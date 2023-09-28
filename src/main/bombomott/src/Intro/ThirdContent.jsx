@@ -4,16 +4,20 @@ import hotContentList from './hotContent.json'
 
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function ThirdContent() {
+    const trendMovies = useSelector((state) => state.trendMovies)
+    const BASE_URL = 'https://image.tmdb.org/t/p/original/'
+
     return (
         <div className='hotContent'>
             <h1>오리지널 콘텐츠</h1>
             <div className="img-area">
             {
-                hotContentList.list.map((a,i)=>{
+                trendMovies.slice(0, 9).map((a,i)=>{
                     return(
-                        <img src={hotContentList.list[i].url} key={i}/>
+                        <img src={`${BASE_URL}${trendMovies[i].backdrop_path}`} key={i}/>
                     )
                 })
             }
