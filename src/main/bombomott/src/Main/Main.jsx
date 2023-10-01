@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import Header from './Header';
+import Carousel from './Carousel';
+import ButtonContainer from './ButtonContainer'
 import './css/main.css'
 
 import { MovieCard } from './MovieCard';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { setTrendMovies } from '../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -31,8 +33,10 @@ export default function Main() {
     },[])
 
     return (
-        <div className='container'>
+        <div className='main-container'>
             <Header/>
+            <Carousel/>
+            <ButtonContainer/>
         </div>
     );
 }

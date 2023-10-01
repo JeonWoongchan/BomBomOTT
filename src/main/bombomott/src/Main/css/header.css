@@ -30,6 +30,7 @@ div{
     display: flex;
     float: left;
     margin: auto 25px;
+    text-decoration-line : none
 }
 
 .header-icon span{

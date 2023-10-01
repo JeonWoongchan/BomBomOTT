@@ -14,29 +14,29 @@ export default function Header(props) {
                 height: profileOn == true ? '280px' : '70px', 
                 backgrounColor : profileOn == true ? 'black' : 'rgb(4, 7, 20)',
                 border : profileOn == true ? 'solid 1px grey' : 'none',
-                transition: 'all 0.5s',
+                transition: 'all 0.1s',
             }
         }else if(i == 1){
             result={
                 opacity: profileOn == true ? 1 : 0, 
-                transition: 'opacity 0.3s', 
+                transition: 'opacity 0.1s', 
             }
         }
         return result;
     }
 
     return (
-        <div className='header'>
+        <div className='main-header'>
             {/* 상단바 */}
-            <Navbar className={`main-Navbar`}>
+            <Navbar className='main-Navbar'>
                 <Container>
-                    <Navbar.Brand href="#home" className="header-buttons">
+                    <Navbar.Brand className="header-buttons">
                         <img className='header-logo' src='/img/disney_Plus_logo.png'/>
-                        <NavMenu icon='home' menu='홈'/>
-                        <NavMenu icon='search' menu='검색'/>
-                        <NavMenu icon='list' menu='카테고리'/>
-                        <NavMenu icon='add' menu='관심 콘텐츠'/>
-                        <NavMenu icon='forum' menu='커뮤니티'/>
+                        <NavMenu icon='home' menu='홈' link='#home'/>
+                        <NavMenu icon='search' menu='검색' link='#home'/>
+                        <NavMenu icon='list' menu='카테고리' link='#home'/>
+                        <NavMenu icon='add' menu='관심 콘텐츠' link='#home'/>
+                        <NavMenu icon='forum' menu='커뮤니티' link='#home'/>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Text>
@@ -63,12 +63,12 @@ export default function Header(props) {
     );
 }
 
-function NavMenu({icon, menu}){
+function NavMenu({icon, menu, link}){
     return(
-        <span className='header-icon'>
+        <a className='header-icon' href={link}>
             <span className="material-symbols-outlined">{icon}</span>
             <p>{menu}</p>
-        </span>
+        </a>
     )
 }
 
