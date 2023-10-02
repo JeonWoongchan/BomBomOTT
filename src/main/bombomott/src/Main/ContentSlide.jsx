@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import slideImg from './slideImage.json'
-import Slider from "react-slick";
-import './css/carousel.css'
+import './css/mainContent.css'
+import { useSelector, useDispatch } from 'react-redux';
 
-function SlideBox(props){
-    const length = slideImg.images.length;
+function ContentSlide(props){
+    const trendMovies = useSelector((state) => state.trendMovies)
+    const BASE_URL = 'https://image.tmdb.org/t/p/original/'
+
+    const length = trendMovies.length;
     const [style, setStyle] = useState({opacity : 1});
     const [mouseOver, setMouseOver] = useState(false);
 
@@ -23,28 +25,28 @@ function SlideBox(props){
             return style
         }else if(mouseOver == true && copy == i){
             return{
-                boxShadow: `15px 15px 15px 15px rgba(5, 6, 7, 0.75)`,
+                boxShadow: `20px 20px 20px 20px rgba(5, 6, 7, 0.75)`,
                 transition : 'all 0.5s'
             }
         }
     }
 
     return(
-        <>
+        <div className='content-slide'>
         {
-            slideImg.images.map((a,i)=>{
+            props.data.slice(0,15).map((a,i)=>{
                 return(
                     <div className="slide-box" key={i} id={i}> 
-                        <img src={`${slideImg.images[i].img}`} draggable="false" style={slideStyle(i)}
+                        <img src={`${BASE_URL}${trendMovies[i].backdrop_path}`} draggable="false" style={slideStyle(i)}
                             onMouseEnter={()=>{setMouseOver(true)}}
                             onMouseLeave={()=>{setMouseOver(false)}}/>
                     </div>
                 )
             })
         }
-        </>
+        </div>
         
     )
 }
 
-export default SlideBox
+export default ContentSlide

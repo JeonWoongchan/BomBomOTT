@@ -7,6 +7,7 @@ import FirstContent from './FirstContent';
 import SecondContent from './SecondContent'
 import ThirdContent from './ThirdContent'
 import FourthContent from './FourthContent'
+import useScroll from '../useScroll';
 
 import axios from "axios";
 import {useEffect, useState} from "react";
@@ -16,25 +17,10 @@ import { setTrendMovies } from '../store/store';
 
 function Intro() {
     const [data, setData] = useState([]);
-    const [scroll, setScroll] = useState(0);
     const trendMovies = useSelector((state) => state.trendMovies)
+    const scroll = useScroll();  
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
     let dispatch = useDispatch();
-
-    useEffect(() => {//스크롤 이벤트 : 타이머로 성능개선
-        const timer = setInterval(() => {
-            window.addEventListener("scroll", handleScroll);
-        }, 10);
-        return () => {
-            clearInterval(timer);
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [scroll]);
-    
-    const handleScroll = () => {
-        setScroll(window.scrollY)
-        console.log(scroll);
-    };
 
     const MoveToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

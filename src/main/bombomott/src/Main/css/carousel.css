@@ -6,6 +6,7 @@
 
 .carousel-area{
     overflow: hidden;
+    height: 600px;
 }
 
 .main-carousel{
@@ -16,16 +17,16 @@
 .slide-box{
     position: relative;
     left: 0;
-    width: 85vw;
-    height: 400px;
+    width: 90vw;
+    height: 450px;
     float: left;
-    margin: 50px 0 50px 0;
+    margin: 30px 0 30px 0;
     cursor: pointer;
 }
 
 .slide-box img{
     position: absolute;
-    width: 97%;
+    width: 1710px;
     height: 100%;
     left: 0;
     right: 0;
