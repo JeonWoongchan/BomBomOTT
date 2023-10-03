@@ -14,8 +14,21 @@ let trendMovies = createSlice({
 
 export let { setTrendMovies } = trendMovies.actions
 
+let tvShow = createSlice({
+    name : 'tvShow',
+    initialState : [],
+    reducers : {
+        setTvShow(state, action){
+            return action.payload
+        }
+    }
+})
+
+export let { setTvShow } = tvShow.actions
+
 export default configureStore({
     reducer: {
-        trendMovies : trendMovies.reducer
+        trendMovies : trendMovies.reducer,
+        tvShow : tvShow.reducer
     }
 }) 

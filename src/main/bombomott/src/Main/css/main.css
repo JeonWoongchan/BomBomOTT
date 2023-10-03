@@ -4,7 +4,6 @@ div{
 
 .main-container{
     background-color : rgb(30, 33, 47);
-    max-width: 100%;
-    min-height: calc(100vh - 250px);
+    min-height: 100vw;
     overflow: hidden;
 }

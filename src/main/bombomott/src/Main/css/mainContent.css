@@ -5,20 +5,22 @@
 }
 
 .main-content-area{
-    margin-top: 200px;
-    padding: 0 91px;
+    position: relative;
+    margin-top: 2vw;
+    padding: 0 5vw;
     width: 8000px;
 }
 
 .main-content-area .content-slide{
     position: relative;
+    display: flex;
     float: left;
 }
 
 .main-content-area .content-slide .slide-box{
     position: relative;
-    width: 330px;
-    height: 185px;
+    width: 17.3vw;
+    height: 9.7vw;
     margin: 45px 10px;
     border-radius: 12px;
     box-shadow : 4px 17px 15px 0 rgba(5, 6, 7, 0.75);

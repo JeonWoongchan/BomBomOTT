@@ -5,16 +5,17 @@
 }
 
 .button-container{
-    width: 100vw;
-    padding: 0 91px;
+    width: 100%;
+    padding: 0 5vw;
+    margin-top: 120px;
     display: flex; /* Flex 컨테이너 설정 */
     float: left;
 }
 
 .button-container .button-box{
     position: relative;
-    width: 270px;
-    height: 150px;
+    width: 14.2vw;
+    height: 7.9vw;
     margin: auto;
     border-radius: 12px;
     box-shadow: 4px 17px 15px 0 rgba(5, 6, 7, 0.75);

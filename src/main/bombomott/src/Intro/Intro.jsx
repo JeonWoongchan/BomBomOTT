@@ -13,35 +13,14 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
-import { setTrendMovies } from '../store/store';
+
 
 function Intro() {
-    const [data, setData] = useState([]);
-    const trendMovies = useSelector((state) => state.trendMovies)
     const scroll = useScroll();  
-    const BASE_URL = 'https://image.tmdb.org/t/p/original/'
-    let dispatch = useDispatch();
 
     const MoveToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    const options = {
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDkyN2ZmOTFkYjgxNmM1MmQ4NzAxOWRjZDc4NTFlMSIsInN1YiI6IjY1MTEyN2EzMjZkYWMxMDEyZDViYzNkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QRCxAT9F8FznwDJ31GIYiMogsjXDnw0eWInNi3sSn24'
-        }
-    };
-    
-    useEffect(()=>{
-        axios.request(options).then(function (response) {
-            dispatch(setTrendMovies(response.data.results))
-        }).catch(function (error) {
-            console.error(error);
-        });
-    },[])
 
     return (
         <div className="App container">
