@@ -31,12 +31,6 @@ export default function MainContent() {
             console.log(count)
         }
     },[scroll])
-    
-    // const titleStyle = (i)=>{
-    //     return{
-    //         marginTop : `${i*14}vw`
-    //     }
-    // }
 
     return (
         <div className='main-content-area'>
