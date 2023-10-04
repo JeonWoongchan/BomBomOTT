@@ -1,0 +1,9 @@
+div{
+    box-sizing: border-box;
+}
+
+.main-container{
+    background-color : rgb(30, 33, 47);
+    min-height: 100vw;
+    overflow: hidden;
+}
