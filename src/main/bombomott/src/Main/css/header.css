@@ -2,6 +2,10 @@ div{
     box-sizing: border-box;
 }
 
+.main-header{
+    position: absolute;
+}
+
 .main-Navbar{
     position: fixed;
     top: 0px;

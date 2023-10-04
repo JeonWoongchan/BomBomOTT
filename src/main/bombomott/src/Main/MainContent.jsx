@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ContentSlide from './ContentSlide'
 import useScroll from '../useScroll.js';
+import slideTitle from './slideTitle.json'
 
 import './css/mainContent.css'
 import { useSelector } from 'react-redux';
@@ -9,7 +10,7 @@ export default function MainContent() {
     const trendMovies = useSelector((state) => state.trendMovies)
     const tvShow = useSelector((state) => state.tvShow)
     const scroll = useScroll();  
-    const DataList = [trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow]
+    const DataList = [trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow]
     const [data, setData] = useState([]); //실제 보여줄 목록    
     const [count, setCount] = useState(0);//끝까지 스크롤 내린 횟수
 
@@ -31,16 +32,25 @@ export default function MainContent() {
         }
     },[scroll])
     
+    // const titleStyle = (i)=>{
+    //     return{
+    //         marginTop : `${i*14}vw`
+    //     }
+    // }
+
     return (
         <div className='main-content-area'>
             {
                 data.map((a,i)=>{
                     return(
-                        <ContentSlide key={i} data={a} id={i}/>
+                        <>
+                            <h4 className='slide-title'>{slideTitle.title[i].title}</h4>
+                            <ContentSlide key={i} data={a} id={i}/>
+                        </>
+                        
                     )
                 }) 
-            }
-            
+            } 
         </div>
     );
 }

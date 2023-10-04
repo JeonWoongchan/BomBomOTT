@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
 import './css/mainContent.css'
+import borderStyle from './borderStyle';
+import slideTitle from './slideTitle.json'
+
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 function ContentSlide(props){
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
+    const [mouseIndex, setMouseIndex] = useState('')
 
     const slideStyle = () => {
         return{
             transition: moveOn === true ? 'all 0.5s ease-in-out' : 'all ease-in-out', 
-            transform: `translateX(${moveX}vw)`
+            transform: `translateX(${position}vw)`
         }
     }
 
@@ -27,14 +31,14 @@ function ContentSlide(props){
     const [startX, setStartX] = useState(0);
     const [endX, setEndX] = useState(0);
     const [lastX, setLastX] = useState(0);
-    const [moveX, setMoveX] = useState(-0.1)
+    const [position, setPosition] = useState(-0.1)
     const [click, setClick] = useState(false);
     const [moveOn, setMoveOn] = useState(false)// 다시 돌아오게 할건지 여부
     const [num, setNum] = useState(0); // 박스의 위치
 
-    useEffect(()=>{
+    useEffect(()=>{ // 마우스 떼었을때
         console.log(startX, endX)
-        if(click == false){
+        if(!click){
             if(startX-endX > 400 && num != 2){ // 오른쪽이동
                 setNum(num+1)
             }else if(startX-endX < -400 && num != 0){ // 왼쪽이동
@@ -46,13 +50,13 @@ function ContentSlide(props){
         setMoveOn(true)
     }, [endX])
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         if(num == 0){
-            setMoveX(-0.1)
+            setPosition(-0.1)
         }else if(num == 1){
-            setMoveX(-92.45)        
+            setPosition(-92.45)        
         }else if(num == 2){
-            setMoveX(-183.95)
+            setPosition(-183.95)
         }
         setTimeout(()=>{
             setMoveOn(false)
@@ -64,10 +68,10 @@ function ContentSlide(props){
     }
 
     const slideMouseMove = (e) => {
-        if(click == true){
+        if(click){
             setLastX(e.clientX - currentX)
             setCurrentX(e.clientX); // 마우스 움직일때도 startX 업데이트해줘서 부드럽게 이동하도록 함
-            setMoveX(moveX + (lastX / window.innerWidth) * 100) // 이동한 위치에서 추가로 lastX만큼 이동하도록 moveX 이용
+            setPosition((prevPosition) => prevPosition + (lastX / window.innerWidth) * 100) // 이동한 위치에서 추가로 lastX만큼 이동하도록 position 이용
         }
     }
 
@@ -75,37 +79,41 @@ function ContentSlide(props){
         // 마우스 뗏을때 슬라이드가 양끝 넘어가면 다시 슬라이드 복구시킴
         setEndX(e.clientX)
         setClick(false)
-        if(moveX > -0.1){
-            setMoveOn(true)
-            setMoveX(-0.1)
-            setTimeout(()=>{
-                setMoveOn(false)
-            }, 300)
-        }else if(moveX < -185){
-            setMoveOn(true)
-            setMoveX(-185)
-            setTimeout(()=>{
-                setMoveOn(false)
-            }, 300)
+        if(position > -0.1){
+            positionBack(-0.1)
+        }else if(position < -185){
+            positionBack(-185)
         }
-        console.log(moveX)
     }
 
+    const positionBack = (pos)=>{ //position 슬라이드 드래그 이전으로
+        setMoveOn(true)
+        setPosition(pos)
+        setTimeout(()=>{
+            setMoveOn(false)
+        }, 300)
+    }
     return(
-        <div className='content-slide' style={slideStyle()}
-            onMouseDown={(e)=>{slideMouseDown(e)}} 
-            onMouseMove={(e)=>{slideMouseMove(e)}}
-            onMouseUp={(e)=>{slideMouseUp(e)}}>
-        {
-            props.data.slice(0,15).map((a,i)=>{
-                return(
-                    <div className="slide-box" key={i} id={i} style={boxStyle(i)}> 
-                        <img src={`${BASE_URL}${props.data[i].backdrop_path}`} draggable="false"/>
-                    </div>
-                )
-            })
-        }
-        </div>
+        <>
+            <div className='content-slide' style={slideStyle()}
+                onMouseDown={(e)=>{slideMouseDown(e)}} 
+                onMouseMove={(e)=>{slideMouseMove(e)}}
+                onMouseUp={(e)=>{slideMouseUp(e)}}>
+            
+            {
+                props.data.slice(0,15).map((a,i)=>{
+                    return(
+                        <div className="slide-box" key={i}
+                            style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
+                            onMouseEnter={()=>{setMouseIndex(i)}} 
+                            onMouseLeave={()=>{setMouseIndex('')}}> 
+                            <img src={`${BASE_URL}${props.data[i].backdrop_path}`} draggable="false"/>
+                        </div>
+                    )
+                })
+            }
+            </div>
+        </>
     )
 }
 

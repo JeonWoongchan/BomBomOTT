@@ -4,6 +4,8 @@ import Header from './Header';
 import Carousel from './Carousel';
 import ButtonContainer from './ButtonContainer'
 import MainContent from './MainContent';
+import Footer from '../Footer';
+import ToTop from '../ToTop';
 import './css/main.css'
 
 import { useEffect, useState } from "react";
@@ -38,6 +40,8 @@ export default function Main() {
             <Carousel/>
             <ButtonContainer/>
             <MainContent/>
+            <Footer/>
+            <ToTop/>
         </div>
     );
 }

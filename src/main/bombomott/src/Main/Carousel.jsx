@@ -6,7 +6,7 @@ import './css/carousel.css'
 export default function Carousel() {
     const length = slideImg.images.length;
 
-    const [slide, setSlide] = useState(length*90.5-4.25) // 실제 적용되면 2vw차이남
+    const [slide, setSlide] = useState(length*90.5-4.235) // 실제 적용되면 2vw차이남
     const [num, setNum] = useState(length) // 슬라이드 번호 총 슬라이드 개수 * 3개 : 0부터 11 까지
     const [transition, setTransition] = useState('all 0.3s')
 
@@ -20,16 +20,16 @@ export default function Carousel() {
         }
     }
 
-    useEffect(()=>{ // 헤더컨텐츠 이미지 자동변경
-        const timer = setInterval(()=>{
-            setSlide(slide+90.5)
-            setNum(num+1)
-        }, 5000)
-        return () => {
-            clearInterval(timer);
-        };
+    // useEffect(()=>{ // 헤더컨텐츠 이미지 자동변경
+    //     const timer = setInterval(()=>{
+    //         setSlide(slide+90.5)
+    //         setNum(num+1)
+    //     }, 5000)
+    //     return () => {
+    //         clearInterval(timer);
+    //     };
         
-    })
+    // })
     useEffect(()=>{ 
         const timer = setTimeout(()=>{
             if(num >= length*2-2){ // 마지막에서 두번째 칸이면 박스 개수만큼 왼쪽으로 이동
