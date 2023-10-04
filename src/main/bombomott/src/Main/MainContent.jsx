@@ -22,9 +22,12 @@ export default function MainContent() {
     },[trendMovies])
 
     useEffect(()=>{
-        if(scroll+window.innerHeight == document.documentElement.scrollHeight){
+        if(scroll+window.innerHeight >= document.documentElement.scrollHeight){
             setCount(count+2)
-            setData(DataList.slice(0,count+2))
+            setTimeout(()=>{
+                setData(DataList.slice(0,count))
+            },100)    
+            console.log(count)
         }
     },[scroll])
     
@@ -32,7 +35,6 @@ export default function MainContent() {
         <div className='main-content-area'>
             {
                 data.map((a,i)=>{
-                    console.log(a)
                     return(
                         <ContentSlide key={i} data={a} id={i}/>
                     )
