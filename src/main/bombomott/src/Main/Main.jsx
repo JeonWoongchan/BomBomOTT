@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Header from './Header';
+import Header from '../Header';
 import Carousel from './Carousel';
 import ButtonContainer from './ButtonContainer'
 import MainContent from './MainContent';

@@ -1,12 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/intro.css';
-import './css/header.css'
-import './css/headerSlide.css'
-import IntroHeader from './IntroHeader';
-import FirstContent from './FirstContent';
-import SecondContent from './SecondContent'
-import ThirdContent from './ThirdContent'
-import FourthContent from './FourthContent'
+import Header from '../Header';
 import Footer from '../Footer';
 import ToTop from '../ToTop';
 import useScroll from '../useScroll';
@@ -22,19 +15,18 @@ function Intro() {
 
     return (
         <div className="App container">
-            {/* {data.map((v,idx)=><li key={`${idx}-${v}`}>{v}</li>)} 데이터연동 확인*/}
-            <IntroHeader scroll={scroll}/>
+            <Header/>
             <div className='content'>
-                <FirstContent/>
+                
             </div>
             <div className='content'>
-                <SecondContent scroll={scroll}/>
+                
             </div>
             <div className='content'>
-                <ThirdContent/>
+                
             </div>
             <div className='content'>
-                <FourthContent/>
+                
             </div>
             <Footer/>
             <ToTop/>

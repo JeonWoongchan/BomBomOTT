@@ -4,10 +4,12 @@ import slideTitle from './slideTitle.json'
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ContentSlide(props){
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
     const [mouseIndex, setMouseIndex] = useState('')
+    const navigate = useNavigate()
 
     const slideStyle = () => {
         return{
@@ -107,7 +109,9 @@ function ContentSlide(props){
                             style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
                             onMouseEnter={()=>{setMouseIndex(i)}} 
                             onMouseLeave={()=>{setMouseIndex('')}}> 
-                            <img src={`${BASE_URL}${props.data[i].backdrop_path}`} draggable="false"/>
+                            <img src={`${BASE_URL}${props.data[i].backdrop_path}`} 
+                                draggable="false" onClick={()=>{ navigate('/content') }}>
+                            </img>
                         </div>
                     )
                 })
