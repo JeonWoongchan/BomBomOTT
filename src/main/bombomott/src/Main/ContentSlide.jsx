@@ -32,13 +32,13 @@ function ContentSlide(props){
     const [endX, setEndX] = useState(0);
     const [lastX, setLastX] = useState(0);
     const [position, setPosition] = useState(-0.1)
-    const [click, setClick] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
     const [moveOn, setMoveOn] = useState(false)// 다시 돌아오게 할건지 여부
     const [num, setNum] = useState(0); // 박스의 위치
 
     useEffect(()=>{ // 마우스 떼었을때
         console.log(startX, endX)
-        if(!click){
+        if(!isDragging){
             if(startX-endX > 400 && num != 2){ // 오른쪽이동
                 setNum(num+1)
             }else if(startX-endX < -400 && num != 0){ // 왼쪽이동
@@ -64,11 +64,11 @@ function ContentSlide(props){
     },[moveOn])
 
     const slideMouseDown = (e) => {
-        setCurrentX(e.clientX); setStartX(e.clientX); setClick(true);
+        setCurrentX(e.clientX); setStartX(e.clientX); setIsDragging(true);
     }
 
     const slideMouseMove = (e) => {
-        if(click){
+        if(isDragging){
             setLastX(e.clientX - currentX)
             setCurrentX(e.clientX); // 마우스 움직일때도 startX 업데이트해줘서 부드럽게 이동하도록 함
             setPosition((prevPosition) => prevPosition + (lastX / window.innerWidth) * 100) // 이동한 위치에서 추가로 lastX만큼 이동하도록 position 이용
@@ -78,7 +78,7 @@ function ContentSlide(props){
     const slideMouseUp = (e) => {
         // 마우스 뗏을때 슬라이드가 양끝 넘어가면 다시 슬라이드 복구시킴
         setEndX(e.clientX)
-        setClick(false)
+        setIsDragging(false)
         if(position > -0.1){
             positionBack(-0.1)
         }else if(position < -185){
