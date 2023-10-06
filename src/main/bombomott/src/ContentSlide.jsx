@@ -1,6 +1,6 @@
-import './css/mainContent.css'
-import borderStyle from './borderStyle';
-import slideTitle from './slideTitle.json'
+import './Main/css/mainContent.css'
+import borderStyle from './Main/borderStyle';
+import slideTitle from './Main/slideTitle.json'
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -35,6 +35,7 @@ function ContentSlide(props){
     const [lastX, setLastX] = useState(0);
     const [position, setPosition] = useState(-0.1)
     const [isDragging, setIsDragging] = useState(false);
+    const [click, setClick] = useState(false)
     const [moveOn, setMoveOn] = useState(false)// 다시 돌아오게 할건지 여부
     const [num, setNum] = useState(0); // 박스의 위치
 
@@ -66,10 +67,13 @@ function ContentSlide(props){
     },[moveOn])
 
     const slideMouseDown = (e) => {
-        setCurrentX(e.clientX); setStartX(e.clientX); setIsDragging(true);
+        setCurrentX(e.clientX); setStartX(e.clientX); setClick(true);
     }
 
     const slideMouseMove = (e) => {
+        if(click == true){
+            setIsDragging(true)
+        }
         if(isDragging){
             setLastX(e.clientX - currentX)
             setCurrentX(e.clientX); // 마우스 움직일때도 startX 업데이트해줘서 부드럽게 이동하도록 함
@@ -80,6 +84,7 @@ function ContentSlide(props){
     const slideMouseUp = (e) => {
         // 마우스 뗏을때 슬라이드가 양끝 넘어가면 다시 슬라이드 복구시킴
         setEndX(e.clientX)
+        setClick(false)
         setIsDragging(false)
         if(position > -0.1){
             positionBack(-0.1)
@@ -104,13 +109,16 @@ function ContentSlide(props){
             
             {
                 props.data.slice(0,15).map((a,i)=>{
+                    const SendData = props.data[i]
+                    console.log(props.data[i])
                     return(
                         <div className="slide-box" key={i}
                             style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
                             onMouseEnter={()=>{setMouseIndex(i)}} 
                             onMouseLeave={()=>{setMouseIndex('')}}> 
                             <img src={`${BASE_URL}${props.data[i].backdrop_path}`} 
-                                draggable="false" onClick={()=>{ navigate('/content') }}>
+                                style={isDragging === true ? { pointerEvents: 'none' } : null}
+                                draggable="false" onClick={()=>{ navigate('/content', {state:SendData})}}>
                             </img>
                         </div>
                     )

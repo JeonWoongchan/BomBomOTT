@@ -29,6 +29,6 @@ export let { setTvShow } = tvShow.actions
 export default configureStore({
     reducer: {
         trendMovies : trendMovies.reducer,
-        tvShow : tvShow.reducer
+        tvShow : tvShow.reducer,
     }
 }) 
