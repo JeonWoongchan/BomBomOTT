@@ -28,7 +28,6 @@ export default function MainContent() {
             setTimeout(()=>{
                 setData(DataList.slice(0,count))
             },100)    
-            console.log(count)
         }
     },[scroll])
 
@@ -39,7 +38,7 @@ export default function MainContent() {
                     return(
                         <>
                             <h4 className='slide-title'>{slideTitle.title[i].title}</h4>
-                            <ContentSlide key={i} data={a} id={i}/>
+                            <ContentSlide data={a} id={i}/>
                         </>
                         
                     )

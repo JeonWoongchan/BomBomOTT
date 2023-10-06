@@ -14,15 +14,13 @@ import { useLocation } from 'react-router-dom';
 function Content(props) {
     const scroll = useScroll();  
     const location = useLocation();
-    const receivedData = location.state;
+    const receivedData = {...location.state};
     console.log(receivedData)
 
     return (
         <div className="App container">
-            <Header/>
-            <div className='content'>
-                <ContentDetail receivedData={receivedData}/>
-            </div>
+            <Header contentScroll={scroll}/>
+            <ContentDetail receivedData={receivedData}/>
             <Footer/>
             <ToTop/>
         </div>

@@ -3,32 +3,41 @@ import './header.css'
 
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
+import { useLocation } from 'react-router-dom';
 
 export default function Header(props) {
+    const location = useLocation();
     const [profileOn, setProfileOn] = useState(false);
 
     const activeProfileStyle = (i) => {
-        let result = {};
         if(i == 0){
-            result={
-                height: profileOn == true ? '280px' : '70px', 
-                backgrounColor : profileOn == true ? 'black' : 'rgb(4, 7, 20)',
-                border : profileOn == true ? 'solid 1px grey' : 'none',
-                transition: 'all 0.1s',
+            return{
+                height: profileOn == true ? '280px' : '70px',
+                backgroundColor: props.contentScroll > 5 ? 'transparent' : null,
+                backgroundColor: profileOn == true ? 'rgb(4, 7, 20)' : null,
+                border : profileOn == true ? 'solid 0.5px white' : 'none',
+                transition: 'all 0.2s',
             }
         }else if(i == 1){
-            result={
+            return{
                 opacity: profileOn == true ? 1 : 0, 
-                transition: 'opacity 0.1s', 
+                transition: 'opacity 0.2s', 
             }
         }
-        return result;
     }
+
+    const NavBarStyle = () => { // props를 매개변수로 추가
+        if (window.location.pathname.startsWith('/content')) {
+            return {
+            backgroundColor: props.contentScroll > 5 ? null : 'transparent'
+            };
+        }
+    };
 
     return (
         <div className='main-header'>
             {/* 상단바 */}
-            <Navbar className='main-Navbar'>
+            <Navbar className='main-Navbar' style={NavBarStyle()}>
                 <Container>
                     <Navbar.Brand className="header-buttons">
                         <img className='header-logo' src='/img/disney_Plus_logo.png'/>

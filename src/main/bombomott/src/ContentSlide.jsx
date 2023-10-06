@@ -110,7 +110,6 @@ function ContentSlide(props){
             {
                 props.data.slice(0,15).map((a,i)=>{
                     const SendData = props.data[i]
-                    console.log(props.data[i])
                     return(
                         <div className="slide-box" key={i}
                             style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
@@ -118,7 +117,7 @@ function ContentSlide(props){
                             onMouseLeave={()=>{setMouseIndex('')}}> 
                             <img src={`${BASE_URL}${props.data[i].backdrop_path}`} 
                                 style={isDragging === true ? { pointerEvents: 'none' } : null}
-                                draggable="false" onClick={()=>{ navigate('/content', {state:SendData})}}>
+                                draggable="false" onClick={()=>{ navigate(`/content/${a.media_type}/${a.id}`, {state:SendData})}}>
                             </img>
                         </div>
                     )
