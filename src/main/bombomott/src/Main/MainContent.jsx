@@ -4,7 +4,7 @@ import useScroll from '../useScroll.js';
 import slideTitle from './slideTitle.json'
 
 import './css/mainContent.css'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function MainContent() {
     const trendMovies = useSelector((state) => state.trendMovies)
@@ -18,28 +18,32 @@ export default function MainContent() {
         //처음부터 data state의 초기값으로 trendMovies를 넣어서 설정하면 처음 랜더링될 때 trendMovies의 데이터 상태를 반영하지 않음
         //순서가 state랜더링, 페이지 랜더링 하고 trendMovies 내용 가져오는듯?
 
-        setData(DataList.slice(0,4));  
-        setCount(data.length)
-    },[trendMovies])
+        if (trendMovies && tvShow) {
+            // 데이터를 초기화하고 상태를 업데이트
+            setData(DataList.slice(0, 4));  
+            setCount(data.length);
+        }
+    },[trendMovies,tvShow])
 
     useEffect(()=>{
-        if(scroll+window.innerHeight >= document.documentElement.scrollHeight){
-            setCount(count+2)
-            setTimeout(()=>{
-                setData(DataList.slice(0,count))
-            },100)    
+        if(scroll+window.innerHeight >= document.documentElement.scrollHeight){//스크롤 끝까지 내렸을때
+            setCount(count+2)    
         }
-    },[scroll])
+    },[count, scroll])
+
+    useEffect(()=>{//count가 변경된 이후에 data를 변경하도록 설정
+        setData(DataList.slice(0,count)) 
+    },[count])
 
     return (
         <div className='main-content-area'>
             {
                 data.map((a,i)=>{
                     return(
-                        <>
+                        <div className='content-carousel' key={i}>
                             <h4 className='slide-title'>{slideTitle.title[i].title}</h4>
                             <ContentSlide data={a} id={i}/>
-                        </>
+                        </div>
                         
                     )
                 }) 

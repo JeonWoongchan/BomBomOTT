@@ -17,7 +17,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Intro/>}/>
                 <Route path='/main' element={<Main/>}/>
-                <Route path='/content/*' element={<Content/>}/>
+                <Route path='/content/:contentType/:contentGenre/:contentId' element={<Content/>}/>
             </Routes>
         </div>
     );

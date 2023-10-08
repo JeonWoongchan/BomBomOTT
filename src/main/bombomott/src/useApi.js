@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTrendMovies, setTvShow } from './store/store';
+import { setLoading, setTrendMovies, setTvShow } from './store/store';
 import axios from "axios";
 
 function useApi() {
-    let dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const isLoading = useSelector((state) => state.isLoading);
 
     const options1 = {
         method: 'GET',

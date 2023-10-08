@@ -14,6 +14,7 @@
     width: 100%;
     padding: 0 5vw;
     margin-top: 6.5vw;
+    margin-bottom: 1vw;
     display: flex; /* Flex 컨테이너 설정 */
     float: left;
 }

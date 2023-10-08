@@ -41,11 +41,11 @@ export default function Header(props) {
                 <Container>
                     <Navbar.Brand className="header-buttons">
                         <img className='header-logo' src='/img/disney_Plus_logo.png'/>
-                        <NavMenu icon='home' menu='홈' link='#home'/>
-                        <NavMenu icon='search' menu='검색' link='#home'/>
-                        <NavMenu icon='list' menu='카테고리' link='#home'/>
-                        <NavMenu icon='add' menu='관심 콘텐츠' link='#home'/>
-                        <NavMenu icon='forum' menu='커뮤니티' link='#home'/>
+                        <NavMenu icon='home' menu='홈' link=''/>
+                        <NavMenu icon='search' menu='검색' link=''/>
+                        <NavMenu icon='list' menu='카테고리' link=''/>
+                        <NavMenu icon='add' menu='관심 콘텐츠' link=''/>
+                        <NavMenu icon='forum' menu='커뮤니티' link=''/>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Text>
