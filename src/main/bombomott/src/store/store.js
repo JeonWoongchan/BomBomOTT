@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import { useState } from 'react'
 
-const isLoading = createSlice({
+const isLoading = createSlice({ // 로딩 완료시 false
     name: 'isLoading',
     initialState : false,
     reducers: {

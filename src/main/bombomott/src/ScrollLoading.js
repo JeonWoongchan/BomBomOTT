@@ -29,6 +29,3 @@ export default function ScrollLoading(DataList, data1, data2, scroll) {
 
     return {data}
 }
-
-
-

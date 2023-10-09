@@ -15,8 +15,10 @@ function ContentSlide(props){
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
     const [mouseIndex, setMouseIndex] = useState('')
     const DataLength =  (props.data && props.data.length) || 0; 
-    const { slideMouseDown, slideMouseMove, slideMouseUp, slideStyle, boxStyle } = SlideLogic(DataLength);
     const isDragging = useSelector((state)=>state.isDragging)
+
+    
+    const { slideMouseDown, slideMouseMove, slideMouseUp, slideStyle, boxStyle } = SlideLogic(DataLength, props.SlideItemNum);
 
     return(
             <div className='content-slide' style={slideStyle()}

@@ -8,10 +8,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setIsDragging } from './store/store';
 
-function SlideLogic(data){
-    const itemCount = data; // 슬라이드 아이템 개수 계산
-    const MaxNum = itemCount%4 == 0 ? itemCount/4-1 : Math.floor(itemCount/4)
-    const MaxPosition = MaxNum == 0 ? 0 : (-91 * (MaxNum));
+function SlideLogic(data, itemNum){
+    const itemCount = data; // 슬라이드 총 아이템 개수
+    const SlideItemNum = itemNum; // 슬라이드 하나의 아이템 개수
+    const MaxNum = (e)=>{
+        return(itemCount%e == 0 ? itemCount/e-1 : Math.floor(itemCount/e))
+    }
+    const MaxPosition = MaxNum(SlideItemNum) == 0 ? 0 : (-91 * (MaxNum(SlideItemNum)));
     const isDragging = useSelector((state)=>state.isDragging)
     const dispatch = useDispatch();
 
@@ -23,14 +26,14 @@ function SlideLogic(data){
     const [click, setClick] = useState(false)
     const [moveOn, setMoveOn] = useState(false)// 다시 돌아오게 할건지 여부
     const [num, setNum] = useState(0); // 박스의 위치
-    // console.log(num,itemCount,MaxNum,MaxPosition)
+    // console.log(num,itemCount,MaxNum(SlideItemNum),MaxPosition)
 
     //startX 기준으로 lastX까지 움직인 거리만큼 컴포넌트를 이동시킴
     //한번 이동한 후에 좌표를 저장해야됨
     //다시 이동할땐 처음 좌표에서 다시 이동한 거리만큼 이동시켜야됨
     useEffect(()=>{ // 마우스 떼었을때
         if(!isDragging){
-            if(startX-endX > 400 && num != MaxNum){ // 오른쪽이동
+            if(startX-endX > 400 && num != MaxNum(SlideItemNum)){ // 오른쪽이동
                 setNum(num+1)
             }else if(startX-endX < -400 && num != 0){ // 왼쪽이동
                 setNum(num-1)
@@ -93,8 +96,11 @@ function SlideLogic(data){
 
     const boxStyle = (i) => {
         return{
-            opacity : num === Math.floor(i / 4) ? 1 : 0.3,
-            transition: `opacity 0.2s`
+            opacity : num === Math.floor(i / SlideItemNum) ? 1 : 0.3,
+            transition: `all 0.2s`,
+            width : SlideItemNum == 5 ? '16.2vw' : '20.75vw',
+            height : SlideItemNum == 5 ? '9.115vw' : '11.8vw'
+
         }
     }
     return {

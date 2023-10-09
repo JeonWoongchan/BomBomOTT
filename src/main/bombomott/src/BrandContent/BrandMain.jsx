@@ -23,11 +23,18 @@ export default function BrandMain(props) {
 
     useEffect(()=>{
         if(data.length == 0){
-            console.log('비어잇음')
+            console.log('로딩중')
+            dispatch(setIsLoading(true))
         }else{
-            setDataLoading(true)
+            dispatch(setIsLoading(false))
         }
     },[data])
+
+    useEffect(()=>{
+        if(!isLoading){
+            setDataLoading(true)
+        }
+    },[isLoading])
 
     const VideoStyle = ()=>{
         return{
@@ -42,7 +49,7 @@ export default function BrandMain(props) {
         }
     }
     return (
-        !dataLoading ? <h1>Now Loading...</h1> :
+        !dataLoading ? console.log('Now Loading...') :
         <div id='brandMain'>
             <div id="brand_main_content">
                 <div className="brand-background-section"></div>

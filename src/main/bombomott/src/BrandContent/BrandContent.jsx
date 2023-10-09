@@ -17,9 +17,8 @@ export default function BrandContent(props) {
     const location = useLocation();
     const receivedData = location.state.data;
     const isLoading = useSelector((state)=>state.isLoading)
-    
+
     return (
-        isLoading == true ? <h1>로딩중...</h1> :
         <div className='main-container'>
             <Header contentScroll={scroll}/>
             <BrandMain BrandData={receivedData}/>

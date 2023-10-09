@@ -15,15 +15,12 @@
 .content-carousel{
     position: relative;
     /* width: 100vw; */
-    height: 16vw;
     display: flex;
     float: left;
 }
 
 .slide-title{
     position: absolute;
-    height: 1vw;
-    margin-left: 0.5vw;
     color: white;
     font-size: 20px;
     font-weight: bold;
