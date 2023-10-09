@@ -4,6 +4,7 @@ import axios from "axios";
 import Intro from './Intro/Intro'
 import Main from './Main/Main'
 import Content from './Content/Content'
+import BrandContent from './BrandContent/BrandContent'
 import useApi from './useApi';
 
 import {useEffect, useState} from "react";
@@ -18,6 +19,7 @@ function App() {
                 <Route path='/' element={<Intro/>}/>
                 <Route path='/main' element={<Main/>}/>
                 <Route path='/content/:contentType/:contentGenre/:contentId' element={<Content/>}/>
+                <Route path='/brand/:brandName' element={<BrandContent/>}/>
             </Routes>
         </div>
     );

@@ -4,15 +4,15 @@ import { useState } from 'react'
 
 const isLoading = createSlice({
     name: 'isLoading',
-    initialState : true,
+    initialState : false,
     reducers: {
-        setLoading: (state, action) => {
+        setIsLoading: (state, action) => {
             return action.payload;
         }
     },
 });
 
-export const { setLoading } = isLoading.actions;
+export const { setIsLoading } = isLoading.actions;
 
 const isDragging = createSlice({
     name: 'isDragging',
@@ -49,6 +49,18 @@ let tvShow = createSlice({
 })
 
 export let { setTvShow } = tvShow.actions
+
+let movie = createSlice({
+    name : 'movie',
+    initialState : [],
+    reducers : {
+        setMovie(state, action){
+            return action.payload
+        }
+    }
+})
+
+export let { setMovie } = movie.actions
 
 export default configureStore({
     reducer: {

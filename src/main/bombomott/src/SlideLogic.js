@@ -10,8 +10,8 @@ import { setIsDragging } from './store/store';
 
 function SlideLogic(data){
     const itemCount = data; // 슬라이드 아이템 개수 계산
-    const MaxNum = itemCount%5 == 0 ? itemCount/5-1 : Math.floor(itemCount/5)
-    const MaxPosition = MaxNum == 0 ? 0.1 : -92.45 + (-91.5 * (MaxNum-1));
+    const MaxNum = itemCount%4 == 0 ? itemCount/4-1 : Math.floor(itemCount/4)
+    const MaxPosition = MaxNum == 0 ? 0 : (-91 * (MaxNum));
     const isDragging = useSelector((state)=>state.isDragging)
     const dispatch = useDispatch();
 
@@ -19,11 +19,11 @@ function SlideLogic(data){
     const [startX, setStartX] = useState(0);
     const [endX, setEndX] = useState(0);
     const [lastX, setLastX] = useState(0);
-    const [position, setPosition] = useState(-0.1)
+    const [position, setPosition] = useState(0)
     const [click, setClick] = useState(false)
     const [moveOn, setMoveOn] = useState(false)// 다시 돌아오게 할건지 여부
     const [num, setNum] = useState(0); // 박스의 위치
-    console.log(num,itemCount,MaxNum,MaxPosition)
+    // console.log(num,itemCount,MaxNum,MaxPosition)
 
     //startX 기준으로 lastX까지 움직인 거리만큼 컴포넌트를 이동시킴
     //한번 이동한 후에 좌표를 저장해야됨
@@ -42,17 +42,7 @@ function SlideLogic(data){
     }, [endX])
 
     useEffect(()=>{ 
-        const BasePsition = -92.45;
-        const movePos = (i)=>{
-            setPosition(BasePsition-(91.5*(i-1)))
-        }
-        if(num == 0){ //0번 1번 슬라이드 위치는 예외임
-            setPosition(-0.1)
-        }else if(num == 1){
-            setPosition(BasePsition)
-        }else{
-            movePos(num)
-        }
+        setPosition(-91*num)
         setTimeout(()=>{
             setMoveOn(false)
         }, 300)
@@ -78,8 +68,8 @@ function SlideLogic(data){
         setEndX(e.clientX)
         setClick(false)
         dispatch(setIsDragging(false))
-        if(position > -0.1){
-            positionBack(-0.1)
+        if(position > 0){
+            positionBack(0)
         }else if(position < MaxPosition){
             positionBack(MaxPosition)
         }
@@ -103,7 +93,7 @@ function SlideLogic(data){
 
     const boxStyle = (i) => {
         return{
-            opacity : num === Math.floor(i / 5) ? 1 : 0.3,
+            opacity : num === Math.floor(i / 4) ? 1 : 0.3,
             transition: `opacity 0.2s`
         }
     }

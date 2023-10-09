@@ -21,12 +21,15 @@
 
 .button-container .button-box{
     position: relative;
-    width: 13.9vw;
-    height: 7.8vw;
-    margin: auto;
+    width: 13.166666667vw;
+    height: 7.3vw;
     border-radius: 5px;
     box-shadow: 4px 17px 15px 0 rgba(5, 6, 7, 0.75);
     cursor: pointer;
+}
+
+.button-container .button-box:not(:last-child){
+    margin-right: 2vw;
 }
 
 .button-box .button-cover{

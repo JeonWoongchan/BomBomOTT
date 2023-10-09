@@ -27,7 +27,7 @@ export default function Header(props) {
     }
 
     const NavBarStyle = () => { // props를 매개변수로 추가
-        if (window.location.pathname.startsWith('/content')) {
+        if (window.location.pathname.startsWith('/content') || window.location.pathname.startsWith('/brand')) {
             return {
             backgroundColor: props.contentScroll > 5 ? null : 'transparent'
             };

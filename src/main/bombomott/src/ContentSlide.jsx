@@ -7,9 +7,11 @@ import SlideLogic from './SlideLogic'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { setIsLoading  } from './store/store';
 
 function ContentSlide(props){
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
     const [mouseIndex, setMouseIndex] = useState('')
     const DataLength =  (props.data && props.data.length) || 0; 
@@ -32,9 +34,23 @@ function ContentSlide(props){
                             style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
                             onMouseEnter={()=>{setMouseIndex(i)}} 
                             onMouseLeave={()=>{setMouseIndex('')}}> 
-                            <img src={`${BASE_URL}${props.data[i].backdrop_path}`} 
+                            <img src={`${BASE_URL}${props.data[i].backdrop_path}`}
                                 style={isDragging === true ? { pointerEvents: 'none' } : null}
                                 draggable="false" onClick={()=>{ navigate(`/content/${a.media_type}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}>
+                            </img>
+                        </div>
+                    )
+                }) :
+                props.data && props.data.media_type ?
+                [1].map((a,i)=>{
+                    return(
+                        <div className="slide-box" key={i}
+                            style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
+                            onMouseEnter={()=>{setMouseIndex(i)}} 
+                            onMouseLeave={()=>{setMouseIndex('')}}> 
+                            <img src={`${BASE_URL}${props.data.backdrop_path}`}
+                                style={isDragging === true ? { pointerEvents: 'none' } : null}
+                                draggable="false" onClick={()=>{}}>
                             </img>
                         </div>
                     )
@@ -46,7 +62,7 @@ function ContentSlide(props){
                             style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
                             onMouseEnter={()=>{setMouseIndex(i)}} 
                             onMouseLeave={()=>{setMouseIndex('')}}> 
-                            <img src={`${BASE_URL}${props.data.backdrop_path}`} 
+                            <img src={`${BASE_URL}${props.data.backdrop_path}`}
                                 style={isDragging === true ? { pointerEvents: 'none' } : null}
                                 draggable="false" onClick={()=>{}}>
                             </img>
