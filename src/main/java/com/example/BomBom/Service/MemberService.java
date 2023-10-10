@@ -17,4 +17,6 @@ public interface MemberService {
     Optional<Member> findById(Long id);
 
     List<Member> findItems(MemberSearchC itemSearch);
+
+    void delete(Long id);
 }

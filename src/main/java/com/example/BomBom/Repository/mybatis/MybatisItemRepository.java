@@ -37,4 +37,8 @@ public class MybatisItemRepository implements MemberRepository {
     public List<Member> findAll(MemberSearchC cond) {
         return memberMapper.findAll(cond);
     }
+
+    @Override
+    public void delete(Long id ) {};
+
 }

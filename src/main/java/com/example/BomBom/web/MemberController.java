@@ -62,4 +62,12 @@ public class MemberController {
         return "redirect:/members/{memberId}";
     }
 
+
+    @PostMapping("/{memberId}/delete")
+    public String delete(@PathVariable Long memberId,RedirectAttributes redirectAttributes) {
+        memberService.delete(memberId);
+        redirectAttributes.addAttribute("delete",true );
+
+        return "redirect:/members";
+    }
 }

@@ -37,4 +37,6 @@ public class MemberServiceV1 implements MemberService {
     public List<Member> findItems(MemberSearchC cond) {
         return memberRepository.findAll(cond);
     }
+
+    public void delete(Long id) {memberRepository.delete(id);};
 }
