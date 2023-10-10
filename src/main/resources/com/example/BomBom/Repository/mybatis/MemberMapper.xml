@@ -44,6 +44,12 @@
     <!-- D -->
     <delete id="delete" >
         delete from member where id = #{id}
+
+         <![CDATA[
+    <![CDATA[
+        update member set id = id - 1
+        where id > #{id}
+        ]]>
     </delete>
 
 </mapper>

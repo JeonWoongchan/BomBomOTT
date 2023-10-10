@@ -20,4 +20,6 @@ public interface MemberMapper {
     Optional<Member> findById(Long id);
 
     List<Member> findAll(MemberSearchC memberSearchc);
+
+    void delete(Long id);
 }

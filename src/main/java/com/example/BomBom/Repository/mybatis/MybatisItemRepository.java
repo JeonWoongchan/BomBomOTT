@@ -39,6 +39,9 @@ public class MybatisItemRepository implements MemberRepository {
     }
 
     @Override
-    public void delete(Long id ) {};
+    public void delete(Long id )
+    {
+        memberMapper.delete(id);
+    };
 
 }

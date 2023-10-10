@@ -13,7 +13,6 @@
 <body>
 
 <div class="container">
-
     <div class="py-5 text-center">
         <h2>회원 상세</h2>
     </div>
@@ -21,7 +20,6 @@
     <!-- 추가 -->
     <h2 th:if="${param.status}" th:text="'등록 완료'"></h2>
     <h2 th:if="${param.update}" th:text="'수정 완료'"></h2>
-
 
     <div>
         <label for="id">식별ID</label>
@@ -41,7 +39,6 @@
         <input type="text" id="email" name="email" class="form-control" value="10000" th:value="${member.email}" readonly>
     </div>
 
-
     <hr class="my-4">
 
     <div class="row">
@@ -53,10 +50,8 @@
         </div>
 
         <div class="col">
-            <button class="w-100 btn btn-danger btn-lg" id="deleteButton"
-
-                    th:onclick="|location.href='@{/members/{memberId}/delete(memberId=${member.id})}'|"
-                    type="button">회원 삭제</button>
+            <button class="w-100 btn btn-danger btn-lg" id="deleteButton" type="button"
+                    th:onclick="|deleteMember('${member.id}')|">회원 삭제</button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
@@ -65,43 +60,29 @@
                     type="button">목록으로</button>
         </div>
     </div>
-
-</div> <!-- /container -->
-</body>
+</div>
 
 <script>
-
-        document.getElementById("deleteButton").addEventListener("click", function () {
-        var memberId = document.getElementById("id").value; // memberId를 얻어옵니다.
-
+    function deleteMember(memberId) {
         if (confirm("정말로 이 회원을 삭제하시겠습니까?")) {
-        // 확인 버튼을 눌렀을 때만 삭제 요청을 보냅니다.
-        var xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/members/" + memberId + "/delete", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        // DELETE 요청을 보냅니다.
-        xhr.open("POST", "/members/" + memberId + "/delete", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log("삭제 성공");
+                        window.location.href = "/members";
+                    } else {
+                        console.log("삭제 실패");
+                    }
+                }
+            };
 
-        xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-        // 삭제가 성공한 경우 처리
-        console.log("삭제 성공");
-        window.location.href = "/members"; // 삭제 후 회원 목록 페이지로 이동
-    } else {
-        // 삭제가 실패한 경우 처리
-        console.log("삭제 실패");
+            xhr.send();
+        }
     }
-    }
-    };
-
-        xhr.send();
-    } else {
-        // 사용자가 삭제를 하지 않은 경우
-        window.location.href = "/members/" + memberId; // 현재 페이지로 이동
-    }
-    });
-
 </script>
 
-</html>
+</body>

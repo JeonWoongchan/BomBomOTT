@@ -7,11 +7,20 @@
 </head>
 <body>
 
+
+
+
+
+
+
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
         <h2>회원목록</h2>
     </div>
 
+    <div class="py-5 text-center">
+        <h2 th:if="param.delete">삭제 완료</h2>
+    </div>
 <!--
     <div class="row">
         <div class="col">
@@ -40,6 +49,14 @@
                         onclick="location.href='addForm.html'"
                         th:onclick="|location.href='@{/members/add}'|"
                         type="button">회원 등록
+                </button>
+            </div>
+
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='addForm.html'"
+                        th:onclick="|location.href='@{/members/login}'|"
+                        type="button">로그인
                 </button>
             </div>
         </div>
