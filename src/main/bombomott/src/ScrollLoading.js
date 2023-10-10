@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useScroll from './useScroll.js';
 import { useSelector, useDispatch } from 'react-redux';
 
+//스크롤 전부 내렸을때 다음 보여줄 항목 로딩하는 기능
 export default function ScrollLoading(DataList, data1, data2, scroll) {
     const [data, setData] = useState([]); //실제 보여줄 목록    
     const [count, setCount] = useState(0);//끝까지 스크롤 내린 횟수
@@ -24,7 +25,12 @@ export default function ScrollLoading(DataList, data1, data2, scroll) {
     },[count, scroll])
 
     useEffect(()=>{//count가 변경된 이후에 data를 변경하도록 설정
-        setData(DataList.slice(0,count)) 
+        if(count < 4){
+            setData(DataList.slice(0,4))//처음엔 무조건 4개 로딩되도록 설정
+        }else{
+            setData(DataList.slice(0,count))
+        }
+
     },[count])
 
     return {data}

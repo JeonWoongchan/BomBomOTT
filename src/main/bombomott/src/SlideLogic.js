@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setIsDragging } from './store/store';
 
+// 슬라이드 넘기기 기능
 function SlideLogic(data, itemNum){
     const itemCount = data; // 슬라이드 총 아이템 개수
     const SlideItemNum = itemNum; // 슬라이드 하나의 아이템 개수

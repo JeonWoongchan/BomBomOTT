@@ -17,7 +17,6 @@ function ContentSlide(props){
     const DataLength =  (props.data && props.data.length) || 0; 
     const isDragging = useSelector((state)=>state.isDragging)
 
-    
     const { slideMouseDown, slideMouseMove, slideMouseUp, slideStyle, boxStyle } = SlideLogic(DataLength, props.SlideItemNum);
 
     return(

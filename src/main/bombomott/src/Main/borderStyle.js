@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+//박스 마우스 올리면 테두리 생기는 기능
 export default function borderStyle(a) {
     if(a == 'box'){
         return{

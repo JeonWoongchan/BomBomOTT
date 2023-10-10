@@ -7,34 +7,21 @@ import ContentSlide from '../ContentSlide'
 import useScroll from '../useScroll.js';
 import disneyTitle from './disneyTitle.json'
 import ScrollLoading from '../ScrollLoading'
+import SlideControll from '../SlideControll'
+import LoadingLogic from '../LoadingLogic'
 import useApi from '../useApi';
 
 export default function BrandMain(props) {
     const [videoEnded, setVideoEnded] = useState(false);    
     const trendMovies = useSelector((state) => state.trendMovies)
     const tvShow = useSelector((state) => state.tvShow)
-    const isLoading = useSelector((state) => state.isLoading)
-    const dispatch = useDispatch();
+    
     const scroll = useScroll();  
     const DataList = [trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow]
 
     const { data } = ScrollLoading(DataList, trendMovies, tvShow, scroll) 
-    const [dataLoading, setDataLoading] = useState(false);
-
-    useEffect(()=>{
-        if(data.length == 0){
-            console.log('로딩중')
-            dispatch(setIsLoading(true))
-        }else{
-            dispatch(setIsLoading(false))
-        }
-    },[data])
-
-    useEffect(()=>{
-        if(!isLoading){
-            setDataLoading(true)
-        }
-    },[isLoading])
+    const {SlideItemNum, carouselStyle, titleStyle} =  SlideControll();
+    const {dataLoading} =  LoadingLogic(data);
 
     const VideoStyle = ()=>{
         return{
@@ -67,9 +54,9 @@ export default function BrandMain(props) {
                     { 
                         data.map((a,i)=>{
                             return(
-                                <div className='content-carousel' key={i}>
-                                    <h4 className='slide-title'>{disneyTitle.title[i].title}</h4>
-                                    <ContentSlide data={a} id={i}/>
+                                <div className='content-carousel' key={i} style={carouselStyle()}>
+                                    <h4 className='slide-title' style={titleStyle()}>{disneyTitle.title[i].title}</h4>
+                                    <ContentSlide data={a} id={i} SlideItemNum={SlideItemNum}/>
                                 </div>
                                 
                             )
