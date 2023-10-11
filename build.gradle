@@ -33,6 +33,7 @@ dependencies {
 	//테스트에서 lombok 사용
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'junit:junit:4.12' // 또는 더 최신 버전 사용
 }
 
 tasks.named('test') {

@@ -1,4 +1,4 @@
-package com.example.BomBom.domain;
+package com.example.BomBom.Repository;
 
 import com.example.BomBom.Repository.MemberRepositoryMemory;
 

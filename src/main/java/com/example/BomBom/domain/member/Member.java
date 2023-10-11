@@ -21,8 +21,10 @@ public class Member {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String userid;
-        private String email;
+        private String password;
         private String name;
+        private String email;
+
 
 
 
@@ -30,9 +32,10 @@ public class Member {
         }
 
 
-        public Member(String userid, String email, String name) {
+        public Member(String userid, String email, String name, String password) {
                 this.userid = userid;
                 this.email = email;
                 this.name = name;
+                this.password = password;
         }
 }
