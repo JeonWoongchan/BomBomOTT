@@ -5,6 +5,7 @@ import Intro from './Intro/Intro'
 import Main from './Main/Main'
 import Content from './Content/Content'
 import BrandContent from './BrandContent/BrandContent'
+import Category from './Category/Category'
 import useApi from './useApi';
 
 import {useEffect, useState} from "react";
@@ -20,6 +21,7 @@ function App() {
                 <Route path='/main' element={<Main/>}/>
                 <Route path='/content/:contentType/:contentGenre/:contentId' element={<Content/>}/>
                 <Route path='/brand/:brandName' element={<BrandContent/>}/>
+                <Route path='/category/:categoryType' element={<Category/>}/>
             </Routes>
         </div>
     );

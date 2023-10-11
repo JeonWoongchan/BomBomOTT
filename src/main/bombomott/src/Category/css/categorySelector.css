@@ -1,0 +1,50 @@
+.category-seletor{
+    padding-top: 40px;
+}
+
+.category-seletor .cover{
+    width: 100%;
+}
+
+.category-seletor .cover .box{
+    position: relative;
+    box-sizing: border-box;
+}
+
+.value-list-control{
+    width: 160px;
+    height: 36px;
+    background-color: black;
+    cursor: pointer;
+    border-radius: 18px;
+}
+
+.value-list-control .control-value{
+    position: absolute;
+    top: 6px;
+    left: 22px;
+    color: white;
+}
+
+.value-list-control .control-button{
+    position: relative;
+    top: 6px;
+    left: 125px;
+    color: white;
+}
+
+.value-list{
+    position: absolute;
+    width: 160px;
+    background-color: black;
+    display: none;
+    margin-top: 10px;
+    padding: 20px 0;
+}
+
+.value-list .value{
+    color: white;
+    position: relative;
+    left: 22px;
+    margin: 7px 0;
+}

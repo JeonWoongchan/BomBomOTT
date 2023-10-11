@@ -3,12 +3,12 @@ import './header.css'
 
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
     const location = useLocation();
     const [profileOn, setProfileOn] = useState(false);
-
+    
     const activeProfileStyle = (i) => {
         if(i == 0){
             return{
@@ -43,8 +43,9 @@ export default function Header(props) {
                         <img className='header-logo' src='/img/disney_Plus_logo.png'/>
                         <NavMenu icon='home' menu='홈' link=''/>
                         <NavMenu icon='search' menu='검색' link=''/>
-                        <NavMenu icon='list' menu='카테고리' link=''/>
                         <NavMenu icon='add' menu='관심 콘텐츠' link=''/>
+                        <NavMenu icon='movie' menu='영화' link='/category/movie'/>
+                        <NavMenu icon='tv_gen' menu='시리즈' link=''/>
                         <NavMenu icon='forum' menu='커뮤니티' link=''/>
                     </Navbar.Brand>
                     <Navbar.Toggle />
@@ -73,8 +74,9 @@ export default function Header(props) {
 }
 
 function NavMenu({icon, menu, link}){
+    const navigate = useNavigate();
     return(
-        <a className='header-icon' href={link}>
+        <a className='header-icon' onClick={()=>{ navigate(`${link}`)}}>
             <span className="material-symbols-outlined">{icon}</span>
             <p>{menu}</p>
         </a>
