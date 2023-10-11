@@ -1,5 +1,6 @@
 create table member
 (
+--     /*회원테이블 * /
     id     INT AUTO_INCREMENT PRIMARY KEY,
     userid varchar(40),
     paasword varchar(40),
