@@ -23,7 +23,7 @@ function SlideBox(props){
             return style
         }else if(mouseOver == true && copy == i){
             return{
-                boxShadow: `15px 15px 15px 15px rgba(5, 6, 7, 0.75)`,
+                boxShadow: `20px 20px 20px 20px rgba(5, 6, 7, 0.75)`,
                 transition : 'all 0.5s'
             }
         }

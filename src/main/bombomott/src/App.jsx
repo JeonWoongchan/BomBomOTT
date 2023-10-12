@@ -10,16 +10,22 @@ import useApi from './useApi';
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import {Route, Routes, Link, useNavigate, Outlet} from 'react-router-dom';
+import MainBoard from "./board/MainBoard";
+import Detail from "./board/Detail";
+import CreateBoard from "./board/CreateBoard";
+import UpdateBoard from "./board/UpdateBoard";
 
 function App() {
-    useApi();
+
     return (
         <div className="App container">
             <Routes>
                 <Route path='/' element={<Intro/>}/>
                 <Route path='/main' element={<Main/>}/>
-                <Route path='/content/:contentType/:contentGenre/:contentId' element={<Content/>}/>
-                <Route path='/brand/:brandName' element={<BrandContent/>}/>
+                <Route path='/main-board' element={<MainBoard/>}/>
+                <Route path="/detail" element={<Detail/>} />
+                <Route path="/create-board" element={<CreateBoard/>} />
+                <Route path="/update-board" element={<UpdateBoard/>} />
             </Routes>
         </div>
     );

@@ -5,45 +5,42 @@
 }
 
 .carousel-area{
-    width: calc(900vw - 17px);
+    overflow: hidden;
 }
 
 .main-carousel{
     position: relative;
     top: 70px;
-    font-size: 0;
 }
 
-.main-carousel .slide-box{
+.slide-box{
     position: relative;
-    display: inline-block;
     left: 0;
-    width: 89vw;
-    margin: 35px 0.75vw 30px 0.75vw;
+    width: 85vw;
+    height: 400px;
+    float: left;
+    margin: 50px 0 50px 0;
     cursor: pointer;
-    padding: 10px;
-    aspect-ratio: 3.9/1;
 }
 
 .slide-box img{
     position: absolute;
-    width: 100%;
+    width: 97%;
     height: 100%;
     left: 0;
     right: 0;
     margin: 0 auto;
-    border-radius: 5px;
+    border-radius: 10px;
     box-sizing: border-box;
     box-shadow: 4px 17px 15px 0 rgba(5, 6, 7, 0.75);
 }
 
 .prev-btn{
     position: absolute;
-    top: 45px;
+    top: 50px;
     left: 0;
-    width: 5vw;
-    text-align: center;
-    height: 22.82vw;
+    width: 121px;
+    height: 400px;
     border: none;
     border-radius: 10px;
     background: transparent;
@@ -51,11 +48,10 @@
 
 .next-btn{
     position: absolute;
-    top: 45px;
-    left: 94.4vw;
-    text-align: center;
-    width: 5vw;
-    height: 22.82vw;
+    top: 50px;
+    left: 93.7vw;
+    width: 121px;
+    height: 400px;
     border: none;
     border-radius: 10px;
     background: transparent;
