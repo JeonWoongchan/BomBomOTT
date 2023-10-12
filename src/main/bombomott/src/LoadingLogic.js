@@ -15,7 +15,7 @@ function SlideLogic(data, itemNum){
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        if(data.length >= 4){
+        if(data.length < 4){
             console.log('로딩중')
             dispatch(setIsLoading(true))
         }else{

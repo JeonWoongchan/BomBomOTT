@@ -41,7 +41,7 @@ export default function Header(props) {
                 <Container>
                     <Navbar.Brand className="header-buttons">
                         <img className='header-logo' src='/img/disney_Plus_logo.png'/>
-                        <NavMenu icon='home' menu='홈' link=''/>
+                        <NavMenu icon='home' menu='홈' link='/main'/>
                         <NavMenu icon='search' menu='검색' link=''/>
                         <NavMenu icon='add' menu='관심 콘텐츠' link=''/>
                         <NavMenu icon='movie' menu='영화' link='/category/movie'/>
