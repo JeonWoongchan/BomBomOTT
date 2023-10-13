@@ -4,6 +4,7 @@ import './css/header.css'
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
 
+//안쓰는거임
 export default function Header(props) {
     const [profileOn, setProfileOn] = useState(false);
 

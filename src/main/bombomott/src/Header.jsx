@@ -44,8 +44,8 @@ export default function Header(props) {
                         <NavMenu icon='home' menu='홈' link='/main'/>
                         <NavMenu icon='search' menu='검색' link=''/>
                         <NavMenu icon='add' menu='관심 콘텐츠' link=''/>
-                        <NavMenu icon='movie' menu='영화' link='/category/movie'/>
-                        <NavMenu icon='tv_gen' menu='시리즈' link=''/>
+                        <NavMenu icon='movie' menu='영화' link='/category/movie/recommend'/>
+                        <NavMenu icon='tv_gen' menu='시리즈' link='/category/series/recommend'/>
                         <NavMenu icon='forum' menu='커뮤니티' link=''/>
                     </Navbar.Brand>
                     <Navbar.Toggle />

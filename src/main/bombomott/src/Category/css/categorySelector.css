@@ -12,39 +12,67 @@
 }
 
 .value-list-control{
-    width: 160px;
+    position: relative;
+    display: flex;
+    float: left;
     height: 36px;
-    background-color: black;
+    background-color: rgb(182, 182, 182, 0.2);
     cursor: pointer;
     border-radius: 18px;
+    padding: 5px 0 10px 20px;
+}
+
+.value-list-control:hover{
+    background-color: rgb(14, 15, 22);
 }
 
 .value-list-control .control-value{
     position: absolute;
-    top: 6px;
-    left: 22px;
+    top: 6.5px;
+    font-size: 15px;
     color: white;
+
 }
 
 .value-list-control .control-button{
-    position: relative;
+    position: absolute;
     top: 6px;
-    left: 125px;
+    right: 10px;
     color: white;
 }
 
 .value-list{
     position: absolute;
+    top: 40px;
     width: 160px;
-    background-color: black;
+    background-color: rgb(14, 14, 14);
     display: none;
     margin-top: 10px;
     padding: 20px 0;
+    border: solid 1px grey;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .value-list .value{
     color: white;
     position: relative;
-    left: 22px;
-    margin: 7px 0;
+    width: 100%;
+    padding: 3px 0;
+    cursor: pointer;
+}
+
+.value span{
+    position: relative;
+    left: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    opacity: 0;
+}
+
+.value a{
+    position: relative;
+    left: 25px;
+    font-size: 13px;
+    font-weight: bold;
 }

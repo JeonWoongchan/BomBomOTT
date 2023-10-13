@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLoading, setTrendMovies, setTvShow, setMovie } from './store/store';
+import { setLoading, setTrendMovies, setTvShow, setMovie, setGenreMovie } from './store/store';
 import axios from "axios";
 
 //api 받아오는거 모음

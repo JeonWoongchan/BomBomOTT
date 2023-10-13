@@ -1,5 +1,5 @@
 import './Main/css/mainContent.css'
-import borderStyle from './Main/borderStyle';
+import borderStyle from './borderStyle';
 import slideTitle from './Main/slideTitle.json'
 import './contentSlide.css'
 
@@ -15,7 +15,7 @@ function SlideLogic(data, itemNum){
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        if(data.length < 4){
+        if(data.length < itemNum){
             console.log('로딩중')
             dispatch(setIsLoading(true))
         }else{

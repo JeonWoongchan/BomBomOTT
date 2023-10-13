@@ -42,7 +42,7 @@
 }
 
 .category-box .category-title{
-    background-color: rgb(26, 29, 41);
+    background-color: rgb(21, 22, 33);
     left: 0px;
     padding: 72px calc(3.5vw + 24px) 24px;
     position: fixed;
@@ -55,11 +55,8 @@
 
 .category-box .category-title h1{
     color: #f9f9f9;
-    font-size: 40px;
+    font-size: 38px;
     font-weight: bold;
-    padding: 30px 20px 0 0;
+    padding: 30px 24px 0 0;
 }
 
-.category-box .category-content{
-    margin-top: 90px;
-}

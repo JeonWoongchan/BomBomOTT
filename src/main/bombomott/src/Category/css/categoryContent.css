@@ -1,0 +1,30 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.category-box .category-content{
+    position: relative;
+    margin-top: 180px;
+    margin-bottom: 50px;
+    padding: 0 5.4vw;
+    text-align: center;
+}
+
+.category-content .content-box{
+    place-content: center flex-start;
+    display: flex;
+    -webkit-box-pack: start;
+    flex-flow: wrap;
+    margin: 0px 0px 0px -20px;
+}
+
+.category-content .content-box img{
+    width: calc(25% - 20px);
+    margin: 20px 0px 0px 20px;
+    flex: 0 0 auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

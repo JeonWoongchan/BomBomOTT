@@ -62,11 +62,27 @@ let movie = createSlice({
 
 export let { setMovie } = movie.actions
 
+const genreMovie = createSlice({
+    name: 'genreMovie',
+    initialState : [],
+    reducers: {
+        setGenreMovie: (state, action) => {
+            return action.payload;
+        },
+        pushGenreMovie: (state, action) => {
+            state.push(action.payload);
+        }
+    },
+});
+
+export const { setGenreMovie, pushGenreMovie } = genreMovie.actions;
+
 export default configureStore({
     reducer: {
         trendMovies : trendMovies.reducer,
         tvShow : tvShow.reducer,
         isLoading : isLoading.reducer,
-        isDragging : isDragging.reducer
+        isDragging : isDragging.reducer,
+        genreMovie : genreMovie.reducer,
     }
 }) 

@@ -14,5 +14,9 @@ export default function borderStyle(a) {
             scale: '1.01',
             transition: 'all 0.3s ease-in-out'
         }
+    }else if(a == 'list'){
+        return{
+            backgroundColor : 'grey'
+        }
     }
 }

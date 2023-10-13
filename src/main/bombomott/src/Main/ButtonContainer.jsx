@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import buttonContent from './buttonContent.json'
-import borderStyle from './borderStyle';
+import borderStyle from '../borderStyle';
 import './css/buttonContainer.css'
 
 export default function ButtonContainer() {

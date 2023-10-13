@@ -21,7 +21,7 @@ function App() {
                 <Route path='/main' element={<Main/>}/>
                 <Route path='/content/:contentType/:contentGenre/:contentId' element={<Content/>}/>
                 <Route path='/brand/:brandName' element={<BrandContent/>}/>
-                <Route path='/category/:categoryType' element={<Category/>}/>
+                <Route path='/category/:mediaType/:categoryType' element={<Category/>}/>
             </Routes>
         </div>
     );

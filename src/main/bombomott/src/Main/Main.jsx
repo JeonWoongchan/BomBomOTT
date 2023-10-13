@@ -13,7 +13,6 @@ import { setTrendMovies } from '../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Main() {
-    
     return (
         <div className='main-container'>
             <Header/>

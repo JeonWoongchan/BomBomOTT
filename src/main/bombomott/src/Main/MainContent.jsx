@@ -18,7 +18,7 @@ export default function MainContent(props) {
     
     const { data } = ScrollLoading(DataList, trendMovies, tvShow, scroll)
     const {SlideItemNum, carouselStyle, titleStyle} =  SlideControll();
-    const {dataLoading} =  LoadingLogic(data);//데이터 로딩이 다 되면 페이지 로딩되도록
+    const {dataLoading} =  LoadingLogic(data, 4);//데이터 로딩이 다 되면 페이지 로딩되도록
 
     return (
         !dataLoading ? console.log('Now Loading...') :
