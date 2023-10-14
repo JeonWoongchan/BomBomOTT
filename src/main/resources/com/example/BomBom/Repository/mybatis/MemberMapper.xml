@@ -49,4 +49,18 @@
 
     </delete>
 
+
+
+    <select id="MemberCount" resultType="int">
+        SELECT COUNT(*) FROM member
+    </select>
+
+    <select id="login" resultType="boolean">
+        select *
+        from member
+        where userid = #{userid} AND password = #{password}
+    </select>
+
+
+
 </mapper>

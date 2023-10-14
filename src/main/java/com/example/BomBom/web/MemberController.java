@@ -24,11 +24,18 @@ public class MemberController {
     public String members(@ModelAttribute("memberSearch") MemberSearchC memberSearch, Model model) {
         List<Member> members = memberService.findItems(memberSearch);
         model.addAttribute("members", members);
+
+
+
+        int count = memberService.MemberCount();
+        model.addAttribute("count",count);
+
+
         return "members";
     }
 
     @GetMapping("/{memberId}")
-    public String item(@PathVariable long memberId, Model model) {
+    public String member(@PathVariable long memberId, Model model) {
         Member member = memberService.findById(memberId).get();
         model.addAttribute("member", member);
         return "member";

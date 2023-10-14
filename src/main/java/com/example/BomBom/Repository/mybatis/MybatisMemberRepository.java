@@ -1,5 +1,6 @@
 package com.example.BomBom.Repository.mybatis;
 
+import com.example.BomBom.Repository.MemberLoginDto;
 import com.example.BomBom.Repository.MemberRepository;
 import com.example.BomBom.Repository.MemberSearchC;
 import com.example.BomBom.Repository.MemberUpdateDto;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MybatisItemRepository implements MemberRepository {
+public class MybatisMemberRepository implements MemberRepository {
 
     private final MemberMapper memberMapper;
     @Override
@@ -42,6 +43,17 @@ public class MybatisItemRepository implements MemberRepository {
     public void delete(Long id )
     {
         memberMapper.delete(id);
-    };
+    }
+
+    @Override
+    public int MemberCount() {
+        return memberMapper.MemberCount();
+    }
+
+    @Override
+    public Optional<Boolean> login(String userid, String password) {
+         return memberMapper.login(userid,password);
+    }
+
 
 }

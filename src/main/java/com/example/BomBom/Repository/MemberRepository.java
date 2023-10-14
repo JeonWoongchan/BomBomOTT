@@ -19,4 +19,10 @@ public interface MemberRepository {
     void delete(Long id);
 
 
+    int MemberCount();
+
+
+    Optional<Boolean>  login(String userid, String password);
+
+
 }

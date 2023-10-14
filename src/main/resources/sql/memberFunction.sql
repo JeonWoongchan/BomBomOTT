@@ -4,7 +4,10 @@
 /*회원 로그인 sql */
 select password
 from member
-where userid = #{userid}
+where userid = #{userid} ,
+select *
+from member
+where userid = #{userid} AND password = #{password}
 
 /* 멤버 자동 업데이트 */
 
@@ -18,6 +21,9 @@ where id > #{id}
 /* 회원 갯수 조회 */
 
 select count(*) from member;
+
+
+
 
 
 

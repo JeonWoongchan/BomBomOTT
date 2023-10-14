@@ -4,7 +4,7 @@ package com.example.BomBom.config;
 import com.example.BomBom.Repository.MemberRepository;
 import com.example.BomBom.Repository.mybatis.MemberMapper;
 
-import com.example.BomBom.Repository.mybatis.MybatisItemRepository;
+import com.example.BomBom.Repository.mybatis.MybatisMemberRepository;
 import com.example.BomBom.Service.MemberService;
 import com.example.BomBom.Service.MemberServiceV1;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class MyBatisConfig {
 
         @Bean
     public MemberRepository memberRepository() {
-        return new MybatisItemRepository(memberMapper);
+        return new MybatisMemberRepository(memberMapper);
     }
 }
 

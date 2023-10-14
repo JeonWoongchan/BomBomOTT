@@ -1,5 +1,11 @@
 package com.example.BomBom.Repository;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class MemberLoginDto {
 
 
