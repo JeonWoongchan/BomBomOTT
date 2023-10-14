@@ -69,13 +69,13 @@ const genreMovie = createSlice({
         setGenreMovie: (state, action) => {
             return action.payload;
         },
-        pushGenreMovie: (state, action) => {
-            state.push(action.payload);
+        addGenreMovie: (state, action) => {
+            return [...state, ...action.payload];
         }
     },
 });
 
-export const { setGenreMovie, pushGenreMovie } = genreMovie.actions;
+export const { setGenreMovie, addGenreMovie } = genreMovie.actions;
 
 export default configureStore({
     reducer: {

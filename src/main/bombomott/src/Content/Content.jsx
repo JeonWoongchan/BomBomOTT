@@ -20,7 +20,7 @@ function Content(props) {
     const receivedData = {...location.state.data};
     const receivedDataAll = {...location.state.dataAll};
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
-    console.log(scroll)
+    
     const contentBackground = ()=>{
         return{
             backgroundImage : `url(${BASE_URL}${receivedData.backdrop_path})`,

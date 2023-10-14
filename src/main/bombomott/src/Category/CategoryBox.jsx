@@ -1,10 +1,7 @@
 import React from 'react';
 import CategorySelector from './CategorySelector'
 import CategoryContent from './CategoryContent';
-import MovieGenre from '../MovieGenre';
-import GenreApi from '../GenreApi';
 
-import {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
 
 export default function CategoryBox(props) {

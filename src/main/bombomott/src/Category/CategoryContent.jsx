@@ -4,6 +4,7 @@ import borderStyle from '../borderStyle';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { setIsLoading } from '../store/store';
 
 export default function CategoryContent() {
     const navigate = useNavigate()
@@ -15,14 +16,17 @@ export default function CategoryContent() {
     const [loadCount, setLoadCount] = useState(0);
 
     useEffect(()=>{ // 카테고리 변경시 이미지 불투명하게
+        setIsLoading(true)
         setBoxOpacity(false);
         setLoadCount(0)
     },[mediaType, categoryType])
 
     useEffect(()=>{ // 이미지 로딩 완료시 보여지도록 설정
         if(loadCount >= 10){
+            setIsLoading(false)
             setBoxOpacity(true)
         }
+        // console.log(loadCount)
     },[loadCount])
 
     const contentBoxStyle = ()=>{
@@ -38,6 +42,7 @@ export default function CategoryContent() {
                     genreMovie.map((a,i)=>{
                         const Data = genreMovie[i]
                         const DataAll = genreMovie
+                        // console.log(genreMovie)
                         return(
                             <img src={`${BASE_URL}${genreMovie[i].backdrop_path}`} key={i} style={mouseIndex === i ? borderStyle('box') : null}
                             onMouseEnter={()=>{setMouseIndex(i)}} onMouseLeave={()=>{setMouseIndex('')}} onLoad={()=>{setLoadCount((prev)=>prev+1)}}

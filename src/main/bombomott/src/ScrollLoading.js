@@ -19,7 +19,8 @@ export default function ScrollLoading(DataList, data1, data2, scroll) {
     },[data1,data2])
 
     useEffect(()=>{
-        if(scroll+window.innerHeight >= document.documentElement.scrollHeight){//스크롤 끝까지 내렸을때
+        if(scroll+window.innerHeight +5 >= document.documentElement.scrollHeight
+            && count < DataList.length){//스크롤 끝까지 내렸을때
             setCount(count+2)    
         }
     },[count, scroll])

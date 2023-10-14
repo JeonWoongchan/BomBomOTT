@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function ContentTabText(props) {
-    console.log(props.data)
+    // console.log(props.data)
     return (
         <div className='tab-info'>
             <div className='title'>{props.data.title}</div>

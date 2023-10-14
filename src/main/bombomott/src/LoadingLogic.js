@@ -19,6 +19,7 @@ function SlideLogic(data, itemNum){
             console.log('로딩중')
             dispatch(setIsLoading(true))
         }else{
+            console.log('로딩완료')
             dispatch(setIsLoading(false))
         }
     },[data])
