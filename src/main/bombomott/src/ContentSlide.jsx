@@ -13,10 +13,10 @@ function ContentSlide(props){
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
-    const [mouseIndex, setMouseIndex] = useState('')
-    const DataLength =  (props.data && props.data.length) || 0; 
+    const [mouseIndex, setMouseIndex] = useState('') 
     const isDragging = useSelector((state)=>state.isDragging)
     const DataArray = Array.isArray(props.data) ? [...props.data] : props.data && props.data.media_type == 'movie' ? new Array(1).fill(0) : new Array(10).fill(0);
+    const DataLength =  (DataArray && DataArray.length) || 0;
     const { slideMouseDown, slideMouseMove, slideMouseUp, slideStyle, boxStyle } = SlideLogic(DataLength, props.SlideItemNum);
 
     return(

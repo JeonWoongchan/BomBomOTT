@@ -3,17 +3,24 @@ import './css/contentDetail.css'
 import useScroll from '../useScroll';
 import MovieGenre from '../MovieGenre'
 import TVGenre from '../TVGenre'
+import ContentTab from './ContentTab';
+import DetailApi from '../DetailApi'
 
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { avbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
-import ContentTab from './ContentTab';
+import { useParams } from 'react-router-dom';
 
 function ContentDetail(props) {
-    const Release_date = props.receivedData.release_date;
+    const {contentType} = useParams()
+    const contentDetail = useSelector((state)=>state.contentDetail)
+    const Release_date = contentType == 'series' ? contentDetail.first_air_date : contentDetail.release_date;
+    const RunTime = contentDetail.runtime < 60 ? `${contentDetail.runtime}분` 
+                    : `${Math.floor(contentDetail.runtime/60)}시간 ${contentDetail.runtime%60}분`
+    const BASE_URL = 'https://image.tmdb.org/t/p/original/'
+
     const [genre, setGenre] = useState([]);
-    const scroll = useScroll(); 
+
     useEffect(()=>{
         window.scrollTo(0, 0);
         const copy = [...genre]
@@ -51,7 +58,7 @@ function ContentDetail(props) {
                             <img className='img1' src='https://disney.images.edge.bamgrid.com/ripcut-delivery/v1/variant/disney/8B03E101F8D8DA2184622BB0513EA1F2C5BD0B545E1F363A7288B204D8F32EAE/scale?width=240'/>
                             <img className='img2' src="https://disney.images.edge.bamgrid.com/ripcut-delivery/v1/variant/disney/FD4912EB883B7CCB847EB9C62E1FC853D547CAF7DF940B9086AE35AFAD0848AB/scale?width=240"/>
                             <img className='img3' src="https://disney.images.edge.bamgrid.com/ripcut-delivery/v1/variant/disney/FAE63AC7AC11C27C949E1856CF188BF09FC20EA52AEA3B65B43C24EEB5F29BFD/scale?width=240"/>
-                            <span>{props.receivedData.media_type == 'movie' ? Release_date.slice(0,4) : null}</span>
+                            <span>{contentType == 'movie' && Release_date ? Release_date.slice(0,4)+'•'+RunTime : null}</span>
                         </div>
                         <div className="top2">
                             {genre.join(', ')}

@@ -4,6 +4,7 @@ import ContentDetail from './ContentDetail'
 import Footer from '../Footer';
 import ToTop from '../ToTop';
 import useScroll from '../useScroll';
+import DetailApi from '../DetailApi'
 import './css/content.css'
 
 import axios from "axios";
@@ -20,16 +21,23 @@ function Content(props) {
     const receivedData = {...location.state.data};
     const receivedDataAll = {...location.state.dataAll};
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
-    
-    const contentBackground = ()=>{
+
+    const {contentType, contentId} = useParams()
+    const mediaType = contentType == 'series' ? 'tv' : contentType
+    DetailApi(mediaType, contentId)
+
+    const imageStyle = ()=>{
         return{
-            backgroundImage : `url(${BASE_URL}${receivedData.backdrop_path})`,
-            overflow : 'hidden'
+            opacity : scroll < 350 ? -(5/3000)*scroll + 0.8 : 0.3
         }
     }
+    
     return (
-        <div className="contentPage-container" style={contentBackground()}>
+        <div className="contentPage-container">
             <Header contentScroll={scroll}/>
+            <div className="content-background" style={imageStyle()}>
+                <img src={`${BASE_URL}${receivedData.backdrop_path}`}/>
+            </div>
             <ContentDetail receivedData={receivedData} receivedDataAll={receivedDataAll}/>
             <Footer/>
             <ToTop/>

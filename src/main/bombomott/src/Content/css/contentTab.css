@@ -1,10 +1,8 @@
 .content-tab{
     position: relative;
-    top: 15vw;
     left: 5vw;
     width: 89vw;
-    margin-top: 3vw;
-    margin-bottom: 25vw;
+    margin-top: 16vw;
 }
 
 .content-tab .tab-box{
@@ -28,6 +26,7 @@
 .content-tab .tab-box-detail{
     position: relative;
     top: 3vw;
+    min-height: 20vw;
     padding: 1vw 0;
 }
 
@@ -37,7 +36,7 @@
 }
 
 .tab-info .title{
-    position: relative;
+    position: absolute;
     width: 100%;
     color: white;
     font-size: 24px;
@@ -45,46 +44,55 @@
 }
 
 .tab-info .detail{
-    position: relative;
+    position: absolute;
+    margin-top: 50px;
     width: 100%;
     display: flex;
     float: left;
 }
 
 .tab-info .detail .box1{
+    position: relative;
     margin-right: 1vw;
     width: 80vw;
-    font-size: 18px;
-    height: 15vw;
+    font-size: 0.9vw;
     color: white;
 }
 
 .tab-info .detail .box2{
+    position: relative;
     margin-right: 1vw;
     width: 40vw;
     color: white;
-    padding: 0.5vw;
+    flex-direction: column;
 }
 
 .tab-info .detail .box2 .etc-info{
     position: relative;
-    margin-bottom: 4vw;
+    width: 100%;
+    font-size: 0.9vw;
+    flex: 1 1 0%;
 }
+
+.tab-info .detail .box2 .etc-info:not(:first-child){
+    margin-top: 10px;
+}
+
 
 .tab-info .detail .box2 .etc-info h6{
     color: rgb(160, 160, 160);
+    font-size: 0.9vw;
     font-weight: bold;
 }
 
 .tab-info .detail .box2 .etc-info p{
-    position: absolute;
-    top: 2vw;
+    position: relative;
     color: white;
 }
 
 .tab-info .detail .box2 .etc-info img{
-    position: absolute;
-    top: 2vw;
+    position: relative;
     color: white;
-    width: 2vw;
+    height: 1.2vw;
+    margin-right: 15px;
 }

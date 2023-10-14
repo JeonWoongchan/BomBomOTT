@@ -6,7 +6,6 @@ import axios from "axios";
 // api 받아오는 함수
 function GenreApi(media, genre, page) {
     const dispatch = useDispatch();
-    const genreMovie = useSelector((state)=>state.genreMovie);
 
     useEffect(()=>{
         const GenreMovieData = {
