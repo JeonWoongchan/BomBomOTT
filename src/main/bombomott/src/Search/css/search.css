@@ -1,0 +1,55 @@
+.searchPage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-height: 100%;
+  height: 100vh;
+}
+
+.searchBox {
+  width: 100%;
+  position: absolute;
+  height: 11%;
+  top: 70px;
+  background: rgb(97, 101, 117);
+  background: linear-gradient(
+    0deg,
+    rgba(97, 101, 117, 1) 0%,
+    rgba(88, 92, 106, 1) 65%,
+    rgba(65, 68, 78, 1) 90%
+  );
+}
+
+.inputBox {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  font-size: xx-large;
+  border: none;
+  outline: none;
+  color: white;
+  padding-left: 70px;
+}
+
+input::placeholder {
+  color: #dadada;
+}
+
+.content {
+  background: rgb(15, 17, 26);
+  background: linear-gradient(
+    0deg,
+    rgba(15, 17, 26, 1) 2%,
+    rgba(19, 21, 32, 1) 14%,
+    rgba(42, 46, 63, 11) 57%
+  );
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 170px;
+  padding: 40px 0 0 70px;
+}
+.text-a {
+  color: white;
+  font-weight: 600;
+}
