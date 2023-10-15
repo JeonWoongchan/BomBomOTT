@@ -1,0 +1,27 @@
+
+.content-slide{
+    display: flex;
+    float: left;
+    margin: 0vw 0;
+}
+
+.content-slide .slide-box{
+    position: relative;
+    box-shadow : 4px 17px 15px 0 rgba(5, 6, 7, 0.75);
+    flex: 0 0 auto; /* Flexbox를 사용하여 가로로 나열 */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.content-slide .slide-box:not(:last-child){
+    margin: 2.5vw 2vw 0 0;
+}
+
+.content-slide .slide-box:last-child{
+    margin: 2.5vw 0 0 0;
+}
+
+.content-slide .slide-box img{
+    width: 100%;
+    border-radius: 5px;
+}

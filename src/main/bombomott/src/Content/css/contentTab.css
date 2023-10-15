@@ -1,0 +1,98 @@
+.content-tab{
+    position: relative;
+    left: 5vw;
+    width: 89vw;
+    margin-top: 16vw;
+}
+
+.content-tab .tab-box{
+    position: absolute;
+    width: 100%;
+    height: 3vw;
+    display: flex;
+    float: left;
+    border-bottom: 1px solid grey;
+}
+
+.tab-box .box{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 40px;
+    padding-bottom: 15px;
+    cursor: pointer;
+}
+
+.content-tab .tab-box-detail{
+    position: relative;
+    top: 3vw;
+    min-height: 20vw;
+    padding: 1vw 0;
+}
+
+.tab-box-detail .tab-info{
+    position: absolute;
+    width: 100%;
+}
+
+.tab-info .title{
+    position: absolute;
+    width: 100%;
+    color: white;
+    font-size: 24px;
+    padding-bottom: 1vw;
+}
+
+.tab-info .detail{
+    position: absolute;
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    float: left;
+}
+
+.tab-info .detail .box1{
+    position: relative;
+    margin-right: 1vw;
+    width: 80vw;
+    font-size: 0.9vw;
+    color: white;
+}
+
+.tab-info .detail .box2{
+    position: relative;
+    margin-right: 1vw;
+    width: 40vw;
+    color: white;
+    flex-direction: column;
+}
+
+.tab-info .detail .box2 .etc-info{
+    position: relative;
+    width: 100%;
+    font-size: 0.9vw;
+    flex: 1 1 0%;
+}
+
+.tab-info .detail .box2 .etc-info:not(:first-child){
+    margin-top: 10px;
+}
+
+
+.tab-info .detail .box2 .etc-info h6{
+    color: rgb(160, 160, 160);
+    font-size: 0.9vw;
+    font-weight: bold;
+}
+
+.tab-info .detail .box2 .etc-info p{
+    position: relative;
+    color: white;
+}
+
+.tab-info .detail .box2 .etc-info img{
+    position: relative;
+    color: white;
+    height: 1.2vw;
+    margin-right: 15px;
+}

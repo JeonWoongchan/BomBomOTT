@@ -6,37 +6,35 @@ import './css/carousel.css'
 export default function Carousel() {
     const length = slideImg.images.length;
 
-    const [slide, setSlide] = useState(77.5+(length-1)*85)
+    const [slide, setSlide] = useState(length*90.5-4.235) // 실제 적용되면 2vw차이남
     const [num, setNum] = useState(length) // 슬라이드 번호 총 슬라이드 개수 * 3개 : 0부터 11 까지
     const [transition, setTransition] = useState('all 0.3s')
 
     const moveSlide = (e) => { //슬라이드 이동 버튼
         if(e == 0){
-            setSlide(slide-85)
+            setSlide(slide-90.5)//박스1개크기 + 박스간격
             setNum(num-1)
         }else if(e == 1){
-            setSlide(slide+85)
+            setSlide(slide+90.5)
             setNum(num+1)
         }
     }
 
-    useEffect(()=>{ // 헤더컨텐츠 이미지 자동변경
-        const timer = setInterval(()=>{
-            setSlide(slide+85)
-            setNum(num+1)
-        }, 5000)
-        return () => {
-            clearInterval(timer);
-        };
+    // useEffect(()=>{ // 헤더컨텐츠 이미지 자동변경
+    //     const timer = setInterval(()=>{
+    //         setSlide(slide+90.5)
+    //         setNum(num+1)
+    //     }, 5000)
+    //     return () => {
+    //         clearInterval(timer);
+    //     };
         
-    })
-
-    console.log(num)
+    // })
     useEffect(()=>{ 
         const timer = setTimeout(()=>{
             if(num >= length*2-2){ // 마지막에서 두번째 칸이면 박스 개수만큼 왼쪽으로 이동
                 setTransition(''); // 애니메이션 꺼야지 티 안남
-                setSlide(slide-(85*length))
+                setSlide(slide-(90.5*length))
                 setNum(num-length)
 
                 setTimeout(() => {
@@ -44,7 +42,7 @@ export default function Carousel() {
                 }, 100);
             }else if(num == 1){
                 setTransition(''); 
-                setSlide(slide+(85*length))
+                setSlide(slide+(90.5*length))
                 setNum(num+length)
 
                 setTimeout(() => {
@@ -59,8 +57,8 @@ export default function Carousel() {
 
     return (
         <div className='carousel-area'>
-            <div className='main-carousel' style={{               
-                width : `${270*slideImg.images.length}vw`,
+            <div className='main-carousel' style={{     
+                width : `${length * 200}vw`,//SlideBox 두개쓰니까 길이의 두배의 100vw만큼      
                 transition: transition, 
                 transform: `translateX(-${slide}vw)`
                 }}>
