@@ -10,26 +10,28 @@
 
 .content-detail .content-title{
     position: relative;
-    top: 8vw;
+    top: 90px;
     left: 5vw;
-    /* background-color: aliceblue; */
-    color: white;
-    width: 50vw;
-    height: 10vw;
-    font-size: 50px;
-    font-weight: bolder;
+    width: 90%;
+    min-height: 170px;
+    padding-top: 56px;
+    padding-bottom: 16px;
+
 }
 
-.content-title img{
-    height: 13vw;
+.content-title .title-img{
+    position: absolute;
+    max-width: 341px;
+    min-width: 100px;
+    width: 35vw;
 }
 
 .content-detail .content-info-box{
     position: relative;
-    top: 13vw;
     left: 5vw;
     width: 60vw;
     height: 15vw;
+    margin-top: 10vw;
 }
 
 .content-info-box .info-top{

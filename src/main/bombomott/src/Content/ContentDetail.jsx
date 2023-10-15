@@ -50,7 +50,11 @@ function ContentDetail(props) {
             <div className='content-detail'>
                 <div className="content-title">
                     {/* {props.receivedData.original_title} */}
-                    <img src="https://www.themoviedb.org/t/p/original/gC3fmmZbIHaGIsjcjyyuACZSiBZ.png" alt="" />
+                    {
+                        contentType == 'movie'? 
+                        <img className='title-img' src="https://www.themoviedb.org/t/p/original/gC3fmmZbIHaGIsjcjyyuACZSiBZ.png"/>
+                        : <img className='title-img' src="https://image.tmdb.org/t/p/original/fGcycVw3joQLr42FvLGCBlt6Mgu.svg"/>
+                    }
                 </div>
                 <div className="content-info-box">
                     <div className="info-top">
@@ -58,7 +62,9 @@ function ContentDetail(props) {
                             <img className='img1' src='https://disney.images.edge.bamgrid.com/ripcut-delivery/v1/variant/disney/8B03E101F8D8DA2184622BB0513EA1F2C5BD0B545E1F363A7288B204D8F32EAE/scale?width=240'/>
                             <img className='img2' src="https://disney.images.edge.bamgrid.com/ripcut-delivery/v1/variant/disney/FD4912EB883B7CCB847EB9C62E1FC853D547CAF7DF940B9086AE35AFAD0848AB/scale?width=240"/>
                             <img className='img3' src="https://disney.images.edge.bamgrid.com/ripcut-delivery/v1/variant/disney/FAE63AC7AC11C27C949E1856CF188BF09FC20EA52AEA3B65B43C24EEB5F29BFD/scale?width=240"/>
-                            <span>{contentType == 'movie' && Release_date ? Release_date.slice(0,4)+'•'+RunTime : null}</span>
+                            <span>{Release_date && contentType=='movie' ? `${Release_date.slice(0,4)}•${RunTime}` 
+                                    : Release_date && contentType=='series' ? `${Release_date.slice(0,4)}•시즌 ${contentDetail.number_of_seasons}개`
+                                    : null}</span>
                         </div>
                         <div className="top2">
                             {genre.join(', ')}

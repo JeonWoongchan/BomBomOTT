@@ -1,8 +1,9 @@
 .content-tab{
     position: relative;
-    left: 5vw;
-    width: 89vw;
-    margin-top: 16vw;
+    width: 95vw;
+    overflow: hidden;
+    margin-top: 50px;
+    padding: 0 5vw;
 }
 
 .content-tab .tab-box{
@@ -23,10 +24,36 @@
     cursor: pointer;
 }
 
+.content-tab .episode-list{
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+}
+
+.episode-list .episode-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.episode-list .episode-box .episode{
+    display: inline;
+}
+
+.episode-list .episode-box .episode button{
+    width: 5.5vw;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    background-color: transparent;
+    margin: 0 5px 5px 0;
+}
+
 .content-tab .tab-box-detail{
     position: relative;
     top: 3vw;
-    min-height: 20vw;
+    min-height: 25vw;
     padding: 1vw 0;
 }
 

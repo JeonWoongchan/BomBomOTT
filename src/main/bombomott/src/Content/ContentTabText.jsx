@@ -8,6 +8,8 @@ export default function ContentTabText(props) {
     const {contentType} = useParams()
     const RunTime = contentDetail.runtime < 60 ? `${contentDetail.runtime}분` 
                     : `${Math.floor(contentDetail.runtime/60)}시간 ${contentDetail.runtime%60}분`
+    const ProductionCompanies = contentDetail.production_companies || null;
+    
     return (
         <div className='tab-info'>
             <div className='title'>{contentType == 'movie' ? contentDetail.title : contentDetail.name}</div>
@@ -16,7 +18,7 @@ export default function ContentTabText(props) {
                 <div className="box2">
                     <div className="etc-info">
                         <h6>러닝 타임:</h6>
-                        <p>{contentType == 'movie' ? RunTime: null}</p>
+                        <p>{contentType == 'movie' ? RunTime : contentDetail.episode_run_time+'분'}</p>
                     </div>
                     <div className="etc-info">
                         <h6>공개일:</h6>
@@ -34,13 +36,9 @@ export default function ContentTabText(props) {
                 <div className="box2">
                     <div className="etc-info">
                         <h6>제작사:</h6>
+                        <img className='img1' src={`https://image.tmdb.org/t/p/original${ProductionCompanies[0].logo_path}`}/>
                         {
-                            contentDetail.production_companies ?
-                            <>
-                                <img className='img1' src={`https://image.tmdb.org/t/p/original${contentDetail.production_companies[0].logo_path}`}/>
-                                <img className='img1' src={`https://image.tmdb.org/t/p/original${contentDetail.production_companies[1].logo_path}`}/>
-                            </>
-                            : <p>정보 없음</p>
+                            ProductionCompanies[1] ? <img className='img1' src={`https://image.tmdb.org/t/p/original${ProductionCompanies[1].logo_path}`}/> :null
                         }
                         
                     </div>

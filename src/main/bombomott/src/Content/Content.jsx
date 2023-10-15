@@ -24,6 +24,7 @@ function Content(props) {
 
     const {contentType, contentId} = useParams()
     const mediaType = contentType == 'series' ? 'tv' : contentType
+    const contentDetail = useSelector((state)=>state.contentDetail)
     DetailApi(mediaType, contentId)
 
     const imageStyle = ()=>{
@@ -33,6 +34,7 @@ function Content(props) {
     }
     
     return (
+        contentDetail && Object.keys(contentDetail).length !=0 ?
         <div className="contentPage-container">
             <Header contentScroll={scroll}/>
             <div className="content-background" style={imageStyle()}>
@@ -41,7 +43,7 @@ function Content(props) {
             <ContentDetail receivedData={receivedData} receivedDataAll={receivedDataAll}/>
             <Footer/>
             <ToTop/>
-        </div>
+        </div> : <h1>Now Loading...</h1>
     );
 }
 
