@@ -35,4 +35,8 @@ public interface BoardMapper {
 
     int deleteComment(int commentId);
 
+    int updateBoard(Board board);
+
+    int deleteBoard(int boardId);
+
 }

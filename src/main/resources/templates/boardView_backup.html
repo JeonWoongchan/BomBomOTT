@@ -21,7 +21,6 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -76,24 +75,39 @@
         <span th:text="${commentCount}"></span>
     </div>
     <div id="commentList">
-        <div class="horizontal-list" th:each="comment : ${boardComment}">
-            <div th:onclick="replyArea([[${comment.commentId}]], [[${comment.upperCommentId}]])" >
-                <li th:text="${comment.regUserid}"></li>
-                <li th:text="${comment.content}"></li>
-                <li th:text="${comment.regDate}"></li>
-                <button th:if="${comment.regUserid == 'hwna'}" th:onclick="deleteComment([[${comment.commentId}]])">삭제</button>
-            </div>
-            <div th:if="${comment.upperCommentId == 0}" th:class="|commentAdd_${comment.commentId}|" style="display:none">
-                <textarea th:id="|comment_${comment.commentId}|" class="form-control"></textarea>
-                <button th:onclick="replyComment([[${comment.commentId}]])">작성</button>
-            </div>
+<!--        <div class="horizontal-list">-->
+<!--            <li>user1</li>-->
+<!--            <li>comment1</li>-->
+<!--            <li>11111</li>-->
+<!--        </div>-->
+<!--        <div class="horizontal-list">-->
+<!--            <li>user2</li>-->
+<!--            <li>comment2</li>-->
+<!--            <li>22222</li>-->
+<!--        </div>-->
+<!--        <div class="horizontal-list">-->
+<!--            <li>user3</li>-->
+<!--            <li>comment3</li>-->
+<!--            <li>33333</li>-->
+<!--        </div>-->
+
+        <div id="list" class="horizontal-list" th:each="comment : ${boardComment}">
+            <li th:text="${comment.regUserid}"></li>
+            <li th:text="${comment.content}"></li>
+            <li th:text="${comment.regDate}"></li>
+<!--            <button th:if="${comment.regUserid == 'hwna'}" th:onclick="deleteComment([[${comment.commentId}]])">삭제</button>-->
+<!--            <button type="button" th:onclick="|location.href='@{/event/ranking(rankCd=${rankCd}, bordSeq=${bordSeq})}'|">닫기</button>-->
+<!--            <li><a href="boardView.html" th:href="@{|/board/view/${board.id}|}" th:text="${board.title}">제목</a></li>-->
+
         </div>
+
     </div>
 
     <hr class="my-4">
 
     <div>
         <label for="comment"></label>
+        <!--        <textarea id="content" name="content" class="form-control" readonly><th:value="${board.content}"></textarea>-->
         <textarea id="comment" name="comment" class="form-control"></textarea>
         <button onclick="saveComment()">작성</button>
     </div>
@@ -127,6 +141,7 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     let likeCheck = -1;
     function likeBoard() {
@@ -137,30 +152,40 @@
         console.log(">>> 111111111 boardId : " + boardId + ", likeCheck : " + likeCheck);
         //const likeCountElement = document.getElementById('likeCount');
 
+        /*const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+
+                    /!*const newLikeCount = parseInt(likeCountElement.innerText);
+                    likeCountElement.innerText = newLikeCount === 1 ? 0 : 1;
+
+                    const likeButton = document.getElementById('likeButton');
+                    likeButton.disabled = false;*!/
+                } else {
+                    alert('좋아요 요청에 실패했습니다.');
+                }
+            }
+        };
+        xhr.open('POST', '/board/like/' + boardId + '/' + likeCheck);
+        xhr.send();*/
+
         axios({
             url: '/board/like/' + boardId + '/' + likeCheck, // 통신할 웹문서
             method: 'POST', // 통신할 방식
             data: { }
         })
-            .then(function(response) {
-                //console.log(response.data)
-                console.log(response.status)
-                //console.log(response.statusText)
-                //console.log(response.headers)
-                //console.log(response.config)
-                if (response.status === 200) {
-                    let likeCount = $("#likeCount").val();
-                    if (likeCheck == 0) {
-                        likeCount++;
-                    } else {
-                        likeCount--;
-                    }
-                    $("#likeCount").val(likeCount);
-
-                    likeCheck = likeCheck == 0 ? 1 : 0;
-                    console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
-                }
-            });
+        .then(function(response) {
+            //console.log(response.data)
+            console.log(response.status)
+            //console.log(response.statusText)
+            //console.log(response.headers)
+            //console.log(response.config)
+            if (response.status === 200) {
+                likeCheck = likeCheck == 0 ? 1 : 0;
+                console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+            }
+        });
     }
 
     function saveComment() {
@@ -181,19 +206,32 @@
             method: 'POST', // 통신할 방식
             data: { boardId : boardId, content : comment, upperCommentId : 0 }
         })
-            .then(function(response) {
-                console.log(response.status);
+        .then(function(response) {
+            console.log(response.status);
 
-                if (response.status === 200) {
-                   /* let commentCount = $("#commentCount").val();
-                    commentCount++;
-                    $("#commentCount").val(commentCount);*/
-                    //console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+            if (response.status === 200) {
+                let commentCount = $("#commentCount").val();
+                commentCount++;
+                $("#commentCount").val(commentCount);
+                //console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
 
-                    document.location.href = "/board/detail/" + boardId;
-                }
+                /*let commentHtml = "";
+                commentHtml += '<div className="horizontal-list">';
+                commentHtml += '    <li>' + [[${board.regUserid}]] + '</li>';
+                commentHtml += '    <li>' + $("#content").val() + '</li>';
+                commentHtml += '    <li th:text="${comment.regDate}"></li>';
+                commentHtml += '    <button th:if="${comment.regUserid == 'hwna'}"';
+                commentHtml += '            th:onclick="deleteComment([[${comment.commentId}]])">삭제';
+                commentHtml += '    </button>';
+                commentHtml += '</div>';
 
-            });
+                $("#commentList").append(commentHtml);*/
+
+               //document.location.href = "/board/view/" + boardId;
+
+            }
+
+        });
     }
 
     function deleteComment(commentId) {
@@ -204,21 +242,21 @@
                 method: 'POST', // 통신할 방식
                 //data: { commentId : commentId }
             })
-                .then(function(response) {
-                    console.log(response.status);
+            .then(function(response) {
+                console.log(response.status);
 
-                    if (response.status === 200) {
-                        let commentCount = $("#commentCount").val();
-                        commentCount--;
-                        $("#commentCount").val(commentCount);
-                    }
-                    document.location.href = "/board/detail/" + boardId;
-                });
+                if (response.status === 200) {
+                    let commentCount = $("#commentCount").val();
+                    commentCount--;
+                    $("#commentCount").val(commentCount);
+                }
+
+            });
         }
     }
 
     function deleteBoard(boardId) {
-        if (confirm("정말로 이 글을 삭제하시겠습니까?")) {
+        if (confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
             axios({
                 url: '/board/delete/'+ boardId, // 통신할 웹문서
                 method: 'POST', // 통신할 방식
@@ -235,45 +273,6 @@
         }
 
     }
-
-    function replyArea(commentId, upperCommentId) {
-        if (upperCommentId == 0) {
-            $(".commentAdd_" + commentId).toggle();
-        }
-    }
-
-    function replyComment(commentId) {
-        const boardId = [[${board.id}]];
-
-        //let comment = document.getElementById("comment").value;
-        let comment = $("#comment_" + commentId).val();
-        console.log(">>> [saveComment] boardId : " + boardId + ", content : " + comment );
-
-        if (comment == "") {
-            alert("댓글을 입력해 주세요.");
-            return;
-        }
-
-        axios({
-            url: '/board/comment/save', // 통신할 웹문서
-            method: 'POST', // 통신할 방식
-            data: { boardId : boardId, content : comment, upperCommentId : commentId }
-        })
-            .then(function(response) {
-                console.log(response.status);
-
-                if (response.status === 200) {
-                    /* let commentCount = $("#commentCount").val();
-                     commentCount++;
-                     $("#commentCount").val(commentCount);*/
-                    //console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
-
-                    document.location.href = "/board/detail/" + boardId;
-                }
-
-            });
-    }
 </script>
-
 
 </body>

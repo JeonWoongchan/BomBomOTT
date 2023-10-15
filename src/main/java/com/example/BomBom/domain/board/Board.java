@@ -24,6 +24,7 @@ public class Board {
         private Integer likeCount;
         private String regUserid;
         private String regDate;
+
         private Integer viewCount;
 
         private String searchType;

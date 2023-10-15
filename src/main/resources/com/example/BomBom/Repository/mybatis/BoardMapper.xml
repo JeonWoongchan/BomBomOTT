@@ -35,7 +35,7 @@
 
     <select id="findAll" resultType="Board">
         select id, title, like_count, view_count, reg_userid, DATE_FORMAT(reg_date,'%Y-%m-%d') as reg_date
-        from board
+        from board a
         where 1 = 1
             <if test="searchKeyword != null and searchKeyword != ''">
                 <if test="searchType != null and searchType == 'ALL'">
@@ -48,7 +48,7 @@
                     and content like concat('%',#{searchKeyword},'%')
                 </if>
             </if>
-        ORDER BY reg_date desc
+        ORDER BY a.reg_date desc
         LIMIT #{offset}, #{recordSize}
     </select>
 
@@ -117,6 +117,26 @@
 
     <delete id="deleteComment" >
         delete from board_comment where comment_id = #{commentId}
+
+    </delete>
+
+    <update id="updateBoard">
+        update board set
+             title = #{title}
+             , content = #{content}
+            <if test="filename != null and filename != ''">
+             , filename = #{filename}
+             , filepath = #{filepath}
+            </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBoard" >
+        delete from board_comment where board_id = #{id};
+
+        delete from board_like where id = #{id};
+
+        delete from board where id = #{id};
 
     </delete>
 

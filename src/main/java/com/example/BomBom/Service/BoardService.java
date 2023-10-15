@@ -61,8 +61,11 @@ public class BoardService {
     }
 
     public Board findById(int id, String loginId) {
-        boardMapper.updateViewCount(id);
         return boardMapper.findById(id, loginId);
+    }
+
+    public int updateViewCount(int id) {
+        return boardMapper.updateViewCount(id);
     }
 
     public int addLike (int id, String loginId) {
@@ -83,5 +86,41 @@ public class BoardService {
 
     public int deleteComment (int commentId) {
         return boardMapper.deleteComment(commentId);
+    }
+
+    public void updateBoard(Board board, MultipartFile file) throws Exception {
+
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+
+        UUID uuid = UUID.randomUUID();
+
+        String fileName = uuid + "_" + file.getOriginalFilename();
+
+        System.out.println("filename : " + file.getOriginalFilename());
+
+        if (!"".equals(file.getOriginalFilename())) {
+            System.out.println(">>> projectPath : " + projectPath);
+
+            File saveFile = new File(projectPath, fileName);
+
+            file.transferTo(saveFile);
+
+            board.setFilename(fileName);
+            board.setFilepath("/files/" + fileName);
+        } else {
+            //board.setFilename("");
+            //board.setFilepath("");
+        }
+        board.setRegUserid("hwna");
+
+        System.out.println(">>> board : " + board.toString());
+
+        int result = boardMapper.updateBoard(board);
+
+        System.out.println(">>> result : " + result);
+    }
+
+    public int deleteBoard (int boradId) {
+        return boardMapper.deleteBoard(boradId);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.BomBom.web;
 
 
-
 import com.example.BomBom.Service.BoardService;
 import com.example.BomBom.Service.MemberService;
 import com.example.BomBom.domain.board.Board;
@@ -26,7 +25,6 @@ import java.util.Map;
 public class BoardController {
 
     private final BoardService boardService;
-    private final MemberService memberService;
 
     @GetMapping("/list")
     public String boardList(@ModelAttribute("Board") Board board, Model model) {
@@ -75,8 +73,39 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    /**
+     * 리스트에서 호출할 때
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/view/{id}")
-    public String item(@PathVariable int id, Model model) {
+    public String boardView(@PathVariable int id, Model model) {
+        System.out.println(">> boardView  id: " + id);
+        String loginId = "hwna";
+        boardService.updateViewCount(id);
+
+        Board board = boardService.findById(id, loginId);
+        System.out.println(">> board 1 : " + board.toString());
+
+        // 전체 댓글 수
+        // 댓글 리스트
+        List<BoardComment> commentList = boardService.findComments(id);
+
+        int commentCount = 0;
+        if (commentList != null) {
+            commentCount = commentList.size();
+        }
+
+        model.addAttribute("board", board);
+        model.addAttribute("boardComment", commentList);
+        model.addAttribute("commentCount", commentCount);
+        model.addAttribute("loginId", "hwna");
+        return "boardView";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String boardDetail(@PathVariable int id, Model model) {
         System.out.println(">> boardView  id: " + id);
         String loginId = "hwna";
         Board board = boardService.findById(id, loginId);
@@ -94,6 +123,7 @@ public class BoardController {
         model.addAttribute("board", board);
         model.addAttribute("boardComment", commentList);
         model.addAttribute("commentCount", commentCount);
+        model.addAttribute("loginId", "hwna");
         return "boardView";
     }
 
@@ -107,12 +137,12 @@ public class BoardController {
             boardService.addLike(id, loginId);
         } else {
             System.out.println("deleteLike");
-            boardService.deleteLike(id,loginId);
+            boardService.deleteLike(id, loginId);
         }
 
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", 200);
-        return "redirect:/board/view/" + id;
+        return "redirect:/board/detail/" + id;
     }
 
     @PostMapping("/comment/save")
@@ -132,7 +162,7 @@ public class BoardController {
 
         boardService.commentSave(boardComment);
 
-        return "redirect:/board/view/" + boardComment.getBoardId();
+        return "redirect:/board/detail/" + boardComment.getBoardId();
     }
 
     @PostMapping("/comment/delete/{boardId}/{commentId}")
@@ -141,7 +171,41 @@ public class BoardController {
         System.out.println(">> [deleteComment] boardId : " + boardId + ", commentId : " + commentId);
         boardService.deleteComment(commentId);
 
-        return "redirect:/board/view/" + boardId;
+        return "redirect:/board/detail/" + boardId;
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable int id, Model model) {
+
+        System.out.println(">> boardView  id: " + id);
+        String loginId = "hwna";
+        Board board = boardService.findById(id, loginId);
+        System.out.println(">> board 1 : " + board.toString());
+
+        model.addAttribute("board", board);
+        return "boardUpdate";
+    }
+
+    @PostMapping("/update/{id}")
+    public String boardUpdate(@PathVariable int id, @ModelAttribute Board board, MultipartFile file, RedirectAttributes redirectAttributes) {
+        System.out.println(" boardUpdate : " + board.toString());
+        try {
+            boardService.updateBoard(board, file);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        //redirectAttributes.addAttribute("memberId", savedMember.getId());
+        //redirectAttributes.addAttribute("status", true);
+        return "redirect:/board/detail/" + board.getId();
+    }
+
+    @PostMapping("/delete/{boardId}")
+    public String deleteBoard(@PathVariable("boardId") Integer boardId) {
+
+        System.out.println(">> [deleteBoard] boardId : " + boardId);
+        boardService.deleteBoard(boardId);
+
+        return "forword:/board/list";
     }
 
 }
