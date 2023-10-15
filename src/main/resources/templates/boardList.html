@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게시판</h2>
+    </div>
+
+    <form th:object="${Board}" method="get" class="form-inline">
+    <div class="row">
+        <div class="col">
+            <select class="form-select" id="searchType" name="searchType">
+                <option value="ALL">제목+내용</option>
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+            </select>
+            <input type="text" th:field="*{searchKeyword}" class="form-control" placeholder="검색어"/>
+        </div>
+
+        <div class="col">
+            <button type="submit" class="btn btn-secondary mb-2">검색</button>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='boardWrite.html'"
+                        th:onclick="|location.href='@{/board/write}'|"
+                        type="button">글쓰기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    </form>
+
+    <hr class="my-6">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일</th>
+                <th>조회</th>
+                <th>좋아요</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="list" th:each="board : ${boardList}">
+                <td th:text="${board.id}"></td>
+                <td><a href="boardView.html" th:href="@{|/board/view/${board.id}|}" th:text="${board.title}">제목</a></td>
+                <td th:text="${board.regUserid}"></td>
+                <td th:text="${board.regDate}"></td>
+                <td th:text="${board.viewCount}"></td>
+                <td th:text="${board.likeCount}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="paging">
+        <a href="javascript:void(0);" onclick="movePage(1)" class="page_bt first">첫 페이지</a>
+        <a href="javascript:void(0);" onclick="movePage(1)" class="page_bt prev">이전 페이지</a>
+        <p>
+            <a href="javascript:void(0);" onclick="movePage(1);">1</a>
+            <span class="on">1</span>
+            <a href="javascript:void(0);" onclick="movePage(2);">2</a>
+            <span>2</span>
+        </p>
+        <a href="javascript:void(0);" onclick="movePage(3);" class="page_bt next">다음 페이지</a>
+        <a href="javascript:void(0);" onclick="movePage(5);" class="page_bt last">마지막 페이지</a>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            window.onload = () => {
+                // 페이지가 로드되었을 때, 딱 한 번만 함수를 실행
+                //findAllPost();
+            }
+
+
+            // 게시글 리스트 조회
+            function findAllPost() {
+
+                // 1. PagingResponse의 멤버인 List<T> 타입의 list를 의미
+                const list = [[ ${boardList} ]];
+
+                // 2. 리스트가 비어있는 경우, 행에 "검색 결과가 없다"는 메시지를 출력하고, 페이지 번호(페이지네이션) HTML을 제거(초기화)한 후 로직을 종료
+                if ( !list.length ) {
+                    document.getElementById('list').innerHTML = '<td colspan="6"><div className="no_data_msg">검색된 결과가 없습니다.</div></td>';
+                    drawPage();
+                }
+
+                // 3. PagingResponse의 멤버인 pagination을 의미
+                //const pagination = [[ ${response.pagination} ]];
+
+                // 4. @ModelAttribute를 이용해서 뷰(HTML)로 전달한 SearchDto 타입의 객체인 params를 의미
+                //const params = [[ ${params} ]];
+
+                // 5. 리스트에 출력되는 게시글 번호를 처리하기 위해 사용되는 변수 (리스트에서 번호는 페이지 정보를 이용해서 계산해야 함)
+                //let num = pagination.totalRecordCount - ((params.page - 1) * params.recordSize);
+
+                // 7. 페이지 번호 렌더링
+                //drawPage(pagination, params);
+                drawPage();
+            }
+
+
+            // 페이지 HTML draw
+            //function drawPage(pagination, params) {
+            function drawPage() {
+
+                // 1. 필수 파라미터가 없는 경우, 페이지 번호(페이지네이션) HTML을 제거(초기화)한 후 로직 종료
+                /*if ( !pagination || !params ) {
+                    document.querySelector('.paging').innerHTML = '';
+                    throw new Error('Missing required parameters...');
+                }*/
+
+                // 2. 렌더링 할 HTML을 저장할 변수
+                let html = '';
+
+                // 3. 이전 페이지가 있는 경우, 즉 시작 페이지(startPage)가 1이 아닌 경우 첫 페이지 버튼과 이전 페이지 버튼을 HTML에 추가
+                //if (pagination.existPrevPage) {
+                    html += `
+                        <a href="javascript:void(0);" onclick="movePage(1)" class="page_bt first">첫 페이지</a>
+                        <a href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1})" class="page_bt prev">이전 페이지</a>
+                    `;
+                //}
+
+                /*
+                 * 4. 시작 페이지(startPage)와 끝 페이지(endPage) 사이의 페이지 번호(i)를 넘버링 하는 로직
+                 *    페이지 번호(i)와 현재 페이지 번호(params.page)가 동일한 경우, 페이지 번호(i)를 활성화(on) 처리
+                 */
+                html += '<p>';
+                //for (let i = pagination.startPage; i <= pagination.endPage; i++) {
+                for (let i = 0; i <= 10; i++) {
+                    html += (i !== 1)
+                        ? `<a href="javascript:void(0);" onclick="movePage(${i});">${i}</a>`
+                        : `<span class="on">${i}</span>`
+                }
+                html += '</p>';
+
+                // 5. 현재 위치한 페이지 뒤에 데이터가 더 있는 경우, 다음 페이지 버튼과 끝 페이지 버튼을 HTML에 추가
+                //if (pagination.existNextPage) {
+                    html += `
+                        <a href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});" class="page_bt next">다음 페이지</a>
+                        <a href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});" class="page_bt last">마지막 페이지</a>
+                    `;
+                //}
+
+                // 6. class가 "paging"인 요소를 찾아 HTML을 렌더링
+                document.querySelector('.paging').innerHTML = html;
+            }
+
+            // 페이지 이동
+            function movePage(page) {
+
+                // 1. drawPage( )의 각 버튼에 선언된 onclick 이벤트를 통해 전달받는 page(페이지 번호)를 기준으로 객체 생성
+                const queryParams = {
+                    page: (page) ? page : 1,
+                    recordSize: 10,
+                    pageSize: 10
+                }
+
+                /*
+                 * 2. location.pathname : 리스트 페이지의 URI("/post/list.do")를 의미
+                 *    new URLSearchParams(queryParams).toString() : queryParams의 모든 프로퍼티(key-value)를 쿼리 스트링으로 변환
+                 *    URI + 쿼리 스트링에 해당하는 주소로 이동
+                 *    (해당 함수가 리턴해주는 값을 브라우저 콘솔(console)에 찍어보시면 쉽게 이해하실 수 있습니다.)
+                 */
+                location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+            }
+
+            /*]]>*/
+        </script>
+    </th:block>
+
+
+</div> <!-- /container -->
+
+
+
+</body>
+</html>
