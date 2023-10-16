@@ -7,7 +7,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
     const location = useLocation();
+    const navigate = useNavigate();
     const [profileOn, setProfileOn] = useState(false);
+    const userId = 'userId';
     
     const activeProfileStyle = (i) => {
         if(i == 0){
@@ -59,11 +61,21 @@ export default function Header(props) {
                             </div>
                             <div className='hide-profile-menu' style={activeProfileStyle(1)}>
                                 <div className='profile-line'></div>
-                                <h4>프로필 수정</h4>
-                                <span>계정 정보</span>
-                                <span>저장한 콘텐츠</span>
-                                <span>고객센터</span>
-                                <span>로그아웃</span>
+                                <div onClick={()=>{ navigate(`/profile/${userId}/edit-profile`)}}>
+                                    <h4>프로필 수정</h4>
+                                </div>
+                                <div onClick={()=>{ navigate(`/profile/${userId}/account`)}}>
+                                    <span >계정 정보</span>
+                                </div>
+                                <div onClick={()=>{ navigate(`/profile/${userId}/download`)}}>
+                                    <span>저장한 콘텐츠</span>
+                                </div>
+                                <div onClick={()=>{ navigate(`/help`)}}>
+                                    <span>고객센터</span>
+                                </div>
+                                <div onClick={()=>{ navigate(``)}}>
+                                    <span>로그아웃</span>
+                                </div>
                             </div>  
                         </div>
                     </Navbar.Text>

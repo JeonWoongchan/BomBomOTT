@@ -45,7 +45,8 @@ function ContentSlide(props){
                                 style={isDragging === true ? { pointerEvents: 'none' } : null}
                                 draggable="false" onClick={()=>{ navigate(`/content/${a.media_type}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}>
                             </img>
-                            {contentType == 'series' && props.episodeCount ? <h6>{i+1}화 ({contentDetail.episode_run_time}분)</h6> : null} 
+                            {contentType == 'series' && props.episodeCount 
+                            ? <h6>{i+1}화 ({contentDetail.episode_run_time.length > 0 ?contentDetail.episode_run_time[0] : 60}분)</h6> : null} 
                             {/* 시리즈 콘텐츠 페이지의 에피소드 부분에만 회차 정보 표시 */}
                             {contentType && !props.episodeCount ? <h6>{props.data[i].name || props.data[i].title}</h6> : null} 
                             {/* 콘텐츠 페이지의 추천작 부분에만 제목 정보 표시 */}
