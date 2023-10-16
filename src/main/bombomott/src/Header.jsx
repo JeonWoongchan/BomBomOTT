@@ -3,40 +3,53 @@ import "./header.css";
 
 import { useEffect, useState } from "react";
 import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 export default function Header(props) {
+  const location = useLocation();
   const [profileOn, setProfileOn] = useState(false);
 
   const activeProfileStyle = (i) => {
-    let result = {};
     if (i == 0) {
-      result = {
+      return {
         height: profileOn == true ? "280px" : "70px",
-        backgrounColor: profileOn == true ? "black" : "rgb(4, 7, 20)",
-        border: profileOn == true ? "solid 1px grey" : "none",
-        transition: "all 0.1s",
+        backgroundColor: props.contentScroll > 5 ? "transparent" : null,
+        backgroundColor: profileOn == true ? "rgb(4, 7, 20)" : null,
+        border: profileOn == true ? "solid 0.5px white" : "none",
+        transition: "all 0.2s",
       };
     } else if (i == 1) {
-      result = {
+      return {
         opacity: profileOn == true ? 1 : 0,
-        transition: "opacity 0.1s",
+        transition: "opacity 0.2s",
       };
     }
-    return result;
+  };
+
+  const NavBarStyle = () => {
+    // props를 매개변수로 추가
+    if (
+      window.location.pathname.startsWith("/content") ||
+      window.location.pathname.startsWith("/brand")
+    ) {
+      return {
+        backgroundColor: props.contentScroll > 5 ? null : "transparent",
+      };
+    }
   };
 
   return (
     <div className="main-header">
       {/* 상단바 */}
-      <Navbar className="main-Navbar">
+      <Navbar className="main-Navbar" style={NavBarStyle()}>
         <Container>
           <Navbar.Brand className="header-buttons">
             <img className="header-logo" src="/img/disney_Plus_logo.png" />
-            <NavMenu icon="home" menu="홈" link="#home" />
-            <NavMenu icon="search" menu="검색" link="/search" />
-            <NavMenu icon="list" menu="카테고리" link="#home" />
-            <NavMenu icon="add" menu="관심 콘텐츠" link="#home" />
-            <NavMenu icon="forum" menu="커뮤니티" link="#home" />
+            <NavMenu icon="home" menu="홈" link="" />
+            <NavMenu icon="search" menu="검색" link="" />
+            <NavMenu icon="list" menu="카테고리" link="" />
+            <NavMenu icon="add" menu="관심 콘텐츠" link="" />
+            <NavMenu icon="forum" menu="커뮤니티" link="" />
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Text>
