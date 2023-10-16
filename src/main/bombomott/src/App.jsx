@@ -20,7 +20,9 @@ function App() {
             <Routes>
                 <Route path='/' element={<Intro/>}/>
                 <Route path='/main' element={<Main/>}/>
-                <Route path='/profile/:userId/:profileMenu' element={<Profile/>}/>
+                <Route path='/profile/:userId/:profileMenu' element={<Profile/>}>
+                    <Route path=':profileSubMenu' element={<Profile/>}/>
+                </Route>
                 <Route path='/content/:contentType/:contentGenre/:contentId' element={<Content/>}/>
                 <Route path='/brand/:brandName' element={<BrandContent/>}/>
                 <Route path='/category/:mediaType/:categoryType' element={<Category/>}/>

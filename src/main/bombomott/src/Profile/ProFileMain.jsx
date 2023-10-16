@@ -1,5 +1,7 @@
 import React from 'react';
 import Account from './Account';
+import ChangeEmail from './ChangeEmail'
+import ResetPassword from './ResetPassword';
 import './css/profile.css'
 
 import { useEffect, useState } from "react";
@@ -9,12 +11,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function ProfileMain() {
     const location = useLocation();
-    const {userId, profileMenu} = useParams()
+    const {userId, profileMenu, profileSubMenu} = useParams()
 
     const createProfileContent = ()=>{
-        if(profileMenu == 'account'){
+        if(profileMenu == 'account' && !profileSubMenu){
             return(<Account/>)
+        }else if(profileMenu == 'account' && profileSubMenu == 'change-email'){
+            return(<ChangeEmail/>)
+        }else if(profileMenu == 'account' && profileSubMenu == 'reset-password'){
+            return(<ResetPassword/>)
         }
+        
     }
 
     return (

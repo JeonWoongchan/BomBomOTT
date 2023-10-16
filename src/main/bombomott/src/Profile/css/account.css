@@ -8,7 +8,7 @@
 .account-title h2{
     margin-bottom: 1rem;
     font-family: SeolSans-Medium,sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     color: #f9f9f9;
     font-weight: bold;
     line-height: 1.3;
@@ -73,6 +73,11 @@
     min-width: 24px;
     width: 24px;
     z-index: auto;
+    transition: all 0.3s;
+}
+
+.material-symbols-outlined.icon:hover {
+    transform: scale(1.15); /* 요소를 1.2배로 확대 */
 }
 
 .account-detail .information{
