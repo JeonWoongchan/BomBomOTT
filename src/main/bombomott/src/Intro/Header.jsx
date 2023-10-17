@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
 
 export default function Header(props) {
+    const navigate = useNavigate
     const [navBar, setNevBar] = useState(false);
     const [slide, setSlide] = useState('https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg');
     const [slideButton, setSlideButton] = useState(['slide-buttonOn', 'slide-buttonOff', 'slide-buttonOff', 'slide-buttonOff']);
@@ -48,7 +49,7 @@ export default function Header(props) {
     return (
         <div className='header'>
             {/* 상단바 */}
-            <button className="header-login-btn">로그인</button> 
+            <button className="header-login-btn" type='button' onClick={()=>{na}}>로그인</button> 
             <Navbar className={`intro-Navbar ${props.scroll>450 ? 'show-Navbar' : ''}`} style={{top: '0'}}>
                 <Container>
                     <Navbar.Brand href="#home" className='header-logo'>

@@ -98,6 +98,7 @@ div{
     margin-top: 60px;
     opacity: 0;
     transition: all 0.5s;
+    border: none;
 }
 
 .profile-line{
@@ -108,13 +109,26 @@ div{
     margin-bottom: 10px;
 }
 
-.hide-profile-menu h4{
+.active-profile .hide-profile-menu .modify-profile{
+    display: flex;
+    flex-grow: row;
+}
+
+.active-profile .hide-profile-menu .modify-profile .icon{
+    font-size: 55px;
     color: white;
-    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.active-profile .hide-profile-menu .modify-profile h6{
+    color: #acacac;
+    position: relative;
+    top: 22px;
+    left: 10px;
 }
 
 .hide-profile-menu span{
     display: block;
-    color: white;
-    margin-bottom: 10px;
+    color: #acacac;
+    margin-bottom: 15px;
 }

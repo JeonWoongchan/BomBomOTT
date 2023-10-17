@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './css/changeEmail.css'
-import { current } from '@reduxjs/toolkit';
+import PasswordModal from './PasswordModal';
 
 export default function ChangeEmail(){
+    const [modal, setModal] = useState(false);
     const navigate = useNavigate()
     const userId = 'userId';
     const currentEmail = 'bombom@younsung.ac.kr';
@@ -29,6 +30,7 @@ export default function ChangeEmail(){
 
     return(
         <div className="change-detail">
+            {modal ? <PasswordModal setModal={setModal}/> : null}
             <div className="change-title">
                 <h2>이메일을 변경하세요</h2>
             </div>
@@ -51,8 +53,8 @@ export default function ChangeEmail(){
                     </div></div>
                 </div>
                 <div className="button-area">
-                    <button className='save'>저장</button>
-                    <button className='cancel'>취소</button>
+                    <button className='save' type="button" onClick={()=>{setModal(true)}}>저장</button>
+                    <button className='cancel' type="button" onClick={()=>{navigate(-1)}}>취소</button>
                 </div>
             </form>
         </div>

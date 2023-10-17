@@ -14,10 +14,10 @@ export default function Header(props) {
     const activeProfileStyle = (i) => {
         if(i == 0){
             return{
-                height: profileOn == true ? '280px' : '70px',
+                height: profileOn == true ? '340px' : '70px',
                 backgroundColor: props.contentScroll > 5 ? 'transparent' : null,
-                backgroundColor: profileOn == true ? 'rgb(4, 7, 20)' : null,
-                border : profileOn == true ? 'solid 0.5px white' : 'none',
+                backgroundColor: profileOn == true ? 'rgb(19, 19, 19)' : null,
+                outline : profileOn == true ? '0.5px solid #acacac' : 'none',
                 transition: 'all 0.2s',
             }
         }else if(i == 1){
@@ -29,11 +29,9 @@ export default function Header(props) {
     }
 
     const NavBarStyle = () => { // props를 매개변수로 추가
-        if (window.location.pathname.startsWith('/content') || window.location.pathname.startsWith('/brand')) {
             return {
-            backgroundColor: props.contentScroll > 5 ? null : 'transparent'
+                backgroundColor: props.contentScroll > 5 ? null : 'transparent'
             };
-        }
     };
 
     return (
@@ -61,14 +59,15 @@ export default function Header(props) {
                             </div>
                             <div className='hide-profile-menu' style={activeProfileStyle(1)}>
                                 <div className='profile-line'></div>
+                                <div className='modify-profile' onClick={()=>{ navigate(`/profile/${userId}/edit-profile`)}}>
+                                    <span className="material-symbols-outlined icon">add_circle</span>
+                                    <h6>프로필 추가</h6>
+                                </div>
                                 <div onClick={()=>{ navigate(`/profile/${userId}/edit-profile`)}}>
-                                    <h4>프로필 수정</h4>
+                                    <span>프로필 수정</span>
                                 </div>
                                 <div onClick={()=>{ navigate(`/profile/${userId}/account`)}}>
-                                    <span >계정 정보</span>
-                                </div>
-                                <div onClick={()=>{ navigate(`/profile/${userId}/download`)}}>
-                                    <span>저장한 콘텐츠</span>
+                                    <span >계정</span>
                                 </div>
                                 <div onClick={()=>{ navigate(`/help`)}}>
                                     <span>고객센터</span>

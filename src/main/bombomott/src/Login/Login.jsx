@@ -1,26 +1,20 @@
 import React from 'react';
-import axios from 'axios';
+import LoginMain from './LoginMain.jsx'
 import Header from '../Header';
-import CategoryMain from './CategoryMain'
 import Footer from '../Footer';
 import ToTop from '../ToTop';
-import './css/category.css'
-import useScroll from '../useScroll';
+import './css/login.css'
 
 import { useEffect, useState } from "react";
 import { setTrendMovies } from '../store/store';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-export default function Category() {
-    const location = useLocation();
-    const {categoryType} = useParams()
-    const scroll = useScroll();
-
+export default function Login() {
     return (
         <div className='main-container'>
-            <Header contentScroll={scroll}/>
-            <CategoryMain/>
+            <Header/>
+            <LoginMain/>
             <Footer/>
             <ToTop/>
         </div>

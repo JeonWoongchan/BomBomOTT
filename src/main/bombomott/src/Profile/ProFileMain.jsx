@@ -1,7 +1,9 @@
-import React from 'react';
-import Account from './Account';
+import React from 'react'
+import Account from './Account'
 import ChangeEmail from './ChangeEmail'
-import ResetPassword from './ResetPassword';
+import ResetPassword from './ResetPassword'
+import LogoutDevices from './LogoutDevices'
+import ChangePayment from './ChangePayment'
 import './css/profile.css'
 
 import { useEffect, useState } from "react";
@@ -20,6 +22,10 @@ export default function ProfileMain() {
             return(<ChangeEmail/>)
         }else if(profileMenu == 'account' && profileSubMenu == 'reset-password'){
             return(<ResetPassword/>)
+        }else if(profileMenu == 'account' && profileSubMenu == 'logout-devices'){
+            return(<LogoutDevices/>)
+        }else if(profileMenu == 'account' && profileSubMenu == 'change-payment'){
+            return(<ChangePayment/>)
         }
         
     }

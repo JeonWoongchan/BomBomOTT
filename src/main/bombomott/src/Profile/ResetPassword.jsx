@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import PasswordView from '../PasswordView'
+import PasswordSafeLevel from '../PasswordSafeLevel';
+import PasswordModal from './PasswordModal';
 import './css/resetPassword.css'
 import './css/progressBar.css'
-import { current } from '@reduxjs/toolkit';
+
+
 
 export default function ResetPassword(){
     const navigate = useNavigate()
     const userId = 'userId';
 
-    const [inputOn, setInputOn] = useState(false); // 패스워드 view on/off
-    const [inputIcon, setInputIcon] = useState('visibility_off'); //input창 아이콘
-    const [inputValue, setInputValue] = useState('');
-    const [safeLevel, setSafeLevel] = useState(0);
-    const [progressText, setProgressText] = useState('약함');
-    const [progressColor, setProgressColor] = useState('red');
+    const [modal, setModal] = useState(false);
+    const [inputView, setInputView] = useState(false); // 패스워드 view on/off
+    const [inputValue, setInputValue] = useState(''); //input창 텍스트
 
     const [checkOn, setCheckOn] = useState(false); // checkbox on/off
-    const [hideText, setHideText] = useState(''); //숨겨진 텍스트
+    const [hideText, setHideText] = useState(''); // 숨겨진 텍스트
+
+    const { inputIcon, inputType } = PasswordView(inputView, inputValue);
+    const { safeLevel, progressText, progressColor} = PasswordSafeLevel(inputValue)
 
     const toggleCheckOn = () => {
         if(checkOn){
@@ -26,11 +30,11 @@ export default function ResetPassword(){
         }
     }
     
-    const toggleInputOn = () => {
-        if(inputOn){
-            setInputOn(false)
+    const toggleinputView = () => {
+        if(inputView){
+            setInputView(false)
         }else{
-            setInputOn(true)
+            setInputView(true)
         }
     }
 
@@ -42,54 +46,9 @@ export default function ResetPassword(){
         }
     },[checkOn])
 
-    useEffect(()=>{
-        if(inputOn){
-            setInputIcon('visibility')
-        }else{
-            setInputIcon('visibility_off')
-        }
-    },[inputOn])
-
     const inputValueHandler = (e)=>{
         setInputValue(e.target.value)
     }
-
-    useEffect(() => { // 비밀번호 안전단계 판별
-        let newSafeLevel = 0;
-
-        if (inputValue.length > 13 && /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%]).*$/.test(inputValue)) {
-            newSafeLevel = 6;
-        } else if (inputValue.length > 10 && /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%]).*$/.test(inputValue)) {
-            newSafeLevel = 5;
-        } else if (inputValue.length > 10 && /^(?=.*[0-9])(?=.*[a-zA-Z]).*$/.test(inputValue)) {
-            newSafeLevel = 4;
-        } else if (inputValue.length >= 8) {
-            newSafeLevel = 3;
-        }else if (inputValue.length < 8 && inputValue.length >= 5) {
-            newSafeLevel = 2;
-        } else if (inputValue.length < 5 && inputValue.length > 0) {
-            newSafeLevel = 1;
-        } else if (inputValue.length == 0){
-            newSafeLevel = 0;
-        }
-    
-        setSafeLevel(newSafeLevel);
-        console.log(safeLevel);
-    }, [inputValue]);
-
-    useEffect(()=>{
-        if(safeLevel >= 4){
-            setProgressColor('green')
-            setProgressText('강함')
-        }else if(safeLevel == 3){
-            setProgressColor('yellow')
-            setProgressText('중간')
-        }else if(safeLevel < 3){
-            setProgressColor('red')
-            setProgressText('약함')
-        }
-        console.log(progressColor)
-    },[safeLevel])
 
     const progressStyle = ()=>{
         return{
@@ -100,16 +59,17 @@ export default function ResetPassword(){
 
     return(
         <div className="change-detail">
+            {modal ? <PasswordModal setModal={setModal}/> : null}
             <div className="change-title">
                 <h2>새 비밀번호을 생성하세요</h2>
             </div>
             <span><p>봄봄+ 계정 로그인에 사용하는 비밀번호가 아래 입력한 이메일로 변경됩니다.</p></span>
             <form action="">
                 <fieldset>
-                    <legend>currentEmail</legend>
+                    <legend></legend>
                     <span>
-                        <input type="text" placeholder='새 비밀번호' onChange={inputValueHandler}/>
-                        <button type="button" className='view-control' onClick={()=>{toggleInputOn()}}>
+                        <input type={inputType} placeholder='새 비밀번호' onChange={inputValueHandler}/>
+                        <button type="button" className='view-control' onClick={()=>{toggleinputView()}}>
                             <span className="material-symbols-outlined icon">{inputIcon}</span>
                         </button>
                         <div className='input-bottom'>
@@ -123,14 +83,14 @@ export default function ResetPassword(){
                 </fieldset>
                 <div className='check-box' onClick={()=>{toggleCheckOn()}}>
                     <input/>
-                    <div className='check-icon'>{checkOn?<span class="material-symbols-outlined icon">done</span>:null}</div>
+                    <div className='check-icon'>{checkOn?<span className="material-symbols-outlined icon">done</span>:null}</div>
                     <div><div className='check-text'>모든 기기에서 로그아웃
                         <div className="hide-text">{hideText}</div>
                     </div></div>
                 </div>
                 <div className="button-area">
-                    <button className='save'>저장</button>
-                    <button className='cancel'>취소</button>
+                    <button className='save' type="button" onClick={()=>{setModal(true)}}>저장</button>
+                    <button className='cancel' type="button" onClick={()=>{navigate(-1)}}>취소</button>
                 </div>
             </form>
         </div>

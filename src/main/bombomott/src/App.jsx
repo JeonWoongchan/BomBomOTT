@@ -3,6 +3,7 @@ import './App.css';
 import axios from "axios";
 import Intro from './Intro/Intro'
 import Main from './Main/Main'
+import Login from './Login/Login';
 import Profile from './Profile/Profile'
 import Content from './Content/Content'
 import BrandContent from './BrandContent/BrandContent'
@@ -20,6 +21,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Intro/>}/>
                 <Route path='/main' element={<Main/>}/>
+                <Route path='/login' element={<Login/>}/>
                 <Route path='/profile/:userId/:profileMenu' element={<Profile/>}>
                     <Route path=':profileSubMenu' element={<Profile/>}/>
                 </Route>
