@@ -27,6 +27,10 @@ function App() {
         <Route path="/brand/:brandName" element={<BrandContent />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search:keyword" element={<Search />} />
+        <Route
+          path="/category/:mediaType/:categoryType"
+          element={<Category />}
+        />
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -8,13 +8,13 @@ export default function SearchContent() {
   const navigate = useNavigate();
 
   return (
-    <div className="seach-content">
+    <div className="search-content">
       <div className="search-box">
         {searchMulti.map((a, i) => {
           const Data = searchMulti[i];
           const DataAll = searchMulti;
-          const TYPE = a.mediaType;
-          return (
+          const TYPE = a.media_Type;
+          return searchMulti[i].backdrop_path != null ? (
             <img
               src={`${BASE_URL}${searchMulti[i].backdrop_path}`}
               key={i}
@@ -25,7 +25,7 @@ export default function SearchContent() {
                 });
               }}
             />
-          );
+          ) : null;
         })}
       </div>
     </div>

@@ -97,10 +97,13 @@ const searchMulti = createSlice({
     setSearchMulti: (state, action) => {
       return action.payload;
     },
+    addSearchMulti: (state, action) => {
+      return [...state, ...action.payload];
+    },
   },
 });
 
-export const { setSearchMulti } = searchMulti.actions;
+export const { setSearchMulti, addSearchMulti } = searchMulti.actions;
 
 export default configureStore({
   reducer: {

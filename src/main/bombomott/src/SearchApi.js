@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setSearchMulti } from "./store/store";
+import { addSearchMulti, setSearchMulti } from "./store/store";
 
-function SearchMulti(text) {
+function SearchMulti(text, page) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const SearchMulti = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/search/multi?query=${text}&include_adult=true&language=ko-KR&page=1`,
+      url: `https://api.themoviedb.org/3/search/multi?query=${text}&include_adult=true&language=ko-KR&page=${page}`,
       headers: {
         accept: "application/json",
         Authorization:
@@ -26,8 +26,12 @@ function SearchMulti(text) {
           console.error(error);
         });
     };
-    getRequest(SearchMulti, setSearchMulti);
-  }, [text]);
+    if (page === 1) {
+      getRequest(SearchMulti, setSearchMulti);
+    } else if (page > 1) {
+      getRequest(SearchMulti, addSearchMulti);
+    }
+  }, [text, page]);
 
   return null;
 }

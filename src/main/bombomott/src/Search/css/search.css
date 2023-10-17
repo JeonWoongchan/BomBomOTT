@@ -4,13 +4,14 @@
   position: relative;
   max-height: 100%;
   height: 100vh;
+  transition: height 0.5s ease;
 }
 
 .searchBox {
   width: 100%;
-  position: absolute;
-  height: 12%;
-  top: 70px;
+}
+
+.inputBox {
   background: rgb(97, 101, 117);
   background: linear-gradient(
     0deg,
@@ -18,12 +19,10 @@
     rgba(88, 92, 106, 1) 65%,
     rgba(65, 68, 78, 1) 90%
   );
-}
-
-.inputBox {
-  background-color: transparent;
   width: 100%;
-  height: 100%;
+  position: absolute;
+  height: 100px;
+  top: 70px;
   font-size: xx-large;
   border: none;
   outline: none;
@@ -45,16 +44,31 @@ input::placeholder {
   );
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   top: 170px;
-  padding: 40px 0 0 70px;
+  padding: 40px 70px 40px 70px;
 }
 .text-a {
   color: white;
   font-weight: 600;
 }
 
+.search-box {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
 .img00 {
-  width: 300px;
-  height: 200px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.search-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
