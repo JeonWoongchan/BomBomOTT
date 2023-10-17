@@ -1,5 +1,5 @@
 import './Main/css/mainContent.css'
-import borderStyle from './Main/borderStyle';
+import borderStyle from './borderStyle';
 import slideTitle from './Main/slideTitle.json'
 import './contentSlide.css'
 

@@ -34,7 +34,8 @@ div{
     display: flex;
     float: left;
     margin: auto 25px;
-    text-decoration-line : none
+    text-decoration-line : none;
+    cursor: pointer;
 }
 
 .header-icon span{

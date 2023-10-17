@@ -64,7 +64,7 @@
     left: 0px;
     top: 0px;
     transition: opacity 200ms ease 0s;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

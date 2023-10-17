@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLoading, setTrendMovies, setTvShow, setMovie } from './store/store';
+import { setLoading, setTrendMovies, setTvShow, setMovie, setGenreMovie } from './store/store';
 import axios from "axios";
 
 //api 받아오는거 모음
@@ -19,7 +19,7 @@ function useApi() {
 
     const options2 = {
         method: 'GET',
-        url: 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=ko-KR&page=1&sort_by=popularity.desc',
+        url: 'https://api.themoviedb.org/3/trending/tv/week?language=ko-KR',
         headers: {
             accept: 'application/json',
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDkyN2ZmOTFkYjgxNmM1MmQ4NzAxOWRjZDc4NTFlMSIsInN1YiI6IjY1MTEyN2EzMjZkYWMxMDEyZDViYzNkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QRCxAT9F8FznwDJ31GIYiMogsjXDnw0eWInNi3sSn24'

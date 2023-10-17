@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function FirstContent() {
     const trendMovies = useSelector((state)=>state.trendMovies)
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
-
     return (
         <div className='hotContent'>
             <h1>인기 콘텐츠</h1>

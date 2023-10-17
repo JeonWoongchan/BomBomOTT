@@ -16,6 +16,6 @@ const movieGenre = {
     10770: 'TV영화',
     53: '스릴러',
     10752: '전쟁',
-    37: '서부'
+    37: '서부극'
   };
 export default movieGenre

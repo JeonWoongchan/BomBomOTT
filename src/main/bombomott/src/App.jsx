@@ -5,6 +5,7 @@ import Intro from "./Intro/Intro";
 import Main from "./Main/Main";
 import Content from "./Content/Content";
 import BrandContent from "./BrandContent/BrandContent";
+import Category from "./Category/Category";
 import useApi from "./useApi";
 
 import { useEffect, useState } from "react";
