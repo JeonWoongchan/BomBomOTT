@@ -53,7 +53,7 @@ public class BoardController {
 
     @GetMapping("/write")
     public String addForm() {
-        return "boardWrite";
+        return "board/Form/boardWrite";
     }
 
     @PostMapping("/write")
