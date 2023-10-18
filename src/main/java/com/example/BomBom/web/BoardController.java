@@ -2,13 +2,9 @@ package com.example.BomBom.web;
 
 
 import com.example.BomBom.Service.BoardService;
-import com.example.BomBom.Service.MemberService;
 import com.example.BomBom.domain.board.Board;
 import com.example.BomBom.domain.board.BoardComment;
-import com.example.BomBom.domain.board.BoardSearch;
-import com.example.BomBom.domain.member.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
@@ -38,7 +33,7 @@ public class BoardController {
         model.addAttribute("boardList", boardList);
         System.out.println(">> boardList : " + boardList.size());
         System.out.println(">> boardList : " + boardList.toString());
-        return "boardList";
+        return "board/boardList";
     }
 
 //    @GetMapping("/list2")
@@ -101,7 +96,7 @@ public class BoardController {
         model.addAttribute("boardComment", commentList);
         model.addAttribute("commentCount", commentCount);
         model.addAttribute("loginId", "hwna");
-        return "boardView";
+        return "board/boardView";
     }
 
     @GetMapping("/detail/{id}")
@@ -124,7 +119,7 @@ public class BoardController {
         model.addAttribute("boardComment", commentList);
         model.addAttribute("commentCount", commentCount);
         model.addAttribute("loginId", "hwna");
-        return "boardView";
+        return "board/boardView";
     }
 
     @PostMapping("/like/{id}/{likeCheck}")
@@ -183,7 +178,7 @@ public class BoardController {
         System.out.println(">> board 1 : " + board.toString());
 
         model.addAttribute("board", board);
-        return "boardUpdate";
+        return "board/Form/boardUpdate";
     }
 
     @PostMapping("/update/{id}")

@@ -33,7 +33,7 @@ public class MemberController {
 
 
 
-        return "members";
+        return "member/members";
     }
 
     @GetMapping("/{memberId}")
@@ -44,12 +44,12 @@ public class MemberController {
 
         Member member = memberService.findById(memberId).get();
         model.addAttribute("member", member);
-        return "member";
+        return "member/member";
     }
 
     @GetMapping("/add")
     public String addForm() {
-        return "addForm";
+        return "member/Form/addForm";
     }
 
     @PostMapping("/add")
@@ -64,7 +64,7 @@ public class MemberController {
     public String editForm(@PathVariable Long memberId, Model model) {
         Member member = memberService.findById(memberId).get();
         model.addAttribute("member", member);
-        return "editForm";
+        return "member/Form/editForm";
     }
 
     @PostMapping("/{memberId}/edit")

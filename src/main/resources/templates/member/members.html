@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
-          href="css/bootstrap.min.css" rel="stylesheet">
+          href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,11 +19,11 @@
     </div>
 
     <div class="py-5 text-center">
-<<<<<<< HEAD
+
         <h2 th:if="${count== 0 }">아무것도 없음</h2>
-=======
-        <h2 th:if="param.delete">삭제 완료</h2>
->>>>>>> boardN
+
+        <h2 th:if="${param.delete}">삭제 완료</h2>
+
     </div>
 <!--
     <div class="row">
@@ -37,10 +37,9 @@
     </div>
 -->
     <form th:object="${memberSearch}" method="get" class="form-inline">
-<<<<<<< HEAD
+
         <h2 th:text="${count}"></h2>
-=======
->>>>>>> boardN
+
     <div class="row">
         <div class="col">
             <input type="text" th:field="*{name}" class="form-control" placeholder="회원이름"/>
@@ -63,11 +62,11 @@
             <div class="col">
                 <button class="btn btn-primary float-end"
                         onclick="location.href='addForm.html'"
-<<<<<<< HEAD
+
                         th:onclick="|location.href='@{/login}'|"
-=======
-                        th:onclick="|location.href='@{/members/login}'|"
->>>>>>> boardN
+
+
+
                         type="button">로그인
                 </button>
             </div>
@@ -91,7 +90,7 @@
             <tr th:each="member : ${members}">
                 <td><a href="member.html" th:href="@{/members/{memberId}(memberId=${member.id})}" th:text="${member.id}">식별id</a>
                 </td>
-                <td><a href="member.html" th:href="@{|/members/${member.id}|}"th:text="${member.userid}">userid</a></td>
+                <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.userid}">userid</a></td>
 
 
                 <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.name}">이름</a></td>
