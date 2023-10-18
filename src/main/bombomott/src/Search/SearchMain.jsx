@@ -34,7 +34,7 @@ export default function SearchMain() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setPage(1);
-  }, []);
+  }, [text]);
 
   useEffect(() => {
     SearchMulti(text, page, dispatch);
