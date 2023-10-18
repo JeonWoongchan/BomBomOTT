@@ -55,7 +55,9 @@ input::placeholder {
 .search-box {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
+  gap: 18px;
+  box-sizing: border-box;
+  margin-bottom: 50px;
 }
 
 .img00 {
@@ -68,9 +70,8 @@ input::placeholder {
 }
 
 .img00:hover {
-  transform: scale(1.1);
-
-  border: 2px solid white;
+  transform: scale(1.05);
+  outline: 2px solid white;
   border-radius: 5%;
   box-sizing: border-box;
 }

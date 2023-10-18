@@ -12,7 +12,6 @@ export default function SearchMain() {
   const scroll = useScroll();
   const isLoading = useSelector((state) => state.isLoading);
   const [text, setText] = useState("");
-  const [incrementHeight, setIcrementHeight] = useState(200);
   const dispatch = useDispatch();
 
   const handleUpdate = (e) => {
@@ -25,8 +24,6 @@ export default function SearchMain() {
         document.documentElement.scrollHeight * 0.9 &&
       !isLoading
     ) {
-      //스크롤 끝까지 내렸을때
-      // handleHeight();
       setPage((prev) => prev + 1);
     }
   }, [scroll]);
@@ -40,12 +37,19 @@ export default function SearchMain() {
     SearchMulti(text, page, dispatch);
   }, [text, page, dispatch]);
 
-  const handleHeight = () => {
-    const newHeight = window.innerHeight + incrementHeight;
-    document.querySelector(".searchPage").style.height = newHeight + "px";
-    setIcrementHeight((prev) => prev + 100);
+  // 화면이동해도 검색어 남기기
+  useEffect(() => {
+    const savedText = localStorage.getItem("text");
+    if (savedText) setText(savedText);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("text", text);
+  }, [text]);
+
+  useEffect(() => {
     setPage((prev) => prev + 1);
-  };
+  }, []);
 
   return (
     <div className="searchPage">

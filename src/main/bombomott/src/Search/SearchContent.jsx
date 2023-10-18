@@ -38,6 +38,9 @@ export default function SearchContent() {
               src={`${BASE_URL}${searchMulti[i].backdrop_path}`}
               key={i}
               className="img00"
+              onLoad={() => {
+                setLoadCount((prev) => prev + 1);
+              }}
               onClick={() => {
                 navigate(`/content/${TYPE}/${a.genre_ids[0]}/${a.id}`, {
                   state: { data: Data, dataAll: DataAll },
