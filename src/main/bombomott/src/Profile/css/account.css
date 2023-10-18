@@ -76,7 +76,7 @@
     transition: all 0.3s;
 }
 
-.material-symbols-outlined.icon:hover {
+.account-detail .material-symbols-outlined.icon:hover {
     transform: scale(1.15); /* 요소를 1.2배로 확대 */
 }
 

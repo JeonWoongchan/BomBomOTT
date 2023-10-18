@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import './css/changeEmail.css'
+import '../css/changeEmail.css'
 import PasswordModal from './PasswordModal';
 
 export default function ChangeEmail(){

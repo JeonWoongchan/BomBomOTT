@@ -14,7 +14,7 @@ export default function ContentTabText(props) {
         <div className='tab-info'>
             <div className='title'>{contentType == 'movie' ? contentDetail.title : contentDetail.name}</div>
             <div className="detail">
-                <div className="box1">{props.data.overview}</div>
+                <div className="box1"><p>{props.data.overview}</p></div>
                 <div className="box2">
                     <div className="etc-info">
                         <h6>러닝 타임:</h6>

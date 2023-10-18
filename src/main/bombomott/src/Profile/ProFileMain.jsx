@@ -1,9 +1,9 @@
 import React from 'react'
 import Account from './Account'
-import ChangeEmail from './ChangeEmail'
-import ResetPassword from './ResetPassword'
-import LogoutDevices from './LogoutDevices'
-import ChangePayment from './ChangePayment'
+import ChangeEmail from './SubMenu/ChangeEmail'
+import ResetPassword from './SubMenu/ResetPassword'
+import LogoutDevices from './SubMenu/LogoutDevices'
+import ChangePayment from './SubMenu/ChangePayment'
 import './css/profile.css'
 
 import { useEffect, useState } from "react";

@@ -28,6 +28,7 @@ div{
 .header-logo{
     height: 43px;
     margin: auto 30px;
+    cursor: pointer;
 }
 
 .header-icon{
@@ -109,18 +110,18 @@ div{
     margin-bottom: 10px;
 }
 
-.active-profile .hide-profile-menu .modify-profile{
+.active-profile .hide-profile-menu .profile-menu{
     display: flex;
     flex-grow: row;
 }
 
-.active-profile .hide-profile-menu .modify-profile .icon{
+.active-profile .hide-profile-menu .profile-menu .icon{
     font-size: 55px;
     color: white;
     opacity: 0.9;
 }
 
-.active-profile .hide-profile-menu .modify-profile h6{
+.active-profile .hide-profile-menu .profile-menu h6{
     color: #acacac;
     position: relative;
     top: 22px;

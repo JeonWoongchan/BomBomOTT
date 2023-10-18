@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './css/account.css'
-import PasswordModal from './PasswordModal';
+import PasswordModal from './SubMenu/PasswordModal';
 
 export default function Account(){
     const navigate = useNavigate()

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import PasswordView from '../PasswordView'
-import PasswordSafeLevel from '../PasswordSafeLevel';
+import PasswordView from '../../PasswordView'
+import PasswordSafeLevel from '../../PasswordSafeLevel';
 import PasswordModal from './PasswordModal';
-import './css/resetPassword.css'
-import './css/progressBar.css'
+import '../css/resetPassword.css'
+import '../css/progressBar.css'
 
 
 

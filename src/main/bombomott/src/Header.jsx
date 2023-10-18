@@ -10,11 +10,12 @@ export default function Header(props) {
     const navigate = useNavigate();
     const [profileOn, setProfileOn] = useState(false);
     const userId = 'userId';
+    const [profileName, setProfileName] = useState(['내 프로필', '프로필2', '프로필3']);
     
     const activeProfileStyle = (i) => {
         if(i == 0){
             return{
-                height: profileOn == true ? '340px' : '70px',
+                height: profileOn == true ? `${340 +profileName.length * 50}px` : '70px',
                 backgroundColor: props.contentScroll > 5 ? 'transparent' : null,
                 backgroundColor: profileOn == true ? 'rgb(19, 19, 19)' : null,
                 outline : profileOn == true ? '0.5px solid #acacac' : 'none',
@@ -40,7 +41,7 @@ export default function Header(props) {
             <Navbar className='main-Navbar' style={NavBarStyle()}>
                 <Container>
                     <Navbar.Brand className="header-buttons">
-                        <img className='header-logo' src='/img/disney_Plus_logo.png'/>
+                        <img className='header-logo' src='/img/disney_Plus_logo.png' onClick={()=>{navigate('/main')}}/>
                         <NavMenu icon='home' menu='홈' link='/main'/>
                         <NavMenu icon='search' menu='검색' link=''/>
                         <NavMenu icon='add' menu='관심 콘텐츠' link=''/>
@@ -59,11 +60,22 @@ export default function Header(props) {
                             </div>
                             <div className='hide-profile-menu' style={activeProfileStyle(1)}>
                                 <div className='profile-line'></div>
-                                <div className='modify-profile' onClick={()=>{ navigate(`/profile/${userId}/edit-profile`)}}>
+                                {/* {
+                                    profileName.map((a,i)=>{
+                                        return(
+                                            
+                                        )
+                                    })
+                                } */}
+                                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/select-avatar`)}}>
                                     <span className="material-symbols-outlined icon">add_circle</span>
                                     <h6>프로필 추가</h6>
                                 </div>
-                                <div onClick={()=>{ navigate(`/profile/${userId}/edit-profile`)}}>
+                                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/select-avatar`)}}>
+                                    <span className="material-symbols-outlined icon">add_circle</span>
+                                    <h6>프로필 추가</h6>
+                                </div>
+                                <div onClick={()=>{ navigate(`/profile/${userId}/edit-profiles`)}}>
                                     <span>프로필 수정</span>
                                 </div>
                                 <div onClick={()=>{ navigate(`/profile/${userId}/account`)}}>

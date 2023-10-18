@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import PasswordView from '../PasswordView'
-import './css/passwordModal.css'
-import { setMovie } from '../store/store';
+import PasswordView from '../../PasswordView'
+import '../css/passwordModal.css'
+import { setMovie } from '../../store/store';
 
 export default function PasswordModal(props) {
     const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import './css/logoutDevices.css'
-import PasswordView from '../PasswordView'
+import '../css/logoutDevices.css'
+import PasswordView from '../../PasswordView'
 import PasswordModal from './PasswordModal';
 
 export default function LogoutDevices(){
