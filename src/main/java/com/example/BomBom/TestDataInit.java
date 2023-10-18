@@ -20,8 +20,12 @@ public class TestDataInit {
     @EventListener(ApplicationReadyEvent.class)
     public void initData() {
         log.info("test data init");
+
         memberRepository.save(new Member("kksos28", "rbtlr1234", "Sdsds","ss"));
         memberRepository.save(new Member("kksos33",  "rbtlr1234", "sdsd","ss"));
+
+
+
     }
 
 }

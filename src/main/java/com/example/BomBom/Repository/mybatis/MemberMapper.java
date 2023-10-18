@@ -1,7 +1,9 @@
 package com.example.BomBom.Repository.mybatis;
 
 
+
 import com.example.BomBom.Repository.MemberLoginDto;
+
 import com.example.BomBom.Repository.MemberSearchC;
 import com.example.BomBom.Repository.MemberUpdateDto;
 import com.example.BomBom.domain.member.Member;
@@ -26,10 +28,12 @@ public interface MemberMapper {
 
 
 
+
     int MemberCount();
 
 
 
     Optional<Boolean>  login(@Param("userid") String userid, @Param("password") String password);
+
 
 }

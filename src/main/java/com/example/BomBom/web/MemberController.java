@@ -27,15 +27,21 @@ public class MemberController {
 
 
 
+
         int count = memberService.MemberCount();
         model.addAttribute("count",count);
+
 
 
         return "members";
     }
 
     @GetMapping("/{memberId}")
+
     public String member(@PathVariable long memberId, Model model) {
+
+
+
         Member member = memberService.findById(memberId).get();
         model.addAttribute("member", member);
         return "member";

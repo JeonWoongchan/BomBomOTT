@@ -1,6 +1,8 @@
 package com.example.BomBom.Service;
 
+
 import com.example.BomBom.Repository.MemberLoginDto;
+
 import com.example.BomBom.Repository.MemberRepository;
 
 import com.example.BomBom.Repository.MemberSearchC;
@@ -39,6 +41,7 @@ public class MemberServiceV1 implements MemberService {
         return memberRepository.findAll(cond);
     }
 
+
     public void delete(Long id) {
         memberRepository.delete(id);
     }
@@ -52,6 +55,9 @@ public class MemberServiceV1 implements MemberService {
     public Optional<Boolean> login(MemberLoginDto dto) {
         return memberRepository.login(dto.getUserid(), dto.getPassword());
     }
+
+
+
 
 
 }
