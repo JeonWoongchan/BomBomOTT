@@ -22,6 +22,10 @@ public interface MemberMapper {
 
     Optional<Member> findById(Long id);
 
+
+    Optional<Member> Mypage(String sessionuserid);
+
+
     List<Member> findAll(MemberSearchC memberSearchc);
 
     void delete(Long id);

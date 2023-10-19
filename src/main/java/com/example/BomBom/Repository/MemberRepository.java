@@ -1,8 +1,6 @@
 package com.example.BomBom.Repository;
 
 import com.example.BomBom.domain.member.Member;
-import org.apache.ibatis.annotations.Param;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -31,4 +29,7 @@ public interface MemberRepository {
 
 
     String AddDup(String userid);
+
+
+    Optional<Member> Mypage(String sessionuserid);
 }

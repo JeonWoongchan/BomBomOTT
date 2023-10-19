@@ -18,7 +18,7 @@ public interface MemberService {
     void update(Long memberId, MemberUpdateDto updateParam);
 
     Optional<Member> findById(Long id);
-
+    Optional<Member> Mypage(String usersessionid);
     List<Member> findMemberName(MemberSearchC itemSearch);
 
     void delete(Long id);
@@ -32,6 +32,9 @@ public interface MemberService {
     String MemberName(String user);
 
     String AddDup(String userid);
+
+
+
 
 
 

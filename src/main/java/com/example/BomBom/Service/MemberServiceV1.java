@@ -37,6 +37,11 @@ public class MemberServiceV1 implements MemberService {
     }
 
     @Override
+    public Optional<Member> Mypage(String usersessionid) {
+        return memberRepository.Mypage(usersessionid);
+    }
+
+    @Override
     public List<Member> findMemberName(MemberSearchC cond) {
         return memberRepository.findAll(cond);
     }

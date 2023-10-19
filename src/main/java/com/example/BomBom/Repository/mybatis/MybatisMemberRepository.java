@@ -57,7 +57,14 @@ public class MybatisMemberRepository implements MemberRepository {
     }
 
     public  String MemberName(String user) { return memberMapper.MemberName(user);};
-    public  String AddDup(String userid) { return memberMapper.AddDup(userid);};
+    public  String AddDup(String userid) { return memberMapper.AddDup(userid);}
+
+    @Override
+    public Optional<Member> Mypage(String sessionuserid) {
+        return memberMapper.Mypage(sessionuserid);
+    }
+
+    ;
 
 
 }

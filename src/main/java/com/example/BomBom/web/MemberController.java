@@ -41,12 +41,25 @@ public class MemberController {
             String name = memberService.MemberName(sessionuserid);
 
             model.addAttribute("name", name);
+            model.addAttribute("sessionuserid", sessionuserid);
         }
 
 
 
         return "member/members";
     }
+
+
+    @GetMapping("/mypage/{sessionuserid}")
+
+    public String Mypage(@PathVariable  String  sessionuserid, Model model, HttpSession session) {
+         sessionuserid = (String) session.getAttribute("userid");
+        System.out.println(sessionuserid);
+        Member member = memberService.Mypage(sessionuserid).get();
+        model.addAttribute("member",member);
+        return "member/mypage";
+    }
+
 
     @GetMapping("/{memberId}")
 
@@ -94,6 +107,17 @@ public class MemberController {
         }
 
     }
+
+//    @PostMapping("/dup")
+//    public String dupCheck(@ModelAttribute Member member, RedirectAttributes redirectAttributes) {
+//
+//
+//
+//    }
+
+
+
+
 
     @GetMapping("/{memberId}/edit")
     public String editForm(@PathVariable Long memberId, Model model) {

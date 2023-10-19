@@ -81,6 +81,14 @@
     </select>
 
 
+
+    <select id="Mypage" resultType="Member">
+        select userid, name,email
+        from member
+        where userid = #{userid}
+    </select>
+
+
     <select id="AddDup" resultType="string">
         select userid
         from member
