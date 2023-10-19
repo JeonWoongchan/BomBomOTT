@@ -8,7 +8,7 @@ export default function ContentTabText(props) {
     const {contentType} = useParams()
     const RunTime = contentDetail.runtime < 60 ? `${contentDetail.runtime}분` 
                     : `${Math.floor(contentDetail.runtime/60)}시간 ${contentDetail.runtime%60}분`
-    const ProductionCompanies = contentDetail.production_companies || null;
+    const ProductionCompanies = contentDetail.production_companies.length > 0 ? contentDetail.production_companies: null;
     
     return (
         <div className='tab-info'>
@@ -36,11 +36,14 @@ export default function ContentTabText(props) {
                 <div className="box2">
                     <div className="etc-info">
                         <h6>제작사:</h6>
-                        <img className='img1' src={`https://image.tmdb.org/t/p/original${ProductionCompanies[0].logo_path}`}/>
                         {
-                            ProductionCompanies[1] ? <img className='img1' src={`https://image.tmdb.org/t/p/original${ProductionCompanies[1].logo_path}`}/> :null
+                            ProductionCompanies != null ?
+                            <img className='img1' src={`https://image.tmdb.org/t/p/original${ProductionCompanies[0].logo_path}`}/>:<p>정보 없음</p>
                         }
-                        
+                        {
+                            ProductionCompanies != null && ProductionCompanies[1] 
+                            ? <img className='img1' src={`https://image.tmdb.org/t/p/original${ProductionCompanies[1].logo_path}`}/> :null
+                        }
                     </div>
                     <div className="etc-info">
                         <h6>출연:</h6>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLoading, setTrendMovies, setTvShow, setMovie, setGenreMovie } from './store/store';
+import { setLoading, setTrendMovies, setTvShow, setDisneyMovie, setGenreMovie } from './store/store';
 import axios from "axios";
 
 //api 받아오는거 모음
@@ -26,13 +26,13 @@ function useApi() {
         }
     };
 
-    const options3 = {
+    const disneyMovie = {
         method: 'GET',
-        url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko-KR&page=1&sort_by=popularity.desc',
+        url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_companies=disney',
         headers: {
             accept: 'application/json',
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDkyN2ZmOTFkYjgxNmM1MmQ4NzAxOWRjZDc4NTFlMSIsInN1YiI6IjY1MTEyN2EzMjZkYWMxMDEyZDViYzNkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QRCxAT9F8FznwDJ31GIYiMogsjXDnw0eWInNi3sSn24'
-        }   
+        }  
     };  
 
     const getRequest = (a,b) => {
@@ -46,7 +46,7 @@ function useApi() {
     useEffect(()=>{
         getRequest(options1, setTrendMovies)
         getRequest(options2, setTvShow)
-        getRequest(options3, setMovie)
+        getRequest(disneyMovie, setDisneyMovie)
     },[])
 
 }

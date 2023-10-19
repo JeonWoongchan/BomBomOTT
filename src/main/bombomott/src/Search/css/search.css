@@ -33,7 +33,7 @@ input::placeholder {
   color: #dadada;
 }
 
-.content {
+.searchPage .content {
   background: rgb(15, 17, 26);
   background: linear-gradient(
     0deg,

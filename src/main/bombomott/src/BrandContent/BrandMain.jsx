@@ -13,13 +13,14 @@ import useApi from '../useApi';
 
 export default function BrandMain(props) {
     const [videoEnded, setVideoEnded] = useState(false);    
+    const disneyMovie = useSelector((state)=>state.disneyMovie)
     const trendMovies = useSelector((state) => state.trendMovies)
     const tvShow = useSelector((state) => state.tvShow)
     
     const scroll = useScroll();  
-    const DataList = [trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow]
+    const DataList = [disneyMovie, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow, trendMovies, tvShow]
 
-    const { data } = ScrollLoading(DataList, trendMovies, tvShow, scroll) 
+    const { data } = ScrollLoading(DataList, disneyMovie, tvShow, scroll) 
     const {SlideItemNum, carouselStyle, titleStyle} =  SlideControll();
     const {dataLoading} =  LoadingLogic(data);
 

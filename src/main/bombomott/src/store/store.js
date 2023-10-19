@@ -51,17 +51,17 @@ let tvShow = createSlice({
 
 export let { setTvShow } = tvShow.actions;
 
-let movie = createSlice({
-  name: "movie",
+let disneyMovie = createSlice({
+  name: "disneyMovie",
   initialState: [],
   reducers: {
-    setMovie(state, action) {
+    setDisneyMovie(state, action) {
       return action.payload;
     },
   },
 });
 
-export let { setMovie } = movie.actions;
+export let { setDisneyMovie } = disneyMovie.actions;
 
 const genreMovie = createSlice({
   name: "genreMovie",
@@ -111,6 +111,7 @@ export default configureStore({
     tvShow: tvShow.reducer,
     isLoading: isLoading.reducer,
     isDragging: isDragging.reducer,
+    disneyMovie:disneyMovie.reducer,
     genreMovie: genreMovie.reducer,
     contentDetail: contentDetail.reducer,
     searchMulti: searchMulti.reducer,
