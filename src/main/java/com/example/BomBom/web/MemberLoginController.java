@@ -37,26 +37,38 @@ public class MemberLoginController {
     @PostMapping()
     public String login(MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
                         HttpSession session, HttpServletRequest request)  {
-        Optional<Boolean> loggedIn = memberService.login(dto);
 
+
+
+        Optional<Boolean> loggedIn = memberService.login(dto);
+        int multicheck = memberService.multiCheck(dto.getUserid());
         if (loggedIn.isPresent()) {
             // 로그인 성공 시 처리
-              String userid = request.getParameter("userid");
+             if (multicheck == 0) {
+                 String userid = request.getParameter("userid");
 
 
 
-            session.setAttribute("userid", userid); // 세션에 userid 저장
+                 session.setAttribute("userid", userid); // 세션에 userid 저장
 
 
-            String sessionuserid = (String ) session.getAttribute("userid");
-            model.addAttribute("userid", userid);
+                 String sessionuserid = (String ) session.getAttribute("userid");
+                 model.addAttribute("userid", userid);
 
-            String name = memberService.MemberName(sessionuserid);
+                 String name = memberService.MemberName(sessionuserid);
 
 
-            redirectAttributes.addFlashAttribute("LoginMessage",name+"님 안녕하세요 ");
+                 redirectAttributes.addFlashAttribute("LoginMessage",name+"님 안녕하세요 ");
+                 memberService.multiAdd(userid);
+                 return "redirect:members";
+             }
+             else  {
 
-            return "redirect:members";
+
+                 return "redirect:/login/block";
+             }
+
+
         } else {
             // 로그인 실패 시 처리
             redirectAttributes.addFlashAttribute("LoginMessage", "아이디 또는 비밀번호가 일치하지가 않습니다");
@@ -65,13 +77,18 @@ public class MemberLoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session,MemberLoginDto dto) {
         session.invalidate(); // 세션 무효화
-
+        memberService.multisub(dto.getUserid());
         return "redirect:/login"; // 로그인 페이지로 리다이렉트
     }
 
-
+    @GetMapping("/block")
+    public String block(HttpSession session,RedirectAttributes redirectAttributes) {
+        session.invalidate(); // 세션 무효화
+        redirectAttributes.addFlashAttribute("block","최대 1개 기기만 접속 하실 수 있습니다.");
+        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+    }
 
 
 }

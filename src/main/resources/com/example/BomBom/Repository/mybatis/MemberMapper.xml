@@ -89,11 +89,34 @@
     </select>
 
 
-    <select id="AddDup" resultType="string">
+    <select id="DupCheck" resultType="string">
         select userid
         from member
         where userid = #{userid}
     </select>
+
+
+    <select id="multiCheck" resultType="int">
+      select multideivce
+      from member
+      where userid = #{userid}
+    </select>
+
+
+
+
+    <update id="multiAdd">
+        UPDATE member
+        SET multideivce = multideivce + 1
+        WHERE userid = #{userid}
+    </update>
+
+
+    <update id="multisub">
+        UPDATE member
+        SET multideivce = multideivce - 1
+        WHERE userid = #{userid}
+    </update>
 
 
 

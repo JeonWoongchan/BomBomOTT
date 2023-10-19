@@ -15,9 +15,14 @@ import java.util.Optional;
 @Mapper
 public interface BoardMapper {
 
+
+    // 조회
     List<Board> findAll(Board board);
 
+
+    // 삽입
     int save(Board board);
+
 
     Board findById(int id, String loginId);
 

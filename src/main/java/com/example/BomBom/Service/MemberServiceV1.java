@@ -68,8 +68,23 @@ public class MemberServiceV1 implements MemberService {
     }
 
     @Override
-    public String AddDup(String userid) {
-        return memberRepository.AddDup(userid);
+    public String DupCheck(String userid) {
+        return memberRepository.DupCheck(userid);
+    }
+
+    @Override
+    public int multiCheck(String userid) {
+        return memberRepository.multiCheck(userid);
+    }
+
+    @Override
+    public void multiAdd(String userid) {
+        memberRepository.multiAdd(userid);
+    }
+
+    @Override
+    public void multisub(String userid) {
+        memberRepository.multisub(userid);
     }
 
 

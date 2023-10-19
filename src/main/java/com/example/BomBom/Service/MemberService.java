@@ -31,11 +31,13 @@ public interface MemberService {
 
     String MemberName(String user);
 
-    String AddDup(String userid);
+    String DupCheck(String userid);
 
 
+    int multiCheck(String userid);
 
+    void multiAdd(String userid);
 
-
+    void multisub(String userid);
 
 }

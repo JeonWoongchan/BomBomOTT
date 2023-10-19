@@ -90,7 +90,7 @@ public class MemberController {
 
 
 
-        String sqlId = memberService.AddDup(userid);
+        String sqlId = memberService.DupCheck(userid);
 
 
         if (userid.equals(sqlId)) {
