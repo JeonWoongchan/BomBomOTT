@@ -65,7 +65,7 @@ public class MemberController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Member member, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    public String addMember(@ModelAttribute Member member, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
 
       String  userid = request.getParameter("userid");
