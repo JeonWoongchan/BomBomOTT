@@ -21,4 +21,12 @@ public class MemberLoginDto {
         this.userid = userid;
         this.password = password;
     }
+
+
+    public MemberLoginDto(String userid) {
+        this.userid = userid;
+
+    }
+
+
 }

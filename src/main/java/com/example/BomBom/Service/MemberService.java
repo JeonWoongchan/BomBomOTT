@@ -19,7 +19,7 @@ public interface MemberService {
 
     Optional<Member> findById(Long id);
 
-    List<Member> findItems(MemberSearchC itemSearch);
+    List<Member> findMemberName(MemberSearchC itemSearch);
 
     void delete(Long id);
 
@@ -29,7 +29,9 @@ public interface MemberService {
 
     Optional<Boolean> login(MemberLoginDto dto);
 
+    String MemberName(String user);
 
+    String AddDup(String userid);
 
 
 

@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -33,19 +35,43 @@ public class MemberLoginController {
 
 
     @PostMapping()
-    public String login(MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes) {
+    public String login(MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
+                        HttpSession session, HttpServletRequest request)  {
         Optional<Boolean> loggedIn = memberService.login(dto);
 
         if (loggedIn.isPresent()) {
             // 로그인 성공 시 처리
-            redirectAttributes.addFlashAttribute("LoginMessage", "로그인 완료");
-            return "redirect:login";
+              String userid = request.getParameter("userid");
+
+
+
+            session.setAttribute("userid", userid); // 세션에 userid 저장
+
+
+            String sessionuserid = (String ) session.getAttribute("userid");
+            model.addAttribute("userid", userid);
+
+            String name = memberService.MemberName(sessionuserid);
+
+
+            redirectAttributes.addFlashAttribute("LoginMessage",name+"님 안녕하세요 ");
+
+            return "redirect:members";
         } else {
             // 로그인 실패 시 처리
             redirectAttributes.addFlashAttribute("LoginMessage", "아이디 또는 비밀번호가 일치하지가 않습니다");
             return "redirect:login";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 무효화
+
+        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+    }
+
+
 
 
 }

@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 @Controller
 @RequestMapping("/members")
 @RequiredArgsConstructor
@@ -21,15 +24,24 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping()
-    public String members(@ModelAttribute("memberSearch") MemberSearchC memberSearch, Model model) {
-        List<Member> members = memberService.findItems(memberSearch);
-        model.addAttribute("members", members);
+    public String members(@ModelAttribute("memberSearch") MemberSearchC memberSearch, Model model,
+                          HttpSession session) {
+        // 세션 확인
+        if (session.getAttribute("userid") == null) {
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        } else {
+            List<Member> members = memberService.findMemberName(memberSearch);
+            model.addAttribute("members", members);
 
+            int count = memberService.MemberCount();
+            model.addAttribute("count", count);
 
+            String sessionuserid = (String) session.getAttribute("userid");
 
+            String name = memberService.MemberName(sessionuserid);
 
-        int count = memberService.MemberCount();
-        model.addAttribute("count",count);
+            model.addAttribute("name", name);
+        }
 
 
 
@@ -53,11 +65,34 @@ public class MemberController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Member member, RedirectAttributes redirectAttributes) {
-        Member savedMember = memberService.save(member);
-        redirectAttributes.addAttribute("memberId", savedMember.getId());
-        redirectAttributes.addAttribute("status", true);
-        return "redirect:/members/{memberId}";
+    public String addItem(@ModelAttribute Member member, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+
+      String  userid = request.getParameter("userid");
+
+
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(userid);
+        userid = matcher.replaceAll("");
+
+
+
+        String sqlId = memberService.AddDup(userid);
+
+
+        if (userid.equals(sqlId)) {
+
+            redirectAttributes.addFlashAttribute("userid",sqlId+"이미 있는 아이디 입니다");
+            return "redirect:/members/add";
+
+
+        } else {
+            Member savedMember = memberService.save(member);
+            redirectAttributes.addAttribute("memberId", savedMember.getId());
+            redirectAttributes.addAttribute("status", true);
+            return "redirect:/members/{memberId}";
+        }
+
     }
 
     @GetMapping("/{memberId}/edit")

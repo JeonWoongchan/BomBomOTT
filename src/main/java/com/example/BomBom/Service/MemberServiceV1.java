@@ -37,7 +37,7 @@ public class MemberServiceV1 implements MemberService {
     }
 
     @Override
-    public List<Member> findItems(MemberSearchC cond) {
+    public List<Member> findMemberName(MemberSearchC cond) {
         return memberRepository.findAll(cond);
     }
 
@@ -57,7 +57,15 @@ public class MemberServiceV1 implements MemberService {
     }
 
 
+    @Override
+    public String MemberName(String user) {
+        return memberRepository.MemberName(user);
+    }
 
+    @Override
+    public String AddDup(String userid) {
+        return memberRepository.AddDup(userid);
+    }
 
 
 }

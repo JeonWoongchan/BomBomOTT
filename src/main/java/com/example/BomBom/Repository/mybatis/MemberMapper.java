@@ -29,11 +29,21 @@ public interface MemberMapper {
 
 
 
+
+
     int MemberCount();
 
 
 
     Optional<Boolean>  login(@Param("userid") String userid, @Param("password") String password);
+
+
+    String MemberName(@Param("userid") String userid);
+
+
+
+
+    String AddDup(@Param("userid") String userid);
 
 
 }

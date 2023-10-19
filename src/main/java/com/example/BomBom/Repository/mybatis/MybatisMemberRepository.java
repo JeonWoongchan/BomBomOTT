@@ -7,6 +7,7 @@ import com.example.BomBom.Repository.MemberUpdateDto;
 
 import com.example.BomBom.domain.member.Member;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -54,6 +55,9 @@ public class MybatisMemberRepository implements MemberRepository {
     public Optional<Boolean> login(String userid, String password) {
          return memberMapper.login(userid,password);
     }
+
+    public  String MemberName(String user) { return memberMapper.MemberName(user);};
+    public  String AddDup(String userid) { return memberMapper.AddDup(userid);};
 
 
 }
