@@ -27,7 +27,6 @@ export default function ProfileMain() {
         }else if(profileMenu == 'account' && profileSubMenu == 'change-payment'){
             return(<ChangePayment/>)
         }
-        
     }
 
     return (

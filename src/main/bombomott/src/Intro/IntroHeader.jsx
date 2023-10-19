@@ -53,7 +53,7 @@ export default function Header(props) {
             <button className="header-login-btn" type='button' onClick={()=>{navigate('/login')}}>로그인</button> 
             <Navbar className={`intro-Navbar ${props.scroll>450 ? 'show-Navbar' : ''}`} style={{top: '0'}}>
                 <Container>
-                    <Navbar.Brand href="#home" className='header-logo'>
+                    <Navbar.Brand href="" className='header-logo'>
                         <img className='header-logo' src='/img/disney_Plus_logo.png'/>
                     </Navbar.Brand>
                     <Navbar.Toggle />
