@@ -8,9 +8,9 @@ import './css/category.css'
 import useScroll from '../useScroll';
 
 import { useEffect, useState } from "react";
-import { setTrendMovies } from '../store/store';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { setTrendMovies } from "../store/store";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Category() {
     const location = useLocation();
@@ -26,4 +26,3 @@ export default function Category() {
         </div>
     );
 }
-

@@ -36,6 +36,7 @@ function ContentSlide(props){
                 DataArray.map((a,i)=>{
                     const Data = props.data[i]
                     const DataAll = props.data
+                    const TYPE = a.media_type =='tv' ? 'series' : a.media_type
                     return(
                         <div className="slide-box" key={i}
                             style={mouseIndex === i ? { ...boxStyle(i), ...borderStyle('box') } : boxStyle(i)}
@@ -43,7 +44,7 @@ function ContentSlide(props){
                             onMouseLeave={()=>{setMouseIndex('')}}> 
                             <img src={`${BASE_URL}${Array.isArray(props.data) ? props.data[i].backdrop_path : props.data.backdrop_path}`}
                                 style={isDragging === true ? { pointerEvents: 'none' } : null}
-                                draggable="false" onClick={()=>{ navigate(`/content/${a.media_type}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}>
+                                draggable="false" onClick={()=>{ navigate(`/content/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}>
                             </img>
                             {contentType == 'series' && props.episodeCount 
                             ? <h6>{i+1}화 ({contentDetail.episode_run_time.length > 0 ?contentDetail.episode_run_time[0] : 60}분)</h6> : null} 

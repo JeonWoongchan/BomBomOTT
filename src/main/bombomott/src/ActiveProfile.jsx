@@ -24,9 +24,10 @@ export default function ActiveProfile(props) {
                 outline : profileOn == true ? '0.5px solid #acacac' : 'none',
                 transition: 'all 0.2s',
             }
-        }else if(i == 1){
+        }else if(i == 1){//hide-profile style
             return{
                 opacity: profileOn == true ? 1 : 0, 
+                display: profileOn == true ? 'block' : 'none', 
                 transition: 'opacity 0.2s', 
             }
         }
@@ -45,7 +46,7 @@ export default function ActiveProfile(props) {
                 {
                     profileName.map((a,i)=>{
                         return(
-                            <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/select-avatar`)}}>
+                            <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/select-avatar`)}} key={i}>
                                 <div className="profile-img" style={{background : `url(${profileImg[i]}) 0% 0% / contain no-repeat`}}></div>
                                 <h6>{profileName[i]}</h6>
                             </div>

@@ -53,8 +53,8 @@ function TabContent(props){
     const {SlideItemNum, carouselStyle, titleStyle} =  SlideControll();
 
     const foundAll = Object.values(props.receivedDataAll).filter(e => e.id != contentId);//보고있는 콘텐츠 아이디 제외하고 전체
-    const foundGenre = Object.values(foundAll).filter(e => e.genre_ids.includes(Number(contentGenre)));
-    
+    const foundUndefined = Object.values(foundAll).filter(e => e.genre_ids != undefined);
+    const foundGenre = Object.values(foundUndefined).filter(e => e.genre_ids.includes(Number(contentGenre)));
     
     return [contentType == 'movie' ? <ContentSlide data={foundGenre} SlideItemNum={SlideItemNum}/> :<ContentEpisode SlideItemNum={SlideItemNum}/>, 
             contentType == 'movie' ? <ContentTabText data={props.receivedData} genre={props.genre}/> : <ContentSlide data={foundGenre} SlideItemNum={SlideItemNum}/>, 
