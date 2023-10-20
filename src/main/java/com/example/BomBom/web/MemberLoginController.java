@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Controller
 @RequestMapping("/login")
@@ -48,8 +50,18 @@ public class MemberLoginController {
                  String userid = request.getParameter("userid");
 
 
+                 Timer timer = new Timer();
+                 timer.schedule(new TimerTask() {
+                     @Override
+                     public void run() {
+                         memberService.multisub(userid);
+                     }
+                 }, 599999); // 9분 58초 후에 실행
 
                  session.setAttribute("userid", userid); // 세션에 userid 저장
+                 session.setMaxInactiveInterval(10 * 60);
+
+
 
 
                  String sessionuserid = (String ) session.getAttribute("userid");
@@ -78,8 +90,9 @@ public class MemberLoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session,MemberLoginDto dto) {
-        session.invalidate(); // 세션 무효화
         memberService.multisub(dto.getUserid());
+        session.invalidate(); // 세션 무효화
+
         return "redirect:/login"; // 로그인 페이지로 리다이렉트
     }
 
