@@ -49,7 +49,7 @@ export default function Header(props) {
     return (
         <div className='header'>
             {/* 상단바 */}
-            <button className="header-login-btn" type='button' onClick={()=>{na}}>로그인</button> 
+            <button className="header-login-btn" type='button' onClick={()=>{navigate('')}}>로그인</button>
             <Navbar className={`intro-Navbar ${props.scroll>450 ? 'show-Navbar' : ''}`} style={{top: '0'}}>
                 <Container>
                     <Navbar.Brand href="#home" className='header-logo'>

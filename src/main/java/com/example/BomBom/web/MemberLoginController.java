@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@CrossOrigin(origins = "*")
 @Controller
 @RequestMapping("/login")
 @RequiredArgsConstructor
@@ -31,16 +32,12 @@ public class MemberLoginController {
     @GetMapping()
     public String loginForm(@ModelAttribute("memberSearch") MemberSearchC memberSearch, Model model) {
 
-        return "login/login";
+        return "forward:/index.html";
     }
 
-
-
     @PostMapping()
-    public String login(MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
+    public String login(@RequestBody MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
                         HttpSession session, HttpServletRequest request)  {
-
-
 
         Optional<Boolean> loggedIn = memberService.login(dto);
         int multicheck = memberService.multiCheck(dto.getUserid());
@@ -61,30 +58,23 @@ public class MemberLoginController {
                  session.setAttribute("userid", userid); // 세션에 userid 저장
                  session.setMaxInactiveInterval(10 * 60);
 
-
-
-
                  String sessionuserid = (String ) session.getAttribute("userid");
                  model.addAttribute("userid", userid);
 
                  String name = memberService.MemberName(sessionuserid);
 
-
                  redirectAttributes.addFlashAttribute("LoginMessage",name+"님 안녕하세요 ");
                  memberService.multiAdd(userid);
-                 return "redirect:members";
+                 return "forward:/index.html";
              }
              else  {
-
-
                  return "redirect:/login/block";
              }
-
 
         } else {
             // 로그인 실패 시 처리
             redirectAttributes.addFlashAttribute("LoginMessage", "아이디 또는 비밀번호가 일치하지가 않습니다");
-            return "redirect:login";
+            return "forward:/index.html";
         }
     }
 
