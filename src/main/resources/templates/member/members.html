@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
-          href="css/bootstrap.min.css" rel="stylesheet">
+          href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +19,14 @@
     </div>
 
     <div class="py-5 text-center">
-        <h2 th:if="param.delete">삭제 완료</h2>
+
+        <h2 th:if="${count== 0 }">아무것도 없음</h2>
+
+        <h2 th:if="${param.delete}">삭제 완료</h2>
+
+        <h2 th:text="${name}"></h2>
+
+
     </div>
 <!--
     <div class="row">
@@ -33,6 +40,9 @@
     </div>
 -->
     <form th:object="${memberSearch}" method="get" class="form-inline">
+
+        <h2 th:text="${count}"></h2>
+
     <div class="row">
         <div class="col">
             <input type="text" th:field="*{name}" class="form-control" placeholder="회원이름"/>
@@ -53,10 +63,26 @@
             </div>
 
             <div class="col">
-                <button class="btn btn-primary float-end"
+                <button class="btn btn-danger float-end"
                         onclick="location.href='addForm.html'"
-                        th:onclick="|location.href='@{/login}'|"
-                        type="button">로그인
+
+                        th:onclick="|location.href='@{/login/logout}'|"
+
+
+
+                        type="button">로그아웃
+                </button>
+
+
+
+                <button class="btn btn-success float-end"
+                        onclick="location.href='mypage.html.'"
+
+                        th:onclick="|location.href='@{/members/mypage/{sessionuserid}}'|"
+
+
+
+                        type="button">마이페이지
                 </button>
             </div>
         </div>
@@ -79,7 +105,7 @@
             <tr th:each="member : ${members}">
                 <td><a href="member.html" th:href="@{/members/{memberId}(memberId=${member.id})}" th:text="${member.id}">식별id</a>
                 </td>
-                <td><a href="member.html" th:href="@{|/members/${member.id}|}"th:text="${member.userid}">userid</a></td>
+                <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.userid}">userid</a></td>
 
 
                 <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.name}">이름</a></td>

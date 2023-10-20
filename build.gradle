@@ -22,6 +22,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 	runtimeOnly 'mysql:mysql-connector-java:8.0.30'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -29,15 +30,29 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'mysql:mysql-connector-java:8.0.30' // MySQL JDBC 드라이버
+
+	implementation group: 'org.bgee.log4jdbc-log4j2', name:'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+
+	runtimeOnly 'mysql:mysql-connector-java:8.0.30'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트 의존성
 
 	//테스트에서 lombok 사용
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'junit:junit:4.12' // 또는 더 최신 버전 사용
 
 }

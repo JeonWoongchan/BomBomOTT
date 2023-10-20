@@ -1,5 +1,8 @@
 package com.example.BomBom.Service;
 
+
+import com.example.BomBom.Repository.MemberLoginDto;
+
 import com.example.BomBom.Repository.MemberRepository;
 
 import com.example.BomBom.Repository.MemberSearchC;
@@ -34,9 +37,55 @@ public class MemberServiceV1 implements MemberService {
     }
 
     @Override
-    public List<Member> findItems(MemberSearchC cond) {
+    public Optional<Member> Mypage(String usersessionid) {
+        return memberRepository.Mypage(usersessionid);
+    }
+
+    @Override
+    public List<Member> findMemberName(MemberSearchC cond) {
         return memberRepository.findAll(cond);
     }
 
-    public void delete(Long id) {memberRepository.delete(id);};
+
+    public void delete(Long id) {
+        memberRepository.delete(id);
+    }
+
+    @Override
+    public int MemberCount() {
+        return memberRepository.MemberCount();
+    }
+
+    @Override
+    public Optional<Boolean> login(MemberLoginDto dto) {
+        return memberRepository.login(dto.getUserid(), dto.getPassword());
+    }
+
+
+    @Override
+    public String MemberName(String user) {
+        return memberRepository.MemberName(user);
+    }
+
+    @Override
+    public String DupCheck(String userid) {
+        return memberRepository.DupCheck(userid);
+    }
+
+    @Override
+    public int multiCheck(String userid) {
+        return memberRepository.multiCheck(userid);
+    }
+
+    @Override
+    public void multiAdd(String userid) {
+        memberRepository.multiAdd(userid);
+    }
+
+    @Override
+    public void multisub(String userid) {
+        memberRepository.multisub(userid);
+    }
+
+
 }

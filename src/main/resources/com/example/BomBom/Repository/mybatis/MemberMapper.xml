@@ -5,8 +5,12 @@
 
     <!-- C -->
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
+
         insert into member (userid,password, name, email)
         values (#{userid},#{password}, #{name}, #{email})
+
+
+
     </insert>
 
     <!-- R -->
@@ -14,7 +18,11 @@
     <!-- 상세정보  -->
 
     <select id="findById" resultType="Member">
+
         select id, userid,password, name, email
+
+
+
         from member
         where id = #{id}
     </select>
@@ -35,7 +43,9 @@
     <update id="update" >
         update member
         set userid=#{updateParam.userid},
+
             password=#{updateParam.password},
+
             name=#{updateParam.name},
             email=#{updateParam.email}
         where id = #{id}
@@ -48,5 +58,67 @@
 
 
     </delete>
+
+
+
+
+    <select id="MemberCount" resultType="int">
+        SELECT COUNT(*) FROM member
+    </select>
+
+    <select id="login" resultType="boolean">
+        select *
+        from member
+        where userid = #{userid} AND password = #{password}
+    </select>
+
+
+
+    <select id="MemberName" resultType="string">
+        select name
+        from member
+        where userid = #{userid}
+    </select>
+
+
+
+    <select id="Mypage" resultType="Member">
+        select userid, name,email
+        from member
+        where userid = #{userid}
+    </select>
+
+
+    <select id="DupCheck" resultType="string">
+        select userid
+        from member
+        where userid = #{userid}
+    </select>
+
+
+    <select id="multiCheck" resultType="int">
+      select multideivce
+      from member
+      where userid = #{userid}
+    </select>
+
+
+
+
+    <update id="multiAdd">
+        UPDATE member
+        SET multideivce = multideivce + 1
+        WHERE userid = #{userid}
+    </update>
+
+
+    <update id="multisub">
+        UPDATE member
+        SET multideivce = multideivce - 1
+        WHERE userid = #{userid}
+    </update>
+
+
+
 
 </mapper>
