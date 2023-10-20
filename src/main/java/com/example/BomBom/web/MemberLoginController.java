@@ -89,8 +89,11 @@ public class MemberLoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session,MemberLoginDto dto) {
-        memberService.multisub(dto.getUserid());
+    public String logout(HttpSession session) {
+
+
+        String sessionuserid = (String) session.getAttribute("userid");
+        memberService.multisub(sessionuserid);
         session.invalidate(); // 세션 무효화
 
         return "redirect:/login"; // 로그인 페이지로 리다이렉트
