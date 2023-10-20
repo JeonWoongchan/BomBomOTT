@@ -36,8 +36,10 @@ public class MemberLoginController {
 
 
 
+
+
     @PostMapping()
-    public String login(MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
+    public String login(@RequestBody MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
                         HttpSession session, HttpServletRequest request)  {
 
 
