@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/main")
     public String forwardMain() {
-        return "forward:/index.html";
+        return "forward:index.html";
     }
 
 }

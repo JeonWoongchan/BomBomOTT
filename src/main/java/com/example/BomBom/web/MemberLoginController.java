@@ -39,7 +39,7 @@ public class MemberLoginController {
 
     @PostMapping()
     public String login(@RequestBody MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes,
-                        HttpSession session, HttpServletRequest request) {
+                        HttpSession session) {
 
         Optional<Boolean> loggedIn = memberService.login(dto);
         int multicheck = memberService.multiCheck(dto.getUserid());
