@@ -25,58 +25,59 @@ import java.util.TimerTask;
 @Controller
 @RequestMapping("/login")
 @RequiredArgsConstructor
+
 public class MemberLoginController {
 
     private final MemberService memberService;
 
-    @GetMapping()
-    public String loginForm(@ModelAttribute("memberSearch") MemberSearchC memberSearch, Model model) {
+ @GetMapping()
+ public String loginForm() {
 
-        return "forward:/index.html";
-    }
+     return "forward:index.html";
+ }
+
 
     @PostMapping()
-    public String login(@RequestBody MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
-                        HttpSession session, HttpServletRequest request)  {
+    public String login(@RequestBody MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes,
+                        HttpSession session, HttpServletRequest request) {
 
         Optional<Boolean> loggedIn = memberService.login(dto);
         int multicheck = memberService.multiCheck(dto.getUserid());
         if (loggedIn.isPresent()) {
             // 로그인 성공 시 처리
-             if (multicheck == 0) {
-                 String userid = request.getParameter("userid");
+            if (multicheck == 0) {
+                String userid = "";
+                session.setAttribute("userid", dto.getUserid()); // 세션에 userid 저장
 
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        memberService.multisub(userid);
+                    }
+                }, 599999); // 9분 59초 후에 실행
 
-                 Timer timer = new Timer();
-                 timer.schedule(new TimerTask() {
-                     @Override
-                     public void run() {
-                         memberService.multisub(userid);
-                     }
-                 }, 599999); // 9분 58초 후에 실행
+                session.setMaxInactiveInterval(10 * 60);
 
-                 session.setAttribute("userid", userid); // 세션에 userid 저장
-                 session.setMaxInactiveInterval(10 * 60);
+                String sessionuserid = (String) session.getAttribute("userid");
+                model.addAttribute("userid", userid);
 
-                 String sessionuserid = (String ) session.getAttribute("userid");
-                 model.addAttribute("userid", userid);
+                String name = memberService.MemberName(sessionuserid);
 
-                 String name = memberService.MemberName(sessionuserid);
-
-                 redirectAttributes.addFlashAttribute("LoginMessage",name+"님 안녕하세요 ");
-                 memberService.multiAdd(userid);
-                 return "forward:/index.html";
-             }
-             else  {
-                 return "redirect:/login/block";
-             }
+                redirectAttributes.addFlashAttribute("LoginMessage", name + "님 안녕하세요 ");
+                memberService.multiAdd(sessionuserid);
+                return "redirect:/main"; // 로그인 성공 시 "/main"으로 리디렉션
+            } else {
+                return "redirect:/login/block";
+            }
 
         } else {
             // 로그인 실패 시 처리
             redirectAttributes.addFlashAttribute("LoginMessage", "아이디 또는 비밀번호가 일치하지가 않습니다");
-            return "forward:/index.html";
+            return "redirect:/login";
         }
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

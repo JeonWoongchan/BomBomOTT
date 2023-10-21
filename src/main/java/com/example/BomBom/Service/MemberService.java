@@ -40,4 +40,6 @@ public interface MemberService {
 
     void multisub(String userid);
 
+    void EndUpdatedevice();
+
 }

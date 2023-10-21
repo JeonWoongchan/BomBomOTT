@@ -55,4 +55,7 @@ public interface MemberRepository {
     void multiAdd(@Param("userid") String userid);
 
     void multisub(@Param("userid") String userid);
+
+    void EndUpdatedevice();
+
 }

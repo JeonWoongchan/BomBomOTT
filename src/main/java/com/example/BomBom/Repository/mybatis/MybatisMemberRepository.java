@@ -111,6 +111,11 @@ public class MybatisMemberRepository implements MemberRepository {
         memberMapper.multisub(userid);
     }
 
+    @Override
+    public void EndUpdatedevice() {
+        memberMapper.EndUpdatedevice();
+    }
+
     ;
 
 
