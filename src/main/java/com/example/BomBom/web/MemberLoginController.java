@@ -66,7 +66,7 @@ public class MemberLoginController {
 
                 redirectAttributes.addFlashAttribute("LoginMessage", name + "님 안녕하세요 ");
                 memberService.multiAdd(sessionuserid);
-                return "redirect:/main"; // 로그인 성공 시 "/main"으로 리디렉션
+                return "/main"; // 로그인 성공 시 "/main"으로 리디렉션
             } else {
                 return "redirect:/login/block";
             }
