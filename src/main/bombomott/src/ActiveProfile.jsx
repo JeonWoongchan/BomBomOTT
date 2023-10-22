@@ -4,12 +4,18 @@ import './header.css'
 import {useEffect, useState} from "react";
 import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {setNowProfile} from './store/store.js'
 
 export default function ActiveProfile(props) {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
     const [profileOn, setProfileOn] = useState(false);
-    const userId = 'userId';
+    const userId = useSelector((state)=>state.userData)
+    const nowProfile = useSelector((state)=>state.nowProfile)
+    
     const [profileName, setProfileName] = useState(['프로필1', '프로필2', '프로필3']);
     const [profileImg, setProfileImg] = useState(['https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png',
     'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png',
@@ -33,12 +39,16 @@ export default function ActiveProfile(props) {
         }
     }
 
+    useEffect(()=>{
+        console.log(nowProfile)
+    },[nowProfile])
+
     return (
         <div className="active-profile" 
             onMouseOver={()=>{setProfileOn(true)}} onMouseLeave={()=>{setProfileOn(false)}}
             style={activeProfileStyle(0)}>
             <div className="profile">
-                <span>내 프로필</span>
+                <span>{nowProfile}</span>
                 <img className='header-logo' src='/img/icon-woman.png'/>
             </div>
             <div className='hide-profile-menu' style={activeProfileStyle(1)}>
@@ -46,7 +56,7 @@ export default function ActiveProfile(props) {
                 {
                     profileName.map((a,i)=>{
                         return(
-                            <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/select-avatar`)}} key={i}>
+                            <div className='profile-menu' onClick={()=>{dispatch(setNowProfile(profileName[i]))}} key={i}>
                                 <div className="profile-img" style={{background : `url(${profileImg[i]}) 0% 0% / contain no-repeat`}}></div>
                                 <h6>{profileName[i]}</h6>
                             </div>

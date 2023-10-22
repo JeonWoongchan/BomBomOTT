@@ -22,7 +22,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Intro/>}/>
                 <Route path='/main' element={<Main/>}/>
-                <Route path='/login' element={<Login/>}></Route>
+                <Route path='/login/:loginStep' element={<Login/>}/>
                 <Route path='/profile/:userId/:profileMenu' element={<Profile/>}>
                     <Route path=":profileSubMenu" element={<Profile/>}/>
                 </Route>

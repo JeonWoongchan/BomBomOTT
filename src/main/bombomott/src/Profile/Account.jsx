@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './css/account.css'
 import PasswordModal from './SubMenu/PasswordModal';
+import { useSelector } from 'react-redux';
 
 export default function Account(){
     const navigate = useNavigate()
-    const userId = 'userId';
+    const userId = useSelector((state)=>state.userData)
     const [toggleIcon, setToggleIcon] = useState('toggle_off')
     const [toggleText, setToggleText] = useState('Off')
     const [modal, setModal] = useState(false);
@@ -54,7 +55,7 @@ export default function Account(){
                             <div className="text">구독 정보 표시</div>
                             <div className="text">카드/계좌 정보 표시</div>
                         </div>
-                        <span className="material-symbols-outlined icon" onClick={()=>{navigate(`/profile/${userId}/account/change-payment`)}}>edit</span>
+                        <span className="material-symbols-outlined icon" onClick={()=>{navigate(`/profile/${userId}/account/regist-payment`)}}>edit</span>
                     </div>
                 </div>
             </div>

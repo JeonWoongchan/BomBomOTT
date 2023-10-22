@@ -2,6 +2,31 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { useState } from "react";
 
+const userData = createSlice({ //현재 로그인한 유저의 고유아이디
+  name: "userData",
+  initialState: 'user1234',
+  reducers: {
+      setUserData: (state, action) => {
+      return action.payload;
+      },
+  }
+});
+
+export const { setUserData } = userData.actions;
+
+const nowProfile = createSlice({ //현재 유저가 이용중인 프로필
+  name: "nowProfile",
+  initialState: 'user1234',
+  reducers: {
+      setNowProfile: (state, action) => {
+      return action.payload;
+      },
+  }
+});
+
+export const { setNowProfile } = nowProfile.actions;
+
+
 const isLoading = createSlice({
   // 로딩 완료시 false
   name: "isLoading",
@@ -115,5 +140,7 @@ export default configureStore({
     genreMovie: genreMovie.reducer,
     contentDetail: contentDetail.reducer,
     searchMulti: searchMulti.reducer,
+    userData: userData.reducer,
+    nowProfile: nowProfile.reducer
   },
 });

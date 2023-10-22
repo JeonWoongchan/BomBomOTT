@@ -5,6 +5,7 @@ import './header.css'
 import { useEffect, useState } from "react";
 import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 export default function Header(props) {
     const location = useLocation();

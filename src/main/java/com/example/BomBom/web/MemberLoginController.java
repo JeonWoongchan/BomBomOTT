@@ -35,9 +35,10 @@ public class MemberLoginController {
     @PostMapping()
     public ResponseEntity<Map<String, Object>> login(@RequestBody MemberLoginDto dto, HttpSession session) {
         Optional<Boolean> loggedIn = memberService.login(dto);
-        int multicheck = memberService.multiCheck(dto.getUserid());
+
 
         if (loggedIn.isPresent()) {
+            int multicheck = memberService.multiCheck(dto.getUserid());
             // 로그인 성공 시 처리
             if (multicheck == 0) {
                 String userid = "";
@@ -60,20 +61,20 @@ public class MemberLoginController {
                 memberService.multiAdd(sessionuserid);
 
                 Map<String, Object> response = new HashMap<>();
-                response.put("status", 1);
+                response.put("status", 1); //성공
                 response.put("name", name);
 
                 return ResponseEntity.ok(response);
             } else {
                 Map<String, Object> response = new HashMap<>();
-                response.put("status", -1);
-
+                response.put("status", -1); // 차단
+                session.invalidate(); // 세션 무효화
                 return ResponseEntity.ok(response);
             }
         } else {
             // 로그인 실패 시 처리
             Map<String, Object> response = new HashMap<>();
-            response.put("status", 0);
+            response.put("status", 0);  //아이디 비번 없음
 
             return ResponseEntity.ok(response);
         }

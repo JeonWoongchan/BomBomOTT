@@ -59,7 +59,7 @@ export default function ResetPassword(){
 
     return(
         <div className="change-detail">
-            {modal ? <PasswordModal setModal={setModal}/> : null}
+            {modal ? <PasswordModal setModal={setModal} changeData={'password'}/> : null}
             <div className="change-title">
                 <h2>새 비밀번호을 생성하세요</h2>
             </div>
