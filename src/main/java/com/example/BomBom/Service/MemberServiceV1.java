@@ -87,5 +87,7 @@ public class MemberServiceV1 implements MemberService {
         memberRepository.multisub(userid);
     }
 
+    @Override
+    public void EndUpdatedevice() { memberRepository.EndUpdatedevice(); }
 
 }

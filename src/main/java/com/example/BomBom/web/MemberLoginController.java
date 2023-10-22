@@ -16,10 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -36,45 +33,49 @@ public class MemberLoginController {
     }
 
     @PostMapping()
-    public String login(@RequestBody MemberLoginDto dto, Model model, RedirectAttributes redirectAttributes ,
-                        HttpSession session, HttpServletRequest request)  {
-
+    public ResponseEntity<Map<String, Object>> login(@RequestBody MemberLoginDto dto, HttpSession session) {
         Optional<Boolean> loggedIn = memberService.login(dto);
         int multicheck = memberService.multiCheck(dto.getUserid());
+
         if (loggedIn.isPresent()) {
             // 로그인 성공 시 처리
-             if (multicheck == 0) {
-                 String userid = request.getParameter("userid");
+            if (multicheck == 0) {
+                String userid = "";
+                session.setAttribute("userid", dto.getUserid()); // 세션에 userid 저장
 
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        memberService.multisub(userid);
+                    }
+                }, 599999); // 9분 59초 후에 실행
 
-                 Timer timer = new Timer();
-                 timer.schedule(new TimerTask() {
-                     @Override
-                     public void run() {
-                         memberService.multisub(userid);
-                     }
-                 }, 599999); // 9분 58초 후에 실행
+                session.setMaxInactiveInterval(10 * 60);
 
-                 session.setAttribute("userid", userid); // 세션에 userid 저장
-                 session.setMaxInactiveInterval(10 * 60);
+                String sessionuserid = (String) session.getAttribute("userid");
 
-                 String sessionuserid = (String ) session.getAttribute("userid");
-                 model.addAttribute("userid", userid);
+                String name = memberService.MemberName(sessionuserid);
 
-                 String name = memberService.MemberName(sessionuserid);
+                memberService.multiAdd(sessionuserid);
 
-                 redirectAttributes.addFlashAttribute("LoginMessage",name+"님 안녕하세요 ");
-                 memberService.multiAdd(userid);
-                 return "forward:/index.html";
-             }
-             else  {
-                 return "redirect:/login/block";
-             }
+                Map<String, Object> response = new HashMap<>();
+                response.put("status", 1);
+                response.put("name", name);
 
+                return ResponseEntity.ok(response);
+            } else {
+                Map<String, Object> response = new HashMap<>();
+                response.put("status", -1);
+
+                return ResponseEntity.ok(response);
+            }
         } else {
             // 로그인 실패 시 처리
-            redirectAttributes.addFlashAttribute("LoginMessage", "아이디 또는 비밀번호가 일치하지가 않습니다");
-            return "forward:/index.html";
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", 0);
+
+            return ResponseEntity.ok(response);
         }
     }
 
@@ -83,14 +84,14 @@ public class MemberLoginController {
         memberService.multisub(dto.getUserid());
         session.invalidate(); // 세션 무효화
 
-        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        return "forward:/index.html"; // 로그인 페이지로 리다이렉트
     }
 
     @GetMapping("/block")
     public String block(HttpSession session,RedirectAttributes redirectAttributes) {
         session.invalidate(); // 세션 무효화
         redirectAttributes.addFlashAttribute("block","최대 1개 기기만 접속 하실 수 있습니다.");
-        return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        return "forward:/index.html"; // 로그인 페이지로 리다이렉트
     }
 
 

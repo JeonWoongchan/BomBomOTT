@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import {useEffect, useState} from "react";
-import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginMain() {
+    const navigate = useNavigate()
     const [userId, setUserId] = useState('');
     const [userPw, setUserPw] = useState('');
 
@@ -27,9 +28,11 @@ export default function LoginMain() {
             password: userPw,
         })
             .then((res) => {
-            
+            console.log(res.data.status)
         })
-        .catch();
+        .catch((error)=>{
+            console.log(error)
+        });
     };
 
     return (
@@ -46,7 +49,7 @@ export default function LoginMain() {
                 <hr className="my-4"/>
                 <div className="row">
                     <div className="col">
-                        <button className="w-100 btn btn-primary btn-lg" type="button" onClick={onClickLogin}>로그인</button>
+                        <button className="w-100 btn btn-primary btn-lg" type="button" onClick={()=>{onClickLogin; navigate('/main')}}>로그인</button>
                     </div>
                 </div>
             </form>

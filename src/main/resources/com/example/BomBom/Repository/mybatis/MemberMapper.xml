@@ -97,7 +97,7 @@
 
 
     <select id="multiCheck" resultType="int">
-      select multideivce
+      select multidevice
       from member
       where userid = #{userid}
     </select>
@@ -107,18 +107,25 @@
 
     <update id="multiAdd">
         UPDATE member
-        SET multideivce = multideivce + 1
+        SET multidevice = multidevice + 1
         WHERE userid = #{userid}
     </update>
 
 
     <update id="multisub">
         UPDATE member
-        SET multideivce = multideivce - 1
+        SET multidevice = multidevice - 1
         WHERE userid = #{userid}
     </update>
 
-
-
+    <update id="EndUpdatedevice">
+        UPDATE member
+        SET multidevice =
+                CASE
+                    WHEN multidevice > 0 AND multidevice >= 1 THEN 0
+                    ELSE multidevice
+                    END
+        WHERE id > 0;
+    </update>
 
 </mapper>

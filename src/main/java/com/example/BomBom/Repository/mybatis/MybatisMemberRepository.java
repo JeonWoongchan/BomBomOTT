@@ -113,5 +113,8 @@ public class MybatisMemberRepository implements MemberRepository {
 
     ;
 
-
+    @Override
+    public void EndUpdatedevice() {
+        memberMapper.EndUpdatedevice();
+    }
 }
