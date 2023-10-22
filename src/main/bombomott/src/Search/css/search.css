@@ -82,20 +82,20 @@ input::placeholder {
   height: auto;
 }
 
-@media screen and (max-width: 1440px){
-  .search-box{
+@media screen and (max-width: 1440px) {
+  .search-box {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-@media screen and (max-width: 1024px){
-  .search-box{
+@media screen and (max-width: 1024px) {
+  .search-box {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media screen and (max-width: 768px){
-  .search-box{
+@media screen and (max-width: 768px) {
+  .search-box {
     grid-template-columns: repeat(3, 1fr);
   }
 }

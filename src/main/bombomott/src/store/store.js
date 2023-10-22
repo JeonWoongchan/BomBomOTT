@@ -105,15 +105,41 @@ const searchMulti = createSlice({
 
 export const { setSearchMulti, addSearchMulti } = searchMulti.actions;
 
+const contentTrailer = createSlice({
+  name: "contentTrailer",
+  initialState: [],
+  reducers: {
+    setContentTrailer: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+
+export const { setContentTrailer } = contentTrailer.actions;
+
+const tvTrailer = createSlice({
+  name: "tvTrailer",
+  initialState: [],
+  reducers: {
+    setTvTrailer: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+
+export const { setTvTrailer } = tvTrailer.actions;
+
 export default configureStore({
   reducer: {
     trendMovies: trendMovies.reducer,
     tvShow: tvShow.reducer,
     isLoading: isLoading.reducer,
     isDragging: isDragging.reducer,
-    disneyMovie:disneyMovie.reducer,
+    disneyMovie: disneyMovie.reducer,
     genreMovie: genreMovie.reducer,
     contentDetail: contentDetail.reducer,
     searchMulti: searchMulti.reducer,
+    contentTrailer: contentTrailer.reducer,
+    tvTrailer: tvTrailer.reducer,
   },
 });

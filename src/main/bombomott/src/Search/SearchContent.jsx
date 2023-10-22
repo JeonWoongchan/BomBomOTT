@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setIsLoading } from "../store/store";
 
 export default function SearchContent() {
@@ -31,8 +31,8 @@ export default function SearchContent() {
       <div className="search-box" style={contentBoxStyle()}>
         {searchMulti.map((a, i) => {
           const Data = searchMulti[i];
-          const DataAll = searchMulti.filter((e)=>e.backdrop_path != null);
-          const TYPE = a.mediaType == undefined ? 'series' : a.mediaType 
+          const DataAll = searchMulti.filter((e) => e.backdrop_path != null);
+          const TYPE = a.mediaType == undefined ? "series" : a.mediaType;
           return searchMulti[i].backdrop_path != null ? (
             <img
               src={`${BASE_URL}${searchMulti[i].backdrop_path}`}
@@ -43,7 +43,10 @@ export default function SearchContent() {
               }}
               onClick={() => {
                 navigate(`/content/${a.media_type}/${a.genre_ids[0]}/${a.id}`, {
-                  state: { data: Data, dataAll: DataAll },
+                  state: {
+                    data: Data,
+                    dataAll: DataAll,
+                  },
                 });
               }}
             />
