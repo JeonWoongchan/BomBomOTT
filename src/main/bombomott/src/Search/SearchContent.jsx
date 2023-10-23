@@ -32,7 +32,8 @@ export default function SearchContent() {
         {searchMulti.map((a, i) => {
           const Data = searchMulti[i];
           const DataAll = searchMulti;
-          const TYPE = a.media_Type;
+          const TYPE = a.media_type;
+          console.log(TYPE);
           return searchMulti[i].backdrop_path != null ? (
             <img
               src={`${BASE_URL}${searchMulti[i].backdrop_path}`}

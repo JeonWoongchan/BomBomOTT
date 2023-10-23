@@ -6,7 +6,7 @@ import { addSearchMulti, setSearchMulti } from "./store/store";
 function SearchMulti(text, page, dispatch) {
   const SearchMulti = {
     method: "GET",
-    url: `https://api.themoviedb.org/3/search/multi?query=${text}&include_adult=true&language=ko-KR&page=${page}`,
+    url: `https://api.themoviedb.org/3/search/multi?query=${text}&include_adult=false&language=ko-KR&page=${page}`,
     headers: {
       accept: "application/json",
       Authorization:
