@@ -41,13 +41,14 @@ export default function CategoryContent() {
                 {
                     genreMovie.map((a,i)=>{
                         const Data = genreMovie[i]
-                        const DataAll = genreMovie
+                        const DataAll = genreMovie.filter((e)=>e.backdrop_path != null);//이미지 없으면 안가져옴
                         const TYPE = a.mediaType == undefined ? mediaType : a.mediaType 
                         // console.log(genreMovie)
                         return(
+                            genreMovie[i].backdrop_path != null ? 
                             <img src={`${BASE_URL}${genreMovie[i].backdrop_path}`} key={i} style={mouseIndex === i ? borderStyle('box') : null}
                             onMouseEnter={()=>{setMouseIndex(i)}} onMouseLeave={()=>{setMouseIndex('')}} onLoad={()=>{setLoadCount((prev)=>prev+1)}}
-                            onClick={()=>{ navigate(`/content/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}/>
+                            onClick={()=>{ navigate(`/content/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}/> : null
                         )
                     })
                 }

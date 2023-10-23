@@ -33,7 +33,7 @@ input::placeholder {
   color: #dadada;
 }
 
-.content {
+.searchPage .content {
   background: rgb(15, 17, 26);
   background: linear-gradient(
     0deg,
@@ -82,6 +82,15 @@ input::placeholder {
   height: auto;
 }
 
+<<<<<<< HEAD
+=======
+@media screen and (max-width: 1440px) {
+  .search-box {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+>>>>>>> ddd8190ca290eea616e3fd503747a31a9f1b9cc3
 @media screen and (max-width: 1024px) {
   .search-box {
     grid-template-columns: repeat(4, 1fr);

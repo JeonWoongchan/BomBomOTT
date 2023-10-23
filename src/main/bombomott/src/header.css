@@ -28,6 +28,7 @@ div{
 .header-logo{
     height: 43px;
     margin: auto 30px;
+    cursor: pointer;
 }
 
 .header-icon{
@@ -98,7 +99,7 @@ div{
     margin-top: 60px;
     opacity: 0;
     transition: all 0.5s;
-    pointer-events: none;
+    border: none;
 }
 
 .profile-line{
@@ -106,16 +107,40 @@ div{
     border: solid 0.1px gray;
     margin: auto;
     opacity: 0.5;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.hide-profile-menu h4{
+.active-profile .hide-profile-menu .profile-menu{
+    display: flex;
+    flex-grow: row;
+}
+
+.active-profile .hide-profile-menu .profile-menu .profile-img{
+    width: 50px;
+    height: 50px;
+    display: block;
+    cursor: pointer;
+    margin-bottom: 15px;
+    background-color: rgb(249, 249, 249, 0.1);
+    border-radius: 50%;
+    transition: all 250ms cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s;
+}
+
+.active-profile .hide-profile-menu .profile-menu .icon{
+    font-size: 50px;
     color: white;
-    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.active-profile .hide-profile-menu .profile-menu h6{
+    color: #acacac;
+    position: relative;
+    top: 15px;
+    left: 10px;
 }
 
 .hide-profile-menu span{
     display: block;
-    color: white;
-    margin-bottom: 10px;
+    color: #acacac;
+    margin-bottom: 15px;
 }

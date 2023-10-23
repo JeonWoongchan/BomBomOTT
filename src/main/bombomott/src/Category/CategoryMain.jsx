@@ -25,11 +25,6 @@ export default function CategoryMain(props) {
         }
     },[scroll])
 
-
-    useEffect(()=>{
-        console.log(page)
-    },[page])
-
     useEffect(()=>{
         window.scrollTo(0, 0);
         setPage(1);

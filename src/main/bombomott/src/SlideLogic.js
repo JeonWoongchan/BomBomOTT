@@ -18,7 +18,7 @@ function SlideLogic(data, itemNum){
     const MaxPosition = MaxNum(SlideItemNum) == 0 ? 0 : (-91 * (MaxNum(SlideItemNum)));
     const isDragging = useSelector((state)=>state.isDragging)
     const dispatch = useDispatch();
-
+    
     const [currentX, setCurrentX] = useState(0);
     const [startX, setStartX] = useState(0);
     const [endX, setEndX] = useState(0);

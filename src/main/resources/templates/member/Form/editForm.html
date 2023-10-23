@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
-          href="css/bootstrap.min.css" rel="stylesheet">
+          href="../../css/bootstrap.min.css" rel="stylesheet">
     <style>
         .container {
             max-width: 560px;
@@ -18,9 +18,11 @@
 
     <div class="py-5 text-center">
         <h2>회원 수정 폼</h2>
+
+
     </div>
 
-    <form action="member.html" th:action method="post">
+    <form action="../member.html" th:action method="post">
         <div>
             <label for="id">식별 ID</label>
             <input type="text" id="id" name="id" class="form-control" value="1" th:value="${member.id}" readonly>
@@ -30,10 +32,12 @@
             <input type="text" id="userid" name="userid" class="form-control" value="dkajf23" th:value="${member.userid}">
         </div>
         <div>
+
             <label for="password">패스워드</label>
             <input type="password" id="password" name="password" class="form-control" value="dkajf23" th:value="${member.userid}">
         </div>
         <div>
+
             <label for="name">이름</label>
             <input type="text" id="name" name="name" class="form-control" value="회원A" th:value="${member.name}">
         </div>

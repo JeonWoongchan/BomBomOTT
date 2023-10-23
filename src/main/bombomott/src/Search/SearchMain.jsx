@@ -7,7 +7,6 @@ import useScroll from "../useScroll";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SearchMain() {
-  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const scroll = useScroll();
   const isLoading = useSelector((state) => state.isLoading);
@@ -34,7 +33,9 @@ export default function SearchMain() {
   }, [text]);
 
   useEffect(() => {
-    SearchMulti(text, page, dispatch);
+    if (text) {
+      SearchMulti(text, page, dispatch);
+    }
   }, [text, page, dispatch]);
 
   // 화면이동해도 검색어 남기기

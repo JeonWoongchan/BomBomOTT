@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { setIsLoading } from './store/store';
 
 //data가 전부 들어온 다음에 페이지 로딩되도록 하는 기능
-function SlideLogic(data, itemNum){
+function LoadingLogic(data, itemNum){
     const [dataLoading, setDataLoading] = useState(false);
     const isLoading = useSelector((state) => state.isLoading)
     const dispatch = useDispatch();
@@ -35,4 +35,4 @@ function SlideLogic(data, itemNum){
     };
 }
 
-export default SlideLogic;
+export default LoadingLogic;
