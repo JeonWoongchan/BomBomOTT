@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+mport React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import RegistPaymentLogic from '../BackEndData/RegistPaymentLogic'
 import './css/enterPayment.css'

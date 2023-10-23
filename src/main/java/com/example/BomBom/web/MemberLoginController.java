@@ -4,6 +4,8 @@ import com.example.BomBom.Repository.MemberLoginDto;
 import com.example.BomBom.Repository.MemberSearchC;
 import com.example.BomBom.Service.MemberService;
 import com.example.BomBom.domain.member.Member;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.*;
 
 @CrossOrigin(origins = "*")
@@ -32,52 +37,99 @@ public class MemberLoginController {
         return "forward:/index.html";
     }
 
-    @PostMapping()
-    public ResponseEntity<Map<String, Object>> login(@RequestBody MemberLoginDto dto, HttpSession session) {
-        Optional<Boolean> loggedIn = memberService.login(dto);
+        @PostMapping()
+    public void addMember(@RequestBody MemberLoginDto dto,
+        @ModelAttribute Member member,
+        RedirectAttributes redirectAttributes,
+        HttpServletRequest request,
+        HttpSession session,
+        HttpServletResponse response) {
+        String userid = request.getParameter("userid");
 
+        // 중복 공백 제거 로직은 생략
 
-        if (loggedIn.isPresent()) {
-            int multicheck = memberService.multiCheck(dto.getUserid());
-            // 로그인 성공 시 처리
-            if (multicheck == 0) {
-                String userid = "";
-                session.setAttribute("userid", dto.getUserid()); // 세션에 userid 저장
+        Optional<String> sqlId = memberService.DupCheck(userid);
 
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        memberService.multisub(userid);
-                    }
-                }, 599999); // 9분 59초 후에 실행
+        if (sqlId.isPresent()) {
+            // 이미 아이디가 존재하는 경우
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("status", 1); // 변경: 아이디가 이미 존재함을 나타내는 값
+            responseMap.put("sqld", sqlId.get());
 
-                session.setMaxInactiveInterval(10 * 60);
-
-                String sessionuserid = (String) session.getAttribute("userid");
-
-                String name = memberService.MemberName(sessionuserid);
-
-                memberService.multiAdd(sessionuserid);
-
-                Map<String, Object> response = new HashMap<>();
-                response.put("status", 1); //성공
-                response.put("name", name);
-
-                return ResponseEntity.ok(response);
-            } else {
-                Map<String, Object> response = new HashMap<>();
-                response.put("status", -1); // 차단
-                session.invalidate(); // 세션 무효화
-                return ResponseEntity.ok(response);
+            response.setContentType("application/json");
+            try {
+                response.getWriter().write(new ObjectMapper().writeValueAsString(responseMap));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } else {
-            // 로그인 실패 시 처리
-            Map<String, Object> response = new HashMap<>();
-            response.put("status", 0);  //아이디 비번 없음
 
-            return ResponseEntity.ok(response);
+            dto.setUserid(sqlId.get());
+            Optional<Boolean> loggedIn = memberService.login(dto);
+
+            if (loggedIn.isPresent()) {
+                int multicheck = memberService.multiCheck(dto.getUserid());
+                if (multicheck == 0) {
+                    session.setAttribute("userid", dto.getUserid()); // 세션에 userid 저장
+
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            memberService.multisub(userid);
+                        }
+                    }, 599999); // 9분 59초 후에 실행
+
+                    session.setMaxInactiveInterval(10 * 60);
+
+                    String sessionuserid = (String) session.getAttribute("userid");
+
+                    String name = memberService.MemberName(sessionuserid);
+
+                    memberService.multiAdd(sessionuserid);
+
+
+                    responseMap.put("status", 10); // 변경: 로그인 성공을 나타내는 값
+                    responseMap.put("name", name);
+
+                    response.setContentType("application/json");
+                    try {
+                        response.getWriter().write(new ObjectMapper().writeValueAsString(responseMap));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    responseMap.put("status", -1);
+                    response.setContentType("application/json");
+                    try {
+                        response.getWriter().write(new ObjectMapper().writeValueAsString(responseMap));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    // 다중 로그인 실패
+                }
+            } else {
+                responseMap.put("status", -10);
+                response.setContentType("application/json");
+                try {
+                    response.getWriter().write(new ObjectMapper().writeValueAsString(responseMap));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                // 비밀번호 틀렸어..
+
+            }
+
+
+
+
+        } else {
+
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("status", -100);
+            responseMap.put("sqlId",sqlId.get());
+            // 아이디 없으니 회원가입 ㄱㄱ
         }
+
     }
 
     @GetMapping("/logout")

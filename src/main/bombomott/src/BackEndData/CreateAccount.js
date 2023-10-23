@@ -24,7 +24,8 @@ export default function CreateAccount(email) {
         //     .then((res) => {
         //     console.log(res.data.status)
         //     if(res.data.status == 1){ // 비밀번호 등록 성공
-        //         navigate('/main')
+        //         user테이블의 해당 유저의 고유 아이디 가져오는 코드 있어야됨 -> 로그인시 고유아이디를 url에 사용
+        //         dispatch(setUSerDate(userCode))//받아온 유저 고유번호를 저장
         //     }else if(res.data.status == -1){ //회원가입 실패
         //         console.log('')
         //     }
@@ -33,7 +34,7 @@ export default function CreateAccount(email) {
         //     console.log(error)
         // });
         console.log(email, userPw)
-        navigate(`/login/enter-payment`)
+        navigate(`/login/${userId}/enter-payment`)
     };
 
     return {

@@ -13,7 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export default function CategorySelector(props) {
     const navigate = useNavigate()
-    const {mediaType, categoryType} = useParams();
+    const {nowProfileCode, mediaType, categoryType} = useParams();
 
     const [valueListOn, setValueListOn] = useState(false);
     const [mouseIndex, setMouseIndex] = useState('');
@@ -84,7 +84,7 @@ export default function CategorySelector(props) {
                             return(
                                 <div key={i} className="value" style={mouseIndex === i ? borderStyle('list') : null} 
                                     onMouseEnter={()=>{setMouseIndex(i)}} onMouseLeave={()=>{setMouseIndex('')}}
-                                    onClick={()=>{valueListControl(); navigate(`/category/${mediaType}/${found}`)}}>
+                                    onClick={()=>{valueListControl(); navigate(`/category/${nowProfileCode}/${mediaType}/${found}`)}}>
                                     <span style={valueStyle(a)}>|</span>
                                     <a>{a}</a>
                                 </div>

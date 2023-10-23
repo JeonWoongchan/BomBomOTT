@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import {useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function RegistPaymentLogic() {
     const navigate = useNavigate()
     const [userPay, setUserPay] = useState('');
+    const userData = useSelector((state)=>state.userData)
 
     const handleInputPay = (e)=>{
         setUserPay(e.target.value);
@@ -28,7 +30,7 @@ export default function RegistPaymentLogic() {
         //     console.log(error)
         // });
         console.log(userPay)
-        navigate('/main')
+        navigate(`/login/${userData}/select-profile`)
     };
 
     return {

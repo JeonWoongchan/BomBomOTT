@@ -85,7 +85,10 @@ public class MybatisMemberRepository implements MemberRepository {
 
 
     // 중복아이디 체크
-    public  String DupCheck(String userid) { return memberMapper.DupCheck(userid);}
+    @Override
+    public Optional<String> DupCheck(String userid) {
+        return memberMapper.DupCheck(userid);
+    }
 
 
 

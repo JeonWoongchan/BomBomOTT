@@ -1,18 +1,19 @@
 import React from 'react';
-import './css/editProfile.css'
+import './css/selectProfile.css'
 import borderStyle from '../borderStyle';
 import profileData from '../BackEndData/profileData.json'
 
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { setNowProfile } from '../store/store';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function CreateProfile(){
-    const navigate = useNavigate()
+    const nowProfile = useSelector((state)=>state.nowProfile)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
     const [mouseIndex, setMouseIndex] = useState('');
-    const EDIT_IMG = 'https://static-assets.bamgrid.com/product/disneyplus/images/edit.0a8445c2cff0e80361b2e66906aaeca0.svg'
     
     const avatarImg = (i)=>{
         return{
@@ -30,8 +31,9 @@ export default function CreateProfile(){
                                 <div className="inner-img" 
                                     style={mouseIndex === i ? { ...avatarImg(i), ...borderStyle('box') } : avatarImg(i)}
                                     onMouseEnter={()=>{setMouseIndex(i)}} 
-                                    onMouseLeave={()=>{setMouseIndex('')}}>
-                                    <img src={`${EDIT_IMG}`} alt="" />
+                                    onMouseLeave={()=>{setMouseIndex('')}}
+                                    onClick={()=>{dispatch(setNowProfile(profileData.profile[i].profileName));
+                                                    navigate(`/main/${profileData.profile[i].profileCode}`)}}>
                                 </div>
                                 <h3>{profileData.profile[i].profileName}</h3>
                             </div>

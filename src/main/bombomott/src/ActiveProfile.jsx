@@ -1,9 +1,9 @@
 import React from 'react';
 import './header.css'
+import profileData from './BackEndData/profileData.json'
 
 import {useEffect, useState} from "react";
-import {Navbar, Nav, Container, NavDropdown, Button} from 'react-bootstrap'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {setNowProfile} from './store/store.js'
 
@@ -12,19 +12,16 @@ export default function ActiveProfile(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    const [profileOn, setProfileOn] = useState(false);
+    const [profileOn, setProfileOn] = useState(false)
     const userId = useSelector((state)=>state.userData)
     const nowProfile = useSelector((state)=>state.nowProfile)
+    const {nowProfileCode} = useParams()
+    const [findProfile, setFindProfile] = useState('')
     
-    const [profileName, setProfileName] = useState(['프로필1', '프로필2', '프로필3']);
-    const [profileImg, setProfileImg] = useState(['https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png',
-    'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png',
-    'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png'])
-
     const activeProfileStyle = (i) => {
         if(i == 0){
             return{
-                height: profileOn == true ? `${340 +profileName.length * 70}px` : '70px',
+                height: profileOn == true ? `${250 +profileData.profile.length * 70}px` : '70px',
                 backgroundColor: props.contentScroll > 5 ? 'transparent' : null,
                 backgroundColor: profileOn == true ? 'rgb(19, 19, 19)' : null,
                 outline : profileOn == true ? '0.5px solid #acacac' : 'none',
@@ -40,40 +37,48 @@ export default function ActiveProfile(props) {
     }
 
     useEffect(()=>{
-        console.log(nowProfile)
-    },[nowProfile])
+        if(profileData.profile.length > 0){
+            setFindProfile(profileData.profile.find(profile => profile.profileCode === nowProfileCode).profileName)
+        }
+    },[nowProfile, profileData])
 
     return (
         <div className="active-profile" 
             onMouseOver={()=>{setProfileOn(true)}} onMouseLeave={()=>{setProfileOn(false)}}
             style={activeProfileStyle(0)}>
             <div className="profile">
-                <span>{nowProfile}</span>
+                <span>{findProfile}</span>
                 <img className='header-logo' src='/img/icon-woman.png'/>
             </div>
             <div className='hide-profile-menu' style={activeProfileStyle(1)}>
                 <div className='profile-line'></div>
                 {
-                    profileName.map((a,i)=>{
+                    profileData.profile.map((a,i)=>{
                         return(
-                            <div className='profile-menu' onClick={()=>{dispatch(setNowProfile(profileName[i]))}} key={i}>
-                                <div className="profile-img" style={{background : `url(${profileImg[i]}) 0% 0% / contain no-repeat`}}></div>
-                                <h6>{profileName[i]}</h6>
+                            <div key={i}>
+                            {nowProfileCode != a.profileCode ?
+                                <div className='profile-menu' 
+                                    onClick={()=>{dispatch(setNowProfile(a.profileCode));
+                                    navigate(`/main/${a.profileCode}`)}}>
+                                    <div className="profile-img" style={{background : `url(${a.profileImg}) 0% 0% / contain no-repeat`}}></div>
+                                    <h6>{a.profileName}</h6>
+                                </div> : null
+                            }
                             </div>
                         )
                     })
                 }
                 {
-                    profileName.length < 7  ?
-                    <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/select-avatar`)}}>
+                    profileData.profile.length < 7  ?
+                    <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/select-avatar`)}}>
                         <span className="material-symbols-outlined icon">add_circle</span>
                         <h6>프로필 추가</h6>
                     </div> : null
                 }
-                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/edit-profiles`)}}>
+                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/edit-profiles`)}}>
                     <span>프로필 수정</span>
                 </div>
-                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/account`)}}>
+                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/account`)}}>
                     <span >계정</span>
                 </div>
                 <div className='profile-menu' onClick={()=>{ navigate(`/help`)}}>

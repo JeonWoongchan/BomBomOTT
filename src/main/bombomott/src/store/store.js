@@ -16,7 +16,7 @@ export const { setUserData } = userData.actions;
 
 const nowProfile = createSlice({ //현재 유저가 이용중인 프로필
   name: "nowProfile",
-  initialState: 'user1234',
+  initialState: '',
   reducers: {
       setNowProfile: (state, action) => {
       return action.payload;
@@ -25,7 +25,6 @@ const nowProfile = createSlice({ //현재 유저가 이용중인 프로필
 });
 
 export const { setNowProfile } = nowProfile.actions;
-
 
 const isLoading = createSlice({
   // 로딩 완료시 false
