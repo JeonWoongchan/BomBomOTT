@@ -14,7 +14,7 @@ export default function CreateProfile(){
     const navigate = useNavigate();
 
     const [mouseIndex, setMouseIndex] = useState('');
-    const userData = useSelector((state)=>state.userDate)
+    const userData = useSelector((state)=>state.userData)
     
     const avatarImg = (i)=>{
         return{
@@ -33,7 +33,7 @@ export default function CreateProfile(){
                                     style={mouseIndex === i ? { ...avatarImg(i), ...borderStyle('box') } : avatarImg(i)}
                                     onMouseEnter={()=>{setMouseIndex(i)}} 
                                     onMouseLeave={()=>{setMouseIndex('')}}
-                                    onClick={()=>{dispatch(setNowProfile(profileData.profile[i].profileName));
+                                    onClick={()=>{dispatch(setNowProfile(profileData.profile[i].profileCode));
                                                     navigate(`/main/${profileData.profile[i].profileCode}`)}}>
                                 </div>
                                 <h3>{profileData.profile[i].profileName}</h3>
@@ -50,7 +50,7 @@ export default function CreateProfile(){
                             style={mouseIndex === 'addProfile' ? borderStyle('box') : null}
                             onMouseEnter={()=>{setMouseIndex('addProfile')}} 
                             onMouseLeave={()=>{setMouseIndex('')}}
-                            onClick={()=>{navigate(`/profile/${userData}/${nowProfile}/add-profile`)}}>
+                            onClick={()=>{navigate(`/profile/${userData}/null/add-profile`)}}>
                             <span className="material-symbols-outlined icon">add</span>
                         </div>
                         <h3 style={{color:'#acacac'}}>프로필 추가</h3>

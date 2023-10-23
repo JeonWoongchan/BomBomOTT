@@ -4,7 +4,7 @@ import borderStyle from '../borderStyle';
 import profileData from '../BackEndData/profileData.json'
 
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setNowProfile } from '../store/store';
 
@@ -12,14 +12,20 @@ export default function CreateProfile(){
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [mouseIndex, setMouseIndex] = useState('');
+    const userData = useSelector((state)=>state.userData)
+    const nowProfile = useSelector((state)=>state.nowProfile)   
     const EDIT_IMG = 'https://static-assets.bamgrid.com/product/disneyplus/images/edit.0a8445c2cff0e80361b2e66906aaeca0.svg'
+    
+    useEffect(() => {
+        console.log(nowProfile); // 업데이트된 nowProfile 출력
+    }, [nowProfile]);
     
     const avatarImg = (i)=>{
         return{
             background : `url(${profileData.profile[i].profileImg}) 0% 0% / contain no-repeat`
         }
     }
-
+    
     return(
         <div className="profile-box">
             {
@@ -30,7 +36,8 @@ export default function CreateProfile(){
                                 <div className="inner-img" 
                                     style={mouseIndex === i ? { ...avatarImg(i), ...borderStyle('box') } : avatarImg(i)}
                                     onMouseEnter={()=>{setMouseIndex(i)}} 
-                                    onMouseLeave={()=>{setMouseIndex('')}}>
+                                    onMouseLeave={()=>{setMouseIndex('')}}
+                                    onClick={()=>{navigate(`/profile/${userData}/${nowProfile}/edit-profileInfo`)}}>
                                     <img src={`${EDIT_IMG}`} alt="" />
                                 </div>
                                 <h3>{profileData.profile[i].profileName}</h3>
@@ -46,7 +53,8 @@ export default function CreateProfile(){
                         <div className="inner-img"
                             style={mouseIndex === 'addProfile' ? borderStyle('box') : null}
                             onMouseEnter={()=>{setMouseIndex('addProfile')}} 
-                            onMouseLeave={()=>{setMouseIndex('')}}>
+                            onMouseLeave={()=>{setMouseIndex('')}}
+                            onClick={()=>{navigate(`/profile/${userData}/${nowProfile}/add-profile`)}}>
                             <span className="material-symbols-outlined icon">add</span>
                         </div>
                         <h3 style={{color:'#acacac'}}>프로필 추가</h3>

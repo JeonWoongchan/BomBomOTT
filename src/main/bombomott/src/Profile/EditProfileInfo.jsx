@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/addProfile.css'
+import './css/editProfileInfo.css'
 import CreateProfileLogic from '../BackEndData/CreateProfileLogic';
 import borderStyle from '../borderStyle';
 
@@ -32,12 +32,13 @@ export default function AddProfile() {
                             <section className="box-inner">
                                 <div className="input-section">
                                     <div className="title">
-                                        <h3>프로필 추가</h3>
+                                        <h3>프로필 수정</h3>
                                     </div>
                                     <p>프로필 이름</p>
                                     <input type="text" placeholder='프로필 이름'/>
                                     <div className="line"></div>
-                                    <button type='button'>저장</button>
+                                    <button type='button' className='save'>저장</button>
+                                    <button type='button' className='delete'>삭제</button>
                                 </div>
                                 <div className="image-section">
                                     <div className="profile-avatar">

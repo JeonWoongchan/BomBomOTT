@@ -35,7 +35,7 @@ export default function ActiveProfile(props) {
             }
         }
     }
-
+    
     useEffect(()=>{
         if(profileData.profile.length > 0){
             setFindProfile(profileData.profile.find(profile => profile.profileCode === nowProfileCode).profileName)
@@ -54,11 +54,12 @@ export default function ActiveProfile(props) {
                 <div className='profile-line'></div>
                 {
                     profileData.profile.map((a,i)=>{
+                        
                         return(
                             <div key={i}>
                             {nowProfileCode != a.profileCode ?
                                 <div className='profile-menu' 
-                                    onClick={()=>{dispatch(setNowProfile(a.profileCode));
+                                    onClick={()=>{dispatch(setNowProfile(a.profileCode)); console.log(nowProfile);
                                     navigate(`/main/${a.profileCode}`)}}>
                                     <div className="profile-img" style={{background : `url(${a.profileImg}) 0% 0% / contain no-repeat`}}></div>
                                     <h6>{a.profileName}</h6>
@@ -70,15 +71,15 @@ export default function ActiveProfile(props) {
                 }
                 {
                     profileData.profile.length < 7  ?
-                    <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/add-profile`)}}>
+                    <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfile}/add-profile`)}}>
                         <span className="material-symbols-outlined icon">add_circle</span>
                         <h6>프로필 추가</h6>
                     </div> : null
                 }
-                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/edit-profiles`)}}>
+                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfile}/edit-profiles`)}}>
                     <span>프로필 수정</span>
                 </div>
-                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/account`)}}>
+                <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfile}/account`)}}>
                     <span >계정</span>
                 </div>
                 <div className='profile-menu' onClick={()=>{ navigate(`/help`)}}>
