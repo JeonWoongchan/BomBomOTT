@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileMain from './ProFileMain'
 import EditProfile from './EditProfile'
+import AddProfile from './AddProfile';
 import Header from '../Header';
 import Footer from '../Footer';
 import ToTop from '../ToTop';
@@ -18,7 +19,9 @@ export default function Profile() {
         <div className='main-container'>
             {profileMenu == 'edit-profiles' ?
             <EditProfile/> 
-            :<>
+            : profileMenu == 'add-profile' ?
+            <AddProfile/>
+            : <>
                 <Header/>
                 <ProfileMain/>
                 <Footer/>

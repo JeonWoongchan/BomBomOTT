@@ -48,7 +48,6 @@ export default function CreateProfile(){
                             onMouseEnter={()=>{setMouseIndex('addProfile')}} 
                             onMouseLeave={()=>{setMouseIndex('')}}>
                             <span className="material-symbols-outlined icon">add</span>
-                            <img src="https://static-assets.bamgrid.com/product/disneyplus/images/edit.0a8445c2cff0e80361b2e66906aaeca0.svg" alt="" />
                         </div>
                         <h3 style={{color:'#acacac'}}>프로필 추가</h3>
                     </div>

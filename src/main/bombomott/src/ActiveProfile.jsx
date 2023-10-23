@@ -70,7 +70,7 @@ export default function ActiveProfile(props) {
                 }
                 {
                     profileData.profile.length < 7  ?
-                    <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/select-avatar`)}}>
+                    <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfileCode}/add-profile`)}}>
                         <span className="material-symbols-outlined icon">add_circle</span>
                         <h6>프로필 추가</h6>
                     </div> : null
