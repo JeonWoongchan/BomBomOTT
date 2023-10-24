@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+        .horizontal-list {
+            display: flex; /* 부모 요소를 플렉스 컨테이너로 설정 */
+            flex-direction: row; /* 아이템을 가로로 나열 */
+            list-style-type: none; /* 기본 목록 표시 스타일 제거 */
+            padding: 0; /* 패딩 제거 */
+        }
+
+        .horizontal-list li {
+            margin-right: 10px; /* 각 아이템 사이의 간격을 설정 */
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>게시판 상세</h2>
+    </div>
+
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" class="form-control" value="" th:value="${board.title}" readonly>
+    </div>
+    <div>
+        <label for="regUserid">아이디</label>
+        <input type="text" id="regUserid" name="regUserid" class="form-control" value="" th:value="${board.regUserid}" readonly>
+    </div>
+    <div>
+        <label for="regDate">작성일시</label>
+        <input type="text" id="regDate" name="regDate" class="form-control" value="" th:value="${board.regDate}" readonly>
+    </div>
+    <div>
+        <label for="viewCount">조회수</label>
+        <input type="text" id="viewCount" name="viewCount" class="form-control" value="" th:value="${board.viewCount}" readonly>
+    </div>
+    <div>
+        <label for="likeCount">좋아요</label>
+        <input type="text" id="likeCount" name="likeCount" class="form-control" value="" th:value="${board.likeCount}" readonly>
+    </div>
+    <div>
+        <label for="content">내용</label>
+<!--        <textarea id="content" name="content" class="form-control" readonly><th:value="${board.content}"></textarea>-->
+        <textarea id="content" name="content" class="form-control" th:text="${board.content}" readonly></textarea>
+    </div>
+    <div>
+        <span>원본 첨부파일</span>
+        <a th:href="@{${board.filepath}}">다운받기</a>
+    </div>
+
+
+    <hr class="my-4">
+
+    <button onclick="likeBoard()">좋아요</button>
+
+    <hr class="my-4">
+
+    <div>
+        <label for="commentCount">전체 댓글</label>
+        <input type="text" id="commentCount" name="commentCount" class="form-control" value="" th:value="${commentCount}" readonly>
+    </div>
+    <div>
+        <span>전체 댓글 : </span>
+        <span th:text="${commentCount}"></span>
+    </div>
+    <div id="commentList">
+        <div class="horizontal-list" th:each="comment : ${boardComment}">
+            <div th:onclick="replyArea([[${comment.commentId}]], [[${comment.upperCommentId}]])" >
+                <li th:text="${comment.regUserid}"></li>
+                <li th:text="${comment.content}"></li>
+                <li th:text="${comment.regDate}"></li>
+                <button th:if="${comment.regUserid == 'hwna'}" th:onclick="deleteComment([[${comment.commentId}]])">삭제</button>
+            </div>
+            <div th:if="${comment.upperCommentId == 0}" th:class="|commentAdd_${comment.commentId}|" style="display:none">
+                <textarea th:id="|comment_${comment.commentId}|" class="form-control"></textarea>
+                <button th:onclick="replyComment([[${comment.commentId}]])">작성</button>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+        <label for="comment"></label>
+        <textarea id="comment" name="comment" class="form-control"></textarea>
+        <button onclick="saveComment()">작성</button>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-md"
+                    th:if="${loginId} == ${board.regUserid}"
+                    th:onclick="|location.href='@{/board/update/{boardId}(boardId=${board.id})}'|"
+                    type="button">수정</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-danger btn-md"
+                    id="deleteButton" type="button"
+                    th:if="${loginId} == ${board.regUserid}"
+                    th:onclick="|deleteBoard('${board.id}')|">삭제</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-md"
+                    onclick="location.href='boardList.html'"
+                    th:onclick="|location.href='@{/board/list}'|"
+                    type="button">목록으로</button>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script>
+    let likeCheck = -1;
+    function likeBoard() {
+        const boardId = [[${board.id}]];
+        if (likeCheck == -1) {
+            likeCheck = [[${board.likeCheck}]];
+        }
+        console.log(">>> 111111111 boardId : " + boardId + ", likeCheck : " + likeCheck);
+        //const likeCountElement = document.getElementById('likeCount');
+
+        axios({
+            url: '/board/like/' + boardId + '/' + likeCheck, // 통신할 웹문서
+            method: 'POST', // 통신할 방식
+            data: { }
+        })
+            .then(function(response) {
+                //console.log(response.data)
+                console.log(response.status)
+                //console.log(response.statusText)
+                //console.log(response.headers)
+                //console.log(response.config)
+                if (response.status === 200) {
+                    let likeCount = $("#likeCount").val();
+                    if (likeCheck == 0) {
+                        likeCount++;
+                    } else {
+                        likeCount--;
+                    }
+                    $("#likeCount").val(likeCount);
+
+                    likeCheck = likeCheck == 0 ? 1 : 0;
+                    console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+                }
+            });
+    }
+
+    function saveComment() {
+        const boardId = [[${board.id}]];
+
+        //let comment = document.getElementById("comment").value;
+        let comment = $("#comment").val();
+        console.log(">>> [saveComment] boardId : " + boardId + ", content : " + comment );
+
+
+        if (comment == "") {
+            alert("댓글을 입력해 주세요.");
+            return;
+        }
+
+        axios({
+            url: '/board/comment/save', // 통신할 웹문서
+            method: 'POST', // 통신할 방식
+            data: { boardId : boardId, content : comment, upperCommentId : 0 }
+        })
+            .then(function(response) {
+                console.log(response.status);
+
+                if (response.status === 200) {
+                   /* let commentCount = $("#commentCount").val();
+                    commentCount++;
+                    $("#commentCount").val(commentCount);*/
+                    //console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+
+                    document.location.href = "/board/detail/" + boardId;
+                }
+
+            });
+    }
+
+    function deleteComment(commentId) {
+        if (confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+            const boardId = [[${board.id}]];
+            axios({
+                url: '/board/comment/delete/'+ boardId +'/' +commentId, // 통신할 웹문서
+                method: 'POST', // 통신할 방식
+                //data: { commentId : commentId }
+            })
+                .then(function(response) {
+                    console.log(response.status);
+
+                    if (response.status === 200) {
+                        let commentCount = $("#commentCount").val();
+                        commentCount--;
+                        $("#commentCount").val(commentCount);
+                    }
+                    document.location.href = "/board/detail/" + boardId;
+                });
+        }
+    }
+
+    function deleteBoard(boardId) {
+        if (confirm("정말로 이 글을 삭제하시겠습니까?")) {
+            axios({
+                url: '/board/delete/'+ boardId, // 통신할 웹문서
+                method: 'POST', // 통신할 방식
+                //data: { commentId : commentId }
+            });
+            // .then(function(response) {
+            //     console.log(response.status);
+            //
+            //     if (response.status === 200) {
+            //         //document.location.href = "/board/list/";
+            //     }
+            // });
+            document.location.href = "/board/list/";
+        }
+
+    }
+
+    function replyArea(commentId, upperCommentId) {
+        if (upperCommentId == 0) {
+            $(".commentAdd_" + commentId).toggle();
+        }
+    }
+
+    function replyComment(commentId) {
+        const boardId = [[${board.id}]];
+
+        //let comment = document.getElementById("comment").value;
+        let comment = $("#comment_" + commentId).val();
+        console.log(">>> [saveComment] boardId : " + boardId + ", content : " + comment );
+
+        if (comment == "") {
+            alert("댓글을 입력해 주세요.");
+            return;
+        }
+
+        axios({
+            url: '/board/comment/save', // 통신할 웹문서
+            method: 'POST', // 통신할 방식
+            data: { boardId : boardId, content : comment, upperCommentId : commentId }
+        })
+            .then(function(response) {
+                console.log(response.status);
+
+                if (response.status === 200) {
+                    /* let commentCount = $("#commentCount").val();
+                     commentCount++;
+                     $("#commentCount").val(commentCount);*/
+                    //console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+
+                    document.location.href = "/board/detail/" + boardId;
+                }
+
+            });
+    }
+</script>
+
+
+</body>

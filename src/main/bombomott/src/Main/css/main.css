@@ -1,0 +1,23 @@
+div{
+    box-sizing: border-box;
+}
+
+.main-container{
+    background-color : rgb(30, 33, 47);
+<<<<<<< HEAD
+    max-width: 100%;
+    min-height: calc(100vh - 250px);
+    overflow: hidden;
+=======
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.content{
+    position: relative;
+    background-color: rgb(4, 7, 20);
+    padding: 90px;
+    height: auto;
+>>>>>>> 63855bb (ãchagepassword)
+}
