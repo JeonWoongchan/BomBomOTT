@@ -15,26 +15,42 @@ import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
 import Search from "./Search/Search";
 import ContentModal from "./Content/ContentModal";
+import BoardMain from "./Board/BoardMain";
+import BoardDetail from "./Board/BoardDetail";
 
 function App() {
-    useApi();
-    return (
-        <div className="App container">
-            <Routes>
-                <Route path='/' element={<Intro/>}/>
-                <Route path='/main/:nowProfileCode' element={<Main/>}/>
-                <Route path='/login/:loginStep' element={<Login/>}/>
-                <Route path='/login/:userId/:loginStep' element={<Login/>}/>
-                <Route path='/profile/:userId/:nowProfileCode/:profileMenu' element={<Profile/>}>
-                    <Route path=":profileSubMenu" element={<Profile/>}/>
-                </Route>
-                <Route path='/content/:nowProfileCode/:contentType/:contentGenre/:contentId' element={<Content/>}/>
-                <Route path='/brand/:brandName' element={<BrandContent/>}/>
-                <Route path="/search/:nowProfileCode" element={<Search />} />
-                <Route path='/category/:nowProfileCode/:mediaType/:categoryType' element={<Category/>}/>
-            </Routes>
-        </div>
-    );
+  useApi();
+  return (
+    <div className="App container">
+      <Routes>
+        <Route path="/" element={<Intro />} />
+        <Route path="/main/:nowProfileCode" element={<Main />} />
+        <Route path="/login/:loginStep" element={<Login />} />
+        <Route path="/login/:userId/:loginStep" element={<Login />} />
+        <Route
+          path="/profile/:userId/:nowProfileCode/:profileMenu"
+          element={<Profile />}
+        >
+          <Route path=":profileSubMenu" element={<Profile />} />
+        </Route>
+        <Route
+          path="/content/:nowProfileCode/:contentType/:contentGenre/:contentId"
+          element={<Content />}
+        />
+        <Route path="/brand/:brandName" element={<BrandContent />} />
+        <Route path="/search/:nowProfileCode" element={<Search />} />
+        <Route
+          path="/category/:nowProfileCode/:mediaType/:categoryType"
+          element={<Category />}
+        />
+        <Route path="/board/:nowProfileCode" element={<BoardMain />} />
+        <Route
+          path="/board/:nowProfileCode/:content"
+          element={<BoardDetail />}
+        />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
