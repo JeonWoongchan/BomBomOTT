@@ -5,6 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserData } from '../store/store';
 
+//일이전화면에서 입력받은 이메 넘겨받음, 비밀번호 새로 입력받아서 이메일과 비밀번호를 전달
+//전달받은 이메일과 비밀번호로 로그인 정보 확인 -> 맞으면 로그인 가능 여부 보냄, 로그인 가능 시 유저의 고유id 보냄
+//로그인 가능여부 받아서 맞으면 프로필 선택 페이지, 틀렸으면 알림, 로그인 후 고유id를 저장
 export default function CheckPwLogic(email) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -36,6 +39,7 @@ export default function CheckPwLogic(email) {
         // .catch((error)=>{
         //     console.log(error)
         // });
+        console.log(email, userPw)
         navigate(`/login/${userData}/select-profile`)
     };
 

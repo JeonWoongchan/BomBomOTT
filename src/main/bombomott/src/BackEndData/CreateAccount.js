@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 //이전 이메일 입력화면에서 받아온 이메일과 방금 입력받은 비밀번호를 이용해서 회원등록
-//회원 고유 아이디는 6자리 랜덤생성
+//회원 고유 아이디는 6자리 랜덤생성, 생성시 프로필은 일단 0개, 유저 고유id 보냄
+//유저의 고유id저장, 계좌 입력 화면으로 이동
 export default function CreateAccount(email) {
     const navigate = useNavigate()
     const [userPw, setUserPw] = useState('');

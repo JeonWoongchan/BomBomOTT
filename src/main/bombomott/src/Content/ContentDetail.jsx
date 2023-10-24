@@ -5,6 +5,7 @@ import MovieGenre from '../MovieGenre'
 import TVGenre from '../TVGenre'
 import ContentTab from './ContentTab';
 import DetailApi from '../DetailApi'
+import PostViewData from '../BackEndData/PostViewData'
 
 import { useEffect, useState } from "react";
 import { avbar, Nav, Container, NavDropdown } from 'react-bootstrap'
@@ -13,6 +14,8 @@ import { useParams } from 'react-router-dom';
 
 function ContentDetail(props) {
     const {contentType} = useParams()
+    const userData = useSelector((state)=>state.userData)
+    const nowProfile = useSelector((state)=>state.nowProfile)
     const contentDetail = useSelector((state)=>state.contentDetail)
     const Release_date = contentType == 'series' ? contentDetail.first_air_date : contentDetail.release_date;
     const RunTime = contentDetail.runtime < 60 ? `${contentDetail.runtime}분` 
@@ -20,6 +23,32 @@ function ContentDetail(props) {
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
 
     const [genre, setGenre] = useState([]);
+
+    const PostViewData = (contentId, contentType, userData, nowProfile) => {//시청콘텐츠 추가
+        // axios
+        //     .post("http://localhost:8080/login", {
+        //     userid: userId
+        // })
+        //     .then((res) => {
+        //     setProfileDate(res.data)
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // });
+    };
+
+    const PostInterestData = (contentId, contentType, userData, nowProfile) => { //관심콘텐츠 추가
+        // axios
+        //     .post("http://localhost:8080/login", {
+        //     userid: userId
+        // })
+        //     .then((res) => {
+        //     setProfileDate(res.data)
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // });
+    };
 
     useEffect(()=>{
         window.scrollTo(0, 0);
@@ -71,7 +100,7 @@ function ContentDetail(props) {
                         </div>
                     </div>
                     <div className="info-button">
-                        <button className='play-button'><img src='/img/playButton.png'/>재생</button>
+                        <button className='play-button' type='button' onClick={()=>{}}><img src='/img/playButton.png'/>재생</button>
                         {
                             props.receivedData.media_type == 'movie'
                                 ? <button className='trailer-button'>예고편</button>

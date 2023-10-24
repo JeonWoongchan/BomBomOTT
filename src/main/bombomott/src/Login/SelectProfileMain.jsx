@@ -2,6 +2,7 @@ import React from 'react';
 import './css/selectProfile.css'
 import borderStyle from '../borderStyle';
 import profileData from '../BackEndData/profileData.json'
+import ReciveProfileData from '../BackEndData/ReciveProfilrData'
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,12 +10,12 @@ import { setNowProfile } from '../store/store';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function CreateProfile(){
-    const nowProfile = useSelector((state)=>state.nowProfile)
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const [mouseIndex, setMouseIndex] = useState('');
     const userData = useSelector((state)=>state.userData)
+    // const {profileData} = ReciveProfileData(userData) //백엔드에서 받아온 프로필 데이터
     
     const avatarImg = (i)=>{
         return{

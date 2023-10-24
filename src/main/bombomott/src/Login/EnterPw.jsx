@@ -5,15 +5,17 @@ import CheckPwLogic from '../BackEndData/CheckPwLogic'
 import PasswordView from '../PasswordView'
 
 import {useEffect, useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function EnterPw() {
     const navigate = useNavigate()  
+    const location = useLocation();
+    const email = location.state.email;
     
     const [inputView, setInputView] = useState(false); // 패스워드 view on/off
     const { inputIcon, inputType } = PasswordView(inputView);
-    const {userPw, checked, handleInputPw, CheckPw} = CheckPwLogic()
+    const {userPw, checked, handleInputPw, CheckPw} = CheckPwLogic(email)
     
 
     const toggleinputView = () => {

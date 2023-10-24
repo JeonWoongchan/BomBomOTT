@@ -4,6 +4,9 @@ import {useEffect, useState} from "react";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+//이전화면에서 받은 유저id와 입력받은 계좌번호 보냄
+//유저id에 맞는 유저의 계좌번호 등록
+//등록 성공 시 프로필 선택화면으로 이동
 export default function RegistPaymentLogic() {
     const navigate = useNavigate()
     const [userPay, setUserPay] = useState('');
