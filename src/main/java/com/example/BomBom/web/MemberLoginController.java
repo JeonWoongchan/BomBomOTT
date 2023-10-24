@@ -27,15 +27,17 @@ import java.util.*;
 @Controller
 @RequestMapping("/login")
 @RequiredArgsConstructor
+
 public class MemberLoginController {
 
     private final MemberService memberService;
 
-    @GetMapping()
-    public String loginForm(@ModelAttribute("memberSearch") MemberSearchC memberSearch, Model model) {
+ @GetMapping()
+ public String loginForm() {
 
-        return "forward:/index.html";
-    }
+     return "forward:index.html";
+ }
+
 
         @PostMapping()
     public void addMember(@RequestBody MemberLoginDto dto,
@@ -132,13 +134,18 @@ public class MemberLoginController {
 
     }
 
+
     @GetMapping("/logout")
-    public String logout(HttpSession session,MemberLoginDto dto) {
-        memberService.multisub(dto.getUserid());
+    public String logout(HttpSession session) {
+
+
+        String sessionuserid = (String) session.getAttribute("userid");
+        memberService.multisub(sessionuserid);
         session.invalidate(); // 세션 무효화
 
         return "forward:/index.html"; // 로그인 페이지로 리다이렉트
     }
+
 
     @GetMapping("/block")
     public String block(HttpSession session,RedirectAttributes redirectAttributes) {
