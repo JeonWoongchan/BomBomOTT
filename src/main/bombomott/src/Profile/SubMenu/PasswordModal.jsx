@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
 import PasswordView from '../../PasswordView'
+import ModifyLogic from '../../BackEndData/ModifyLogic';
 import '../css/passwordModal.css'
+
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom'; 
 import { setMovie } from '../../store/store';
+
 
 export default function PasswordModal(props) {
     const navigate = useNavigate()
+    const { userId } = useParams() 
     const [inputView, setInputView] = useState(false); // 패스워드 view on/off
     const [inputValue, setInputValue] = useState(''); //input창 텍스트
 
     const { inputIcon, inputType } = PasswordView(inputView, inputValue);
-
+    const {userInput,  handleInput, ModifyData} = ModifyLogic(userId, props.changeData)
+    
     const toggleinputView = () => {
         if(inputView){
             setInputView(false)
@@ -31,7 +36,7 @@ export default function PasswordModal(props) {
                 <fieldset>
                     <legend></legend>
                     <span>
-                        <input type={inputType} placeholder='비밀번호' onChange={inputValueHandler}/>
+                        <input type={inputType} placeholder='비밀번호' onChange={(e)=>{inputValueHandler(e); handleInput(e)}} value={userInput} required/>
                         <button type="button" className='view-control' onClick={()=>{toggleinputView()}}>
                             <span className="material-symbols-outlined icon">{inputIcon}</span>
                         </button>
@@ -41,10 +46,10 @@ export default function PasswordModal(props) {
                     </span>
                 </fieldset>
                 <div className="button-area">
-                    <button className='save'>저장</button>
+                    <button className='save' type="button" onClick={()=>{ModifyData(); navigate('/profile/user1234/account')}}>저장</button>
                     <button className='cancel' type="button" onClick={()=>{props.setModal(false)}}>취소</button>
                 </div>
-                <button className='find-password' >비밀번호 찾기</button>
+                <button className='find-password'>비밀번호 찾기</button>
             </form>
             </div>
         </div>

@@ -30,7 +30,7 @@ export default function ChangeEmail(){
 
     return(
         <div className="change-detail">
-            {modal ? <PasswordModal setModal={setModal}/> : null}
+            {modal ? <PasswordModal setModal={setModal} changeData={'email'}/> : null}
             <div className="change-title">
                 <h2>이메일을 변경하세요</h2>
             </div>

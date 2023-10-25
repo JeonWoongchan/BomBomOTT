@@ -69,6 +69,7 @@ public interface MemberMapper {
 
     void multisub(@Param("userid") String userid);
 
-
     void EndUpdatedevice();
+
+
 }

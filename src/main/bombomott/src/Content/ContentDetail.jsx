@@ -1,10 +1,11 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/contentDetail.css";
-import useScroll from "../useScroll";
-import MovieGenre from "../MovieGenre";
-import TVGenre from "../TVGenre";
-import ContentTab from "./ContentTab";
-import DetailApi from "../DetailApi";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/contentDetail.css'
+import useScroll from '../useScroll';
+import MovieGenre from '../MovieGenre'
+import TVGenre from '../TVGenre'
+import ContentTab from './ContentTab';
+import DetailApi from '../DetailApi'
+import PostViewData from '../BackEndData/PostViewData'
 
 import { useEffect, useState } from "react";
 import { avbar, Nav, Container, NavDropdown } from "react-bootstrap";
@@ -14,24 +15,44 @@ import ContentModal from "./ContentModal";
 import "./css/contentModal.css";
 
 function ContentDetail(props) {
-  const { contentType } = useParams();
-  const contentDetail = useSelector((state) => state.contentDetail);
+    const {contentType} = useParams()
+    const userData = useSelector((state)=>state.userData)
+    const nowProfile = useSelector((state)=>state.nowProfile)
+    const contentDetail = useSelector((state)=>state.contentDetail)
+    const Release_date = contentType == 'series' ? contentDetail.first_air_date : contentDetail.release_date;
+    const RunTime = contentDetail.runtime < 60 ? `${contentDetail.runtime}분` 
+                    : `${Math.floor(contentDetail.runtime/60)}시간 ${contentDetail.runtime%60}분`
+    const BASE_URL = 'https://image.tmdb.org/t/p/original/'
 
-  const Release_date =
-    contentType == "series"
-      ? contentDetail.first_air_date
-      : contentDetail.release_date;
-  const RunTime =
-    contentDetail.runtime < 60
-      ? `${contentDetail.runtime}분`
-      : `${Math.floor(contentDetail.runtime / 60)}시간 ${
-          contentDetail.runtime % 60
-        }분`;
-  const BASE_URL = "https://image.tmdb.org/t/p/original/";
+    const [genre, setGenre] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [teaser, setTeaser] = useState(false);
 
-  const [genre, setGenre] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [teaser, setTeaser] = useState(false);
+    const PostViewData = (contentId, contentType, userData, nowProfile) => {//시청콘텐츠 추가
+        // axios
+        //     .post("http://localhost:8080/login", {
+        //     userid: userId
+        // })
+        //     .then((res) => {
+        //     setProfileDate(res.data)
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // });
+    };
+
+    const PostInterestData = (contentId, contentType, userData, nowProfile) => { //관심콘텐츠 추가
+        // axios
+        //     .post("http://localhost:8080/login", {
+        //     userid: userId
+        // })
+        //     .then((res) => {
+        //     setProfileDate(res.data)
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // });
+    };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -121,7 +142,7 @@ function ContentDetail(props) {
             )}
             {props.receivedData.media_type == "movie" ? (
               <button
-                className="trailer-button"
+                className="trailer-button" type='button'
                 onClick={() => {
                   setTeaser(true);
                   setModalOpen(false);
@@ -137,7 +158,7 @@ function ContentDetail(props) {
                 type
               />
             )}
-            <button className="add-button">
+            <button className="add-button" type='button'>
               <img src="/img/addButton.png" />
             </button>
           </div>

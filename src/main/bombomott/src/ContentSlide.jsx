@@ -13,7 +13,7 @@ function ContentSlide(props){
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
-    const {contentType} = useParams()
+    const {nowProfileCode, contentType} = useParams()
     const [mouseIndex, setMouseIndex] = useState('') 
     const isDragging = useSelector((state)=>state.isDragging)
     const contentDetail = useSelector((state)=>state.contentDetail)
@@ -44,7 +44,7 @@ function ContentSlide(props){
                             onMouseLeave={()=>{setMouseIndex('')}}> 
                             <img src={`${BASE_URL}${Array.isArray(props.data) ? props.data[i].backdrop_path : props.data.backdrop_path}`}
                                 style={isDragging === true ? { pointerEvents: 'none' } : null}
-                                draggable="false" onClick={()=>{ navigate(`/content/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}>
+                                draggable="false" onClick={()=>{ navigate(`/content/${nowProfileCode}/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}>
                             </img>
                             {contentType == 'series' && props.episodeCount 
                             ? <h6>{i+1}화 ({contentDetail.episode_run_time.length > 0 ?contentDetail.episode_run_time[0] : 60}분)</h6> : null} 

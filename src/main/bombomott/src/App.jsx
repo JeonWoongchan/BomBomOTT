@@ -15,6 +15,8 @@ import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
 import Search from "./Search/Search";
 import ContentModal from "./Content/ContentModal";
+import BoardMain from "./Board/BoardMain";
+import BoardDetail from "./Board/BoardDetail";
 
 function App() {
   useApi();
@@ -22,20 +24,29 @@ function App() {
     <div className="App container">
       <Routes>
         <Route path="/" element={<Intro />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/profile/:userId/:profileMenu" element={<Profile />}>
+        <Route path="/main/:nowProfileCode" element={<Main />} />
+        <Route path="/login/:loginStep" element={<Login />} />
+        <Route path="/login/:userId/:loginStep" element={<Login />} />
+        <Route
+          path="/profile/:userId/:nowProfileCode/:profileMenu"
+          element={<Profile />}
+        >
           <Route path=":profileSubMenu" element={<Profile />} />
         </Route>
         <Route
-          path="/content/:contentType/:contentGenre/:contentId"
+          path="/content/:nowProfileCode/:contentType/:contentGenre/:contentId"
           element={<Content />}
         />
         <Route path="/brand/:brandName" element={<BrandContent />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search/:nowProfileCode" element={<Search />} />
         <Route
-          path="/category/:mediaType/:categoryType"
+          path="/category/:nowProfileCode/:mediaType/:categoryType"
           element={<Category />}
+        />
+        <Route path="/board/:nowProfileCode" element={<BoardMain />} />
+        <Route
+          path="/board/:nowProfileCode/:content"
+          element={<BoardDetail />}
         />
       </Routes>
     </div>

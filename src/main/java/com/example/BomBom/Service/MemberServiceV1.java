@@ -88,9 +88,6 @@ public class MemberServiceV1 implements MemberService {
     }
 
     @Override
-    public void EndUpdatedevice() {
-        memberRepository.EndUpdatedevice();
-    }
-
+    public void EndUpdatedevice() { memberRepository.EndUpdatedevice(); }
 
 }

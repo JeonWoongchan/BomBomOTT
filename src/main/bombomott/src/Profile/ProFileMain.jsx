@@ -3,7 +3,7 @@ import Account from './Account'
 import ChangeEmail from './SubMenu/ChangeEmail'
 import ResetPassword from './SubMenu/ResetPassword'
 import LogoutDevices from './SubMenu/LogoutDevices'
-import ChangePayment from './SubMenu/ChangePayment'
+import ChangePayment from './SubMenu/RegistPayment'
 import './css/profile.css'
 
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ export default function ProfileMain() {
             return(<ResetPassword/>)
         }else if(profileMenu == 'account' && profileSubMenu == 'logout-devices'){
             return(<LogoutDevices/>)
-        }else if(profileMenu == 'account' && profileSubMenu == 'change-payment'){
+        }else if(profileMenu == 'account' && profileSubMenu == 'regist-payment'){
             return(<ChangePayment/>)
         }
     }

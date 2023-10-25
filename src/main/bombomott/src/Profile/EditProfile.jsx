@@ -2,9 +2,13 @@ import React from 'react';
 import './css/editProfile.css'
 import CreateProfile from './CreateProfile';
 import { useNavigate } from 'react-router-dom';
+import { setNowProfile } from '../store/store';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
 
 export default function AddProfile() {
     const navigate = useNavigate()
+    const nowProfile = useSelector((state)=>state.nowProfile)
 
     return (
         <div className='main-container'>
@@ -12,7 +16,6 @@ export default function AddProfile() {
                 <div className="header">
                     <img className='header-logo' src='/img/disney_Plus_logo.png'
                         onClick={()=>{navigate('/main')}}/>
-                    <button type='submit'>완료</button>
                 </div>
                 <div className="center">
                     <section className='center-main'>

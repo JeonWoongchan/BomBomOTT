@@ -8,7 +8,7 @@ import { setIsLoading } from '../store/store';
 
 export default function CategoryContent() {
     const navigate = useNavigate()
-    const {mediaType, categoryType} = useParams()
+    const {nowProfileCode, mediaType, categoryType} = useParams()
     const genreMovie = useSelector((state)=>state.genreMovie);
     const BASE_URL = 'https://image.tmdb.org/t/p/original/'
     const [boxOpacity, setBoxOpacity] = useState(true);
@@ -48,7 +48,7 @@ export default function CategoryContent() {
                             genreMovie[i].backdrop_path != null ? 
                             <img src={`${BASE_URL}${genreMovie[i].backdrop_path}`} key={i} style={mouseIndex === i ? borderStyle('box') : null}
                             onMouseEnter={()=>{setMouseIndex(i)}} onMouseLeave={()=>{setMouseIndex('')}} onLoad={()=>{setLoadCount((prev)=>prev+1)}}
-                            onClick={()=>{ navigate(`/content/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}/> : null
+                            onClick={()=>{ navigate(`/content/${nowProfileCode}/${TYPE}/${a.genre_ids[0]}/${a.id}`, {state:{ data: Data, dataAll: DataAll} })}}/> : null
                         )
                     })
                 }
