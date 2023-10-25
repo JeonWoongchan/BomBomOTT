@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+        .horizontal-list {
+            display: flex; /* 부모 요소를 플렉스 컨테이너로 설정 */
+            flex-direction: row; /* 아이템을 가로로 나열 */
+            list-style-type: none; /* 기본 목록 표시 스타일 제거 */
+            padding: 0; /* 패딩 제거 */
+        }
+
+        .horizontal-list li {
+            margin-right: 10px; /* 각 아이템 사이의 간격을 설정 */
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>게시판 상세</h2>
+    </div>
+
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" class="form-control" value="" th:value="${board.title}" readonly>
+    </div>
+    <div>
+        <label for="regUserid">아이디</label>
+        <input type="text" id="regUserid" name="regUserid" class="form-control" value="" th:value="${board.regUserid}" readonly>
+    </div>
+    <div>
+        <label for="regDate">작성일시</label>
+        <input type="text" id="regDate" name="regDate" class="form-control" value="" th:value="${board.regDate}" readonly>
+    </div>
+    <div>
+        <label for="viewCount">조회수</label>
+        <input type="text" id="viewCount" name="viewCount" class="form-control" value="" th:value="${board.viewCount}" readonly>
+    </div>
+    <div>
+        <label for="likeCount">좋아요</label>
+        <input type="text" id="likeCount" name="likeCount" class="form-control" value="" th:value="${board.likeCount}" readonly>
+    </div>
+    <div>
+        <label for="content">내용</label>
+        <!--        <textarea id="content" name="content" class="form-control" readonly><th:value="${board.content}"></textarea>-->
+        <textarea id="content" name="content" class="form-control" th:text="${board.content}" readonly></textarea>
+    </div>
+    <div>
+        <span>원본 첨부파일</span>
+        <a th:href="@{${board.filepath}}">다운받기</a>
+    </div>
+
+
+    <hr class="my-4">
+
+    <button onclick="likeBoard()">좋아요</button>
+
+    <hr class="my-4">
+
+    <div>
+        <label for="commentCount">전체 댓글</label>
+        <input type="text" id="commentCount" name="commentCount" class="form-control" value="" th:value="${commentCount}" readonly>
+    </div>
+    <div>
+        <span>전체 댓글 : </span>
+        <span th:text="${commentCount}"></span>
+    </div>
+    <div id="commentList">
+        <!--        <div class="horizontal-list">-->
+        <!--            <li>user1</li>-->
+        <!--            <li>comment1</li>-->
+        <!--            <li>11111</li>-->
+        <!--        </div>-->
+        <!--        <div class="horizontal-list">-->
+        <!--            <li>user2</li>-->
+        <!--            <li>comment2</li>-->
+        <!--            <li>22222</li>-->
+        <!--        </div>-->
+        <!--        <div class="horizontal-list">-->
+        <!--            <li>user3</li>-->
+        <!--            <li>comment3</li>-->
+        <!--            <li>33333</li>-->
+        <!--        </div>-->
+
+        <div id="list" class="horizontal-list" th:each="comment : ${boardComment}">
+            <li th:text="${comment.regUserid}"></li>
+            <li th:text="${comment.content}"></li>
+            <li th:text="${comment.regDate}"></li>
+            <!--            <button th:if="${comment.regUserid == 'hwna'}" th:onclick="deleteComment([[${comment.commentId}]])">삭제</button>-->
+            <!--            <button type="button" th:onclick="|location.href='@{/event/ranking(rankCd=${rankCd}, bordSeq=${bordSeq})}'|">닫기</button>-->
+            <!--            <li><a href="boardView.html" th:href="@{|/board/view/${board.id}|}" th:text="${board.title}">제목</a></li>-->
+
+        </div>
+
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+        <label for="comment"></label>
+        <!--        <textarea id="content" name="content" class="form-control" readonly><th:value="${board.content}"></textarea>-->
+        <textarea id="comment" name="comment" class="form-control"></textarea>
+        <button onclick="saveComment()">작성</button>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-md"
+                    th:if="${loginId} == ${board.regUserid}"
+                    th:onclick="|location.href='@{/board/update/{boardId}(boardId=${board.id})}'|"
+                    type="button">수정</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-danger btn-md"
+                    id="deleteButton" type="button"
+                    th:if="${loginId} == ${board.regUserid}"
+                    th:onclick="|deleteBoard('${board.id}')|">삭제</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-md"
+                    onclick="location.href='boardList.html'"
+                    th:onclick="|location.href='@{/board/list}'|"
+                    type="button">목록으로</button>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    let likeCheck = -1;
+    function likeBoard() {
+        const boardId = [[${board.id}]];
+        if (likeCheck == -1) {
+            likeCheck = [[${board.likeCheck}]];
+        }
+        console.log(">>> 111111111 boardId : " + boardId + ", likeCheck : " + likeCheck);
+        //const likeCountElement = document.getElementById('likeCount');
+
+        /*const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+
+                    /!*const newLikeCount = parseInt(likeCountElement.innerText);
+                    likeCountElement.innerText = newLikeCount === 1 ? 0 : 1;
+
+                    const likeButton = document.getElementById('likeButton');
+                    likeButton.disabled = false;*!/
+                } else {
+                    alert('좋아요 요청에 실패했습니다.');
+                }
+            }
+        };
+        xhr.open('POST', '/board/like/' + boardId + '/' + likeCheck);
+        xhr.send();*/
+
+        axios({
+            url: '/board/like/' + boardId + '/' + likeCheck, // 통신할 웹문서
+            method: 'POST', // 통신할 방식
+            data: { }
+        })
+            .then(function(response) {
+                //console.log(response.data)
+                console.log(response.status)
+                //console.log(response.statusText)
+                //console.log(response.headers)
+                //console.log(response.config)
+                if (response.status === 200) {
+                    likeCheck = likeCheck == 0 ? 1 : 0;
+                    console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+                }
+            });
+    }
+
+    function saveComment() {
+        const boardId = [[${board.id}]];
+
+        //let comment = document.getElementById("comment").value;
+        let comment = $("#comment").val();
+        console.log(">>> [saveComment] boardId : " + boardId + ", content : " + comment );
+
+
+        if (comment == "") {
+            alert("댓글을 입력해 주세요.");
+            return;
+        }
+
+        axios({
+            url: '/board/comment/save', // 통신할 웹문서
+            method: 'POST', // 통신할 방식
+            data: { boardId : boardId, content : comment, upperCommentId : 0 }
+        })
+            .then(function(response) {
+                console.log(response.status);
+
+                if (response.status === 200) {
+                    let commentCount = $("#commentCount").val();
+                    commentCount++;
+                    $("#commentCount").val(commentCount);
+                    //console.log(">>> 222222222222  boardId : " + boardId + ", likeCheck : " + likeCheck);
+
+                    /*let commentHtml = "";
+                    commentHtml += '<div className="horizontal-list">';
+                    commentHtml += '    <li>' + [[${board.regUserid}]] + '</li>';
+                    commentHtml += '    <li>' + $("#content").val() + '</li>';
+                    commentHtml += '    <li th:text="${comment.regDate}"></li>';
+                    commentHtml += '    <button th:if="${comment.regUserid == 'hwna'}"';
+                    commentHtml += '            th:onclick="deleteComment([[${comment.commentId}]])">삭제';
+                    commentHtml += '    </button>';
+                    commentHtml += '</div>';
+
+                    $("#commentList").append(commentHtml);*/
+
+                    //document.location.href = "/board/view/" + boardId;
+
+                }
+
+            });
+    }
+
+    function deleteComment(commentId) {
+        if (confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+            const boardId = [[${board.id}]];
+            axios({
+                url: '/board/comment/delete/'+ boardId +'/' +commentId, // 통신할 웹문서
+                method: 'POST', // 통신할 방식
+                //data: { commentId : commentId }
+            })
+                .then(function(response) {
+                    console.log(response.status);
+
+                    if (response.status === 200) {
+                        let commentCount = $("#commentCount").val();
+                        commentCount--;
+                        $("#commentCount").val(commentCount);
+                    }
+
+                });
+        }
+    }
+
+    function deleteBoard(boardId) {
+        if (confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
+            axios({
+                url: '/board/delete/'+ boardId, // 통신할 웹문서
+                method: 'POST', // 통신할 방식
+                //data: { commentId : commentId }
+            });
+            // .then(function(response) {
+            //     console.log(response.status);
+            //
+            //     if (response.status === 200) {
+            //         //document.location.href = "/board/list/";
+            //     }
+            // });
+            document.location.href = "/board/list/";
+        }
+
+    }
+</script>
+
+</body>

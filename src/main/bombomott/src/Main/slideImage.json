@@ -1,0 +1,31 @@
+{
+    "images": [
+        {
+            "id": 0,
+            "title": "banner0",
+            "img": "https://blog.kakaocdn.net/dn/IPB0s/btrkAuaE00t/A9T3dvKXfK9AkEDXLsiZNk/img.png",
+            "url": "https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg"
+        },
+        {
+            
+            "id": 1,
+            "title": "banner1",
+            "img": "https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg",
+            "url": "https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg"
+        },
+        {
+            
+            "id": 2,
+            "title": "banner2",
+            "img": "https://blog.kakaocdn.net/dn/IPB0s/btrkAuaE00t/A9T3dvKXfK9AkEDXLsiZNk/img.png",
+            "url": "https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg"
+        },
+        {
+            
+            "id": 3,
+            "title": "banner3",
+            "img": "https://blog.kakaocdn.net/dn/IPB0s/btrkAuaE00t/A9T3dvKXfK9AkEDXLsiZNk/img.png",
+            "url": "https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg"
+        }
+    ]
+}

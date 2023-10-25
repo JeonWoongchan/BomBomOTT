@@ -1,0 +1,68 @@
+div{
+    box-sizing: border-box;
+}
+
+.header-slide-area{
+    display: flex;
+    float: left;
+    position: absolute;
+    width: 1008px;
+    top: 670px;
+    right: 0;
+    left: 0;
+    margin: auto; 
+}
+
+.header-slide-area .slide-buttonOff{
+    width: 250px;
+    height: 3px;
+    background-color: silver;
+    padding: 0px;
+    margin: 1px;
+    opacity: 0.2;
+    border: none;
+}
+
+.slide-buttonOff:hover{
+    height: 4px;
+    opacity: 0.8;
+    background-color: rgb(211, 211, 211);
+}
+
+.slide-buttonOn{
+    width: 250px;
+    height: 4px;
+    background-color: rgb(211, 211, 211);
+    padding: 0px;
+    margin: 1px;
+    border: none;
+    opacity: 0.8;
+}
+
+@media screen and (max-width:768px){
+    .slide-buttonOff::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 150%;
+        height: 200%;
+        border-radius: 20px;
+        border: 1px dashed #ccc; /* 가상 요소 영역을 표시하기 위한 용도로 실제로는 필요 없음 */
+        background-color: rgba(255,0,0,0.1); /* 가상 요소 영역을 표시하기 위한 용도로 실제로는 필요 없음 */
+    }
+}
+
+.slideTitle{
+    position: absolute;
+    width: 100px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
