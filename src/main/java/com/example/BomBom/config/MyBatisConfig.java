@@ -30,7 +30,12 @@ public class MyBatisConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-        return new MybatisMemberRepository(memberMapper);
+        return new MybatisMemberRepository(memberMapper) {
+            @Override
+            public void EndUpdatedevice() {
+
+            }
+        };
     }
     @Bean
     public BoardService boardService () {

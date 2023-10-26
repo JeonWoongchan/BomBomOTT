@@ -1,13 +1,11 @@
 package com.example.BomBom.Repository.mybatis;
 
-import com.example.BomBom.Repository.MemberLoginDto;
 import com.example.BomBom.Repository.MemberRepository;
 import com.example.BomBom.Repository.MemberSearchC;
 import com.example.BomBom.Repository.MemberUpdateDto;
 
 import com.example.BomBom.domain.member.Member;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MybatisMemberRepository implements MemberRepository {
+public abstract class MybatisMemberRepository implements MemberRepository {
 
     private final MemberMapper memberMapper;
 
@@ -114,15 +112,4 @@ public class MybatisMemberRepository implements MemberRepository {
         memberMapper.multisub(userid);
     }
 
-    @Override
-    public void EndUpdatedevice() {
-        memberMapper.EndUpdatedevice();
-    }
-
-    ;
-
-    @Override
-    public void EndUpdatedevice() {
-        memberMapper.EndUpdatedevice();
-    }
 }

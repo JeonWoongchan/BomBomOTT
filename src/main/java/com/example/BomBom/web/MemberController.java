@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 @Controller
@@ -90,7 +91,7 @@ public class MemberController {
 
 
 
-        String sqlId = memberService.DupCheck(userid);
+        Optional<String> sqlId = memberService.DupCheck(userid);
 
 
         if (userid.equals(sqlId)) {

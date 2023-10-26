@@ -2,8 +2,6 @@ package com.example.BomBom.Repository.mybatis;
 
 
 
-import com.example.BomBom.Repository.MemberLoginDto;
-
 import com.example.BomBom.Repository.MemberSearchC;
 import com.example.BomBom.Repository.MemberUpdateDto;
 import com.example.BomBom.domain.member.Member;
@@ -63,7 +61,7 @@ public interface MemberMapper {
 
 
     // 회원  중복 찾기
-    String DupCheck(@Param("userid") String userid);
+    Optional<String> DupCheck(@Param("userid") String userid);
 
     void multiAdd(@Param("userid") String userid);
 

@@ -43,7 +43,7 @@ public interface MemberRepository {
 
 
 
-    String DupCheck(String userid);
+    Optional<String> DupCheck(String userid);
 
 
     Optional<Member> Mypage(String sessionuserid);
@@ -55,4 +55,6 @@ public interface MemberRepository {
     void multiAdd(@Param("userid") String userid);
 
     void multisub(@Param("userid") String userid);
+
+    void EndUpdatedevice();
 }

@@ -31,7 +31,7 @@ public interface MemberService {
 
     String MemberName(String user);
 
-    String DupCheck(String userid);
+    Optional<String> DupCheck(String userid);
 
 
     int multiCheck(String userid);

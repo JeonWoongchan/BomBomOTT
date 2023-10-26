@@ -68,7 +68,7 @@ public class MemberServiceV1 implements MemberService {
     }
 
     @Override
-    public String DupCheck(String userid) {
+    public Optional<String> DupCheck(String userid) {
         return memberRepository.DupCheck(userid);
     }
 

@@ -31,14 +31,8 @@ export default function SearchContent() {
       <div className="search-box" style={contentBoxStyle()}>
         {searchMulti.map((a, i) => {
           const Data = searchMulti[i];
-<<<<<<< HEAD
-          const DataAll = searchMulti;
-          const TYPE = a.media_type;
-          console.log(TYPE);
-=======
           const DataAll = searchMulti.filter((e) => e.backdrop_path != null);
           const TYPE = a.mediaType == undefined ? "series" : a.mediaType;
->>>>>>> ddd8190ca290eea616e3fd503747a31a9f1b9cc3
           return searchMulti[i].backdrop_path != null ? (
             <img
               src={`${BASE_URL}${searchMulti[i].backdrop_path}`}
