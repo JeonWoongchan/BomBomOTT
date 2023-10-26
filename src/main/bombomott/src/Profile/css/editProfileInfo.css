@@ -1,0 +1,193 @@
+.add-profile{
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.add-profile .header{
+    background-color: transparent;
+    height: 72px;
+    border-bottom: none;
+    padding: 0 15px;
+    z-index: 10;
+}
+
+.add-profile .header .header-logo{
+    margin-top: 15px;
+}
+
+.add-profile .header button{
+    background: #0072d2;
+    color: #f9f9f9;
+    position: absolute;
+    right: 0;
+    margin: 15px 30px 0;
+    width: 80px;
+    height: 48px;
+    border: none;
+    border-radius: 5px;
+}
+
+.add-profile .center{
+    -webkit-box-align: unset;
+    align-items: unset;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-height: unset;
+}
+
+.add-profile .center .center-main{
+    text-align: center;
+    width: 100%;
+}
+
+.add-profile .center .center-main .main-box{
+    -webkit-box-align: unset;
+    align-items: unset;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-height: 615px;
+    padding: calc(127px) 0px 0px;
+}
+
+.add-profile .center .center-main .main-box .box-inner{
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    flex-direction: row;
+    max-width: 800px;
+}
+
+.add-profile .center .center-main .main-box .input-section{
+    
+}
+
+.main-box .input-section .title{
+    width: 400px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.main-box .input-section h3{
+    color: #f9f9f9;
+}
+
+.main-box .input-section p{
+    color: #f9f9f9;
+    margin: 5px;
+    text-align: left;
+}
+
+.main-box .input-section input{
+    backdrop-filter: blur(50px);
+    background-color: rgb(49, 52, 62);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    caret-color: rgb(2, 231, 245);
+    height: 50px;
+    margin: 0px;
+    outline: none;
+    padding: 7px 12px;
+    transition: all 0.1s ease 0s;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.main-box .input-section .line{
+    background-color: #626262;
+    width: 100%;
+    margin: 40px 0;
+    height: 0.5px;
+}
+
+.main-box .input-section .save{
+    background: #0072d2;
+    color: #f9f9f9;
+    width: 45%;
+    margin: 5px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+}
+
+.main-box .input-section .delete{
+    background: #c0002a;
+    color: #f9f9f9;
+    width: 45%;
+    margin: 5px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+}
+
+.add-profile .center .center-main .main-box .image-section{
+    width: 200px;
+    margin-left: 20px;
+}
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar{
+
+}
+
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar{
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    padding: 0px;
+}
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar .inner{
+    margin: 15px;
+}
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar .inner .inner-img{
+    width: 11.6vw;
+    height: 11.6vw;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(249, 249, 249, 0.1);
+    border-radius: 50%;
+    margin: auto;
+    transition: all 250ms cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s;
+}
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar .inner .inner-img img{
+    background: transparent;
+    border-radius: 100%;
+    bottom: -4px;
+    position: absolute;
+    right: -4px;
+    z-index: 10;
+    height: 48px;
+    width: 48px;
+}
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar .inner .inner-img .icon{
+    position: absolute;
+    top: 1.5vw;
+    left: 0;
+    right: 0;
+    width: 100%;
+    font-size: 4.8vw;
+    color: #f9f9f9;
+    margin: 0 auto;
+}
+
+.add-profile .center .center-main .main-box .image-section .profile-avatar .inner h3{
+    margin-top: 25px;
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: #f9f9f9;
+}

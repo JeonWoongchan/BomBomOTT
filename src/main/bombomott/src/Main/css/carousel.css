@@ -1,0 +1,62 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.carousel-area{
+    width: calc(900vw - 17px);
+}
+
+.main-carousel{
+    position: relative;
+    top: 70px;
+    font-size: 0;
+}
+
+.main-carousel .slide-box{
+    position: relative;
+    display: inline-block;
+    left: 0;
+    width: 89vw;
+    margin: 35px 0.75vw 30px 0.75vw;
+    cursor: pointer;
+    padding: 10px;
+    aspect-ratio: 3.9/1;
+}
+
+.slide-box img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 4px 17px 15px 0 rgba(5, 6, 7, 0.75);
+}
+
+.prev-btn{
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 5vw;
+    text-align: center;
+    height: 22.82vw;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.next-btn{
+    position: absolute;
+    top: 45px;
+    left: 94.4vw;
+    text-align: center;
+    width: 5vw;
+    height: 22.82vw;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+}
