@@ -13,16 +13,8 @@ export default function Board() {
   const { nowProfileCode } = useParams();
   const [boardListData, setBoardListData] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    if (searchTerm !== "") {
-      const filteredItems = boardListData.filter((item) => {
-        const content = item.content.toLowerCase();
-        return content.includes(searchTerm);
-      });
-      // 검색 결과에 따라 게시물을 업데이트합니다.
-      setBoardListData(filteredItems);
-    }
-  }, [searchTerm, boardListData]);
+  const [filteredBoardList, setFilteredBoardList] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,6 +31,23 @@ export default function Board() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setFilteredBoardList(boardListData);
+  }, [boardListData]);
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+      const filteredItems = boardListData.filter((item) => {
+        const content = item.title.toLowerCase();
+        return content.includes(searchTerm);
+      });
+      // 검색 결과에 따라 게시물을 업데이트합니다.
+      setFilteredBoardList(filteredItems);
+    } else {
+      setFilteredBoardList(boardListData);
+    }
+  }, [searchTerm, boardListData]);
   console.log(boardListData);
 
   return (
@@ -72,7 +81,7 @@ export default function Board() {
           <p>Loading....</p>
         ) : (
           <ul className="css-1iiugqq">
-            {boardListData.map((item) => (
+            {filteredBoardList.map((item) => (
               <li key={item.id} className="board-list">
                 <Link
                   to={`/board/${nowProfileCode}/${item.title}`}
