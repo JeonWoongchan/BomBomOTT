@@ -4,24 +4,33 @@ import { CiSun } from "react-icons/ci";
 import { SiHotjar } from "react-icons/si";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsTriangleFill } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { FaPencilAlt } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { boardlist } from "../BackEndData/BoardList";
 import { formatAgo } from "../util/date";
 
 export default function Board() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const { nowProfileCode } = useParams();
   const [boardListData, setBoardListData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredBoardList, setFilteredBoardList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [sortword, setSortword] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // BoardList 함수를 호출하여 데이터를 가져옴
-        const data = await boardlist(); // BoardList 함수가 Promise를 반환하므로 await 사용
+        const data = await boardlist(page, "", "", sortword); // BoardList 함수가 Promise를 반환하므로 await 사용
 
-        setBoardListData(data);
+        console.log(">>> data :" + JSON.stringify(data));
+
+        console.log(">>> data.boardList : " + data.boardList);
+
+        //setBoardListData(data);
+        setBoardListData(data.boardList);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -30,7 +39,7 @@ export default function Board() {
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     setFilteredBoardList(boardListData);
@@ -48,19 +57,47 @@ export default function Board() {
       setFilteredBoardList(boardListData);
     }
   }, [searchTerm, boardListData]);
-  console.log(boardListData);
+
+  const handleClick = () => {
+    navigate(`/board/${nowProfileCode}/write`);
+  };
+
+  const handleLinkClick = (item) => {
+    localStorage.setItem("filteredBoardList", JSON.stringify(item));
+  };
+
+  const handleNextPage = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage((prev) => prev - 1);
+  };
+
+  const handleSort = () => {
+    setSortword("new");
+  };
+
+  const handleSort2 = () => {
+    setSortword("best");
+  };
 
   return (
     <div className="board-container">
       <div className="container1">
-        <h5>전체</h5>
+        <div className="top-bar">
+          <h5>전체</h5>
+          <button className="write-button" onClick={handleClick}>
+            <FaPencilAlt />
+          </button>
+        </div>
         <div className="top-board">
           <div className="type-board">
-            <li>
+            <li onClick={handleSort}>
               <CiSun className="cisun" />
               최신
             </li>
-            <li>
+            <li onClick={handleSort2}>
               <SiHotjar className="sihotjar" />
               인기
             </li>
@@ -86,6 +123,7 @@ export default function Board() {
                 <Link
                   to={`/board/${nowProfileCode}/${item.title}`}
                   className="click-wrap"
+                  onClick={() => handleLinkClick(item.id)}
                 ></Link>
                 <span className="likecount">
                   <BsTriangleFill className="likeImg" />
@@ -107,11 +145,14 @@ export default function Board() {
         )}
 
         <div className="pagination">
-          <a href="#" className="btn-page1">
-            <IoIosArrowBack />
-            이전
-          </a>
-          <a href="#" className="btn-page2">
+          {page === 1 && (
+            <a href="#" className="btn-page1" onClick={handlePrevPage}>
+              <IoIosArrowBack />
+              이전
+            </a>
+          )}
+
+          <a href="#" className="btn-page2" onClick={handleNextPage}>
             다음
             <IoIosArrowForward className="greater" />
           </a>

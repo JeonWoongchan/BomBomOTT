@@ -14,9 +14,7 @@ import { useEffect, useState } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Route, Routes, Link, useNavigate, Outlet } from "react-router-dom";
 import Search from "./Search/Search";
-import ContentModal from "./Content/ContentModal";
 import BoardMain from "./Board/BoardMain";
-import BoardDetail from "./Board/BoardDetail";
 
 function App() {
   useApi();
@@ -46,7 +44,11 @@ function App() {
         <Route path="/board/:nowProfileCode" element={<BoardMain />} />
         <Route
           path="/board/:nowProfileCode/:content"
-          element={<BoardDetail />}
+          element={<BoardMain type="content" />}
+        />
+        <Route
+          path="/board/:nowProfileCode/write"
+          element={<BoardMain type="write" />}
         />
       </Routes>
     </div>

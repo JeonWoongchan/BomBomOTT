@@ -49,12 +49,6 @@ public class Board {
     /*private Pagination pagination;    // 페이지네이션 정보*/
 
     private String preFilepath;
-
-    public Board() {
-        this.page = 1;
-        this.recordSize = 5;
-        this.pageSize = 5;
-        this.content = "";
-    }
+    private Integer commentCount;    // 댓글수
 
 }
