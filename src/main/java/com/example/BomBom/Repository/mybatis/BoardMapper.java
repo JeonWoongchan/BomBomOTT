@@ -35,6 +35,8 @@ public interface BoardMapper {
 
     int deleteLike(@Param("id") int id, @Param("loginId") String loginId);
 
+    int selectLike(@Param("id") int id, @Param("loginId") String loginId);
+
     List<BoardComment> findComments(int id);
 
     int commentSave(BoardComment boardComment);

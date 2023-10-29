@@ -5,8 +5,12 @@ import { BsTriangleFill } from "react-icons/bs";
 import { LiaCommentDots } from "react-icons/lia";
 import { boardcommentwrite } from "../BackEndData/BoardCommentWrite";
 import { boardlike } from "../BackEndData/BoardLike";
+import { boardupdate } from "../BackEndData/BoardContentUpdate";
+import { boarddelete } from "../BackEndData/BoardContentDelete";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function BoardDetailContent() {
+  const { nowProfileCode } = useParams();
   const storedData = localStorage.getItem("filteredBoardList");
   const [boardContent, setBoardContent] = useState();
   const [boardTitle, setBoardTitle] = useState();
@@ -25,7 +29,10 @@ export default function BoardDetailContent() {
   const [textareadata2, setTextareadata2] = useState();
   const [textareadata3, setTextareadata3] = useState();
   const [boardwriteId, setBoardwriteId] = useState();
-  const [likecheck, setLikecheck] = useState(1);
+  const [filepath, setFilepath] = useState();
+  const [loginId, setLoginId] = useState();
+  const navigate = useNavigate();
+  const [commentId, setCommentId] = useState();
 
   useEffect(() => {
     boardcontent(storedData)
@@ -40,6 +47,9 @@ export default function BoardDetailContent() {
         setBoardComment(data.boardComment);
         setCommentCount(data.commentCount);
         setBoardwriteId(data.board.id);
+        setFilepath(data.board.filepath);
+        setLoginId(data.board.loginId);
+        setCommentId(data.boardComment.regUserid);
 
         const initialAnswerStates = {};
         const initialReplyStates = {};
@@ -129,10 +139,7 @@ export default function BoardDetailContent() {
   };
 
   const handleLike = () => {
-    const newLikeCheck = likecheck === 1 ? 0 : 1;
-    setLikecheck(newLikeCheck);
-    console.log(newLikeCheck);
-    boardlike(boardwriteId, newLikeCheck)
+    boardlike(boardwriteId)
       .then(() => {
         // 성공적으로 업데이트
         console.log("좋아요");
@@ -141,6 +148,28 @@ export default function BoardDetailContent() {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleDeleteContent = () => {
+    boarddelete(boardwriteId)
+      .then(() => {
+        // 성공적으로 업데이트
+        console.log("삭제 완료");
+        navigate(`/board/${nowProfileCode}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleUpdateContent = () => {
+    navigate(`/board/${nowProfileCode}/write`, {
+      state: {
+        boardwriteId,
+        boardTitle,
+        boardContent,
+      },
+    });
   };
 
   return (
@@ -160,11 +189,26 @@ export default function BoardDetailContent() {
               <span>좋아요 {likeCount}</span>
             </div>
           </div>
+          {loginId === userId && (
+            <ul>
+              <li>
+                <button className="contentdelete" onClick={handleDeleteContent}>
+                  삭제
+                </button>
+              </li>
+              <li>
+                <button className="contentupdate" onClick={handleUpdateContent}>
+                  수정
+                </button>
+              </li>
+            </ul>
+          )}
         </div>
         <div className="board-content-middle">
           <div className="board-content-middle-1">
             <article>
               <p>{boardContent}</p>
+              {filepath && <img src={filepath} alt="파일 사진" />}
             </article>
           </div>
         </div>

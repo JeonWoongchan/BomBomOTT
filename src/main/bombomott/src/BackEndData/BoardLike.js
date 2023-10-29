@@ -1,10 +1,9 @@
 import axios from "axios";
 
-export function boardlike(id, likeCheck) {
+export function boardlike(id) {
   return axios
-    .post(`http://localhost:8080/board/like/${id}/${likeCheck}`, {
+    .post(`http://localhost:8080/board/like/${id}`, {
       id: id,
-      likeCheck: likeCheck,
     })
     .then((response) => {
       if (response.status === 200) {

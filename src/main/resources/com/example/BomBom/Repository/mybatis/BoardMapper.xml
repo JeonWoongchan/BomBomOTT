@@ -103,9 +103,13 @@
 
     <delete id="deleteLike" parameterType="map">
         delete from board_like where id = #{id} and userid = #{loginId}
-
-
     </delete>
+
+    <select id="selectLike" parameterType="map" resultType="int">
+        select count(*) from board_like
+         where id = #{id}
+          AND userid = #{loginId}
+    </select>
 
     <select id="findComments" resultType="BoardComment">
         SELECT comment_id, board_id, content, upper_comment_id, reg_userid, reg_date, 0 AS depth, LPAD(comment_id,3,'0')  AS disp_id

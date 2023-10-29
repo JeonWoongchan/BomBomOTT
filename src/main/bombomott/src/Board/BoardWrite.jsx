@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import ToTop from "../ToTop";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import boardwrite from "../BackEndData/BoardWrite.js";
+import { boardupdate } from "../BackEndData/BoardContentUpdate";
 
 export default function BoardWrite() {
+  const location = useLocation();
+  const { boardwriteId, boardTitle, boardContent } = location.state;
   const [title, setTitle] = useState(""); // 제목 상태
   const [content, setContent] = useState(""); // 내용 상태
   const [file, setFile] = useState(null); // 첨부파일 상태
@@ -14,6 +17,12 @@ export default function BoardWrite() {
   // const goBack = () => {
   //   history.goBack();
   // };
+  useEffect(() => {
+    if (boardContent || boardTitle) {
+      setTitle(boardTitle);
+      setContent(boardContent);
+    }
+  }, [boardTitle, boardContent]);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -32,19 +41,37 @@ export default function BoardWrite() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    if (file) {
-      formData.append("file", file);
+    formData.append("file", file || null);
+
+    if (boardwriteId) {
+      if (file || (file === null && boardContent)) {
+        // 파일이 선택되었거나, 파일이 선택되지 않았지만 이전 파일이 있는 경우 수정 가능
+        boardupdate(boardwriteId, formData, nowProfileCode, navigate)
+          .then(() => {
+            console.log("게시물 수정 성공");
+            // TODO: 작성 후에 어떤 동작을 수행할지 추가하세요.
+          })
+          .catch((error) => {
+            // 에러 발생 시
+            console.error(error);
+            // TODO: 에러 처리를 추가하세요.
+          });
+      } else {
+        // 파일을 선택하지 않았고 이전 파일도 없는 경우에 대한 처리 추가
+        console.log("파일을 선택하세요 또는 이전 파일을 유지하세요.");
+      }
+    } else {
+      boardwrite(formData, nowProfileCode, navigate)
+        .then(() => {
+          console.log("게시물 작성 성공");
+          // TODO: 작성 후에 어떤 동작을 수행할지 추가하세요.
+        })
+        .catch((error) => {
+          // 에러 발생 시
+          console.error(error);
+          // TODO: 에러 처리를 추가하세요.
+        });
     }
-    boardwrite(formData, nowProfileCode, navigate)
-      .then(() => {
-        console.log("게시물 작성 성공");
-        // TODO: 작성 후에 어떤 동작을 수행할지 추가하세요.
-      })
-      .catch((error) => {
-        // 에러 발생 시
-        console.error(error);
-        // TODO: 에러 처리를 추가하세요.
-      });
   };
   return (
     <div className="board-container">

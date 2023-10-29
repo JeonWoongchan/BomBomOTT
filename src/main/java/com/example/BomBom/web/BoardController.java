@@ -198,12 +198,14 @@ public class BoardController {
         return "board/boardView";
     }
 
-    @PostMapping("/like/{id}/{likeCheck}")
-    public ResponseEntity<Map<String, Object>> likeBoard(@PathVariable("id") Integer id, @PathVariable("likeCheck") Integer likeCheck, HttpSession session) {
+    @PostMapping("/like/{id}")
+    public ResponseEntity<Map<String, Object>> likeBoard(@PathVariable("id") Integer id, HttpSession session) {
 
         String loginId = (String) session.getAttribute("email");
 
-        System.out.println(">> likeBoard id : " + id + ", loginId : " + loginId + ", likeCheck : " + likeCheck);
+        System.out.println(">> likeBoard id : " + id + ", loginId : " + loginId);
+        int likeCheck = boardService.selectLike(id, loginId);
+
         if (likeCheck == 0) {
             System.out.println("addLike");
             boardService.addLike(id, loginId);

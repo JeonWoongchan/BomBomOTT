@@ -95,6 +95,10 @@ public class BoardService {
         return boardMapper.deleteLike(id, loginId);
     }
 
+    public int selectLike (int id, String loginId) {
+        return boardMapper.selectLike(id, loginId);
+    }
+
     public List<BoardComment> findComments(int id) {
         return boardMapper.findComments(id);
     }
