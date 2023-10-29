@@ -7,13 +7,26 @@ import { boardupdate } from "../BackEndData/BoardContentUpdate";
 
 export default function BoardWrite() {
   const location = useLocation();
-  const { boardwriteId, boardTitle, boardContent } = location.state;
+  const { boardwriteId, boardTitle, boardContent, filepath } =
+    location.state || {};
   const [title, setTitle] = useState(""); // 제목 상태
   const [content, setContent] = useState(""); // 내용 상태
   const [file, setFile] = useState(null); // 첨부파일 상태
   const { nowProfileCode } = useParams();
   const navigate = useNavigate();
 
+  async function fetchFile(filepath) {
+    try {
+      const response = await fetch(`http://localhost:8080/${filepath}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const fileData = await response.blob();
+      return fileData;
+    } catch (error) {
+      throw error;
+    }
+  }
   // const goBack = () => {
   //   history.goBack();
   // };
@@ -22,7 +35,18 @@ export default function BoardWrite() {
       setTitle(boardTitle);
       setContent(boardContent);
     }
-  }, [boardTitle, boardContent]);
+    if (filepath) {
+      fetchFile(filepath)
+        .then((fileData) => {
+          const blob = new Blob([fileData]);
+          const file = new File([blob], filepath);
+          setFile(file);
+        })
+        .catch((error) => {
+          console.error("파일 로딩 중 오류 발생:", error);
+        });
+    }
+  }, [boardTitle, boardContent, filepath]);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -42,6 +66,8 @@ export default function BoardWrite() {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("file", file || null);
+    console.log(file);
+    console.log(filepath);
 
     if (boardwriteId) {
       if (file || (file === null && boardContent)) {

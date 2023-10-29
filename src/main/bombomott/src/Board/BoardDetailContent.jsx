@@ -33,6 +33,7 @@ export default function BoardDetailContent() {
   const [loginId, setLoginId] = useState();
   const navigate = useNavigate();
   const [commentId, setCommentId] = useState();
+  const [filename, setFilename] = useState();
 
   useEffect(() => {
     boardcontent(storedData)
@@ -50,6 +51,7 @@ export default function BoardDetailContent() {
         setFilepath(data.board.filepath);
         setLoginId(data.board.loginId);
         setCommentId(data.boardComment.regUserid);
+        setFilename(filename);
 
         const initialAnswerStates = {};
         const initialReplyStates = {};
@@ -168,6 +170,7 @@ export default function BoardDetailContent() {
         boardwriteId,
         boardTitle,
         boardContent,
+        filepath,
       },
     });
   };

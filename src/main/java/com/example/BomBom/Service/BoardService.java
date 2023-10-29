@@ -113,31 +113,36 @@ public class BoardService {
 
         UUID uuid = UUID.randomUUID();
 
-        String fileName = uuid + "_" + file.getOriginalFilename();
+        if (file != null) {
+            String fileName = uuid + "_" + file.getOriginalFilename();
 
-        System.out.println("filename : " + file.getOriginalFilename());
+            System.out.println("filename : " + file.getOriginalFilename());
 
-        if (!"".equals(file.getOriginalFilename())) {
-            System.out.println(">>> projectPath : " + projectPath);
+            if (!"".equals(file.getOriginalFilename())) {
+                System.out.println(">>> projectPath : " + projectPath);
 
-            File saveFile = new File(projectPath, fileName);
+                File saveFile = new File(projectPath, fileName);
 
-            file.transferTo(saveFile);
+                file.transferTo(saveFile);
 
-            board.setFilename(fileName);
-            board.setFilepath("/files/" + fileName);
-        } else {
-            System.out.println("board.getFilepath() : " + board.getFilepath());
-            System.out.println("board.getFilename() : " + board.getFilename());
-            System.out.println("board.getPreFilepath() : " + board.getPreFilepath());
-            // 기존 파일을 삭제하는 로직 추가
-            if (board.getPreFilepath() != null && board.getPreFilepath().equals("")) {
-                File saveFile = new File(projectPath, board.getFilename());
-                saveFile.delete();
+                board.setFilename(fileName);
+                board.setFilepath("/files/" + fileName);
+            } else {
+                System.out.println("board.getFilepath() : " + board.getFilepath());
+                System.out.println("board.getFilename() : " + board.getFilename());
+                System.out.println("board.getPreFilepath() : " + board.getPreFilepath());
+                // 기존 파일을 삭제하는 로직 추가
+                if (board.getPreFilepath() != null && board.getPreFilepath().equals("")) {
+                    File saveFile = new File(projectPath, board.getFilename());
+                    saveFile.delete();
 
-                board.setFilename("");
-                board.setFilepath("");
+                    board.setFilename("");
+                    board.setFilepath("");
+                }
             }
+        } else {
+            board.setFilename("");
+            board.setFilepath("");
         }
         //board.setRegUserid("hwna");
 
