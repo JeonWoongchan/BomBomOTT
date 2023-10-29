@@ -30,6 +30,8 @@ public class Board {
     private String searchType;
     private String searchKeyword;
 
+    private String sortType;
+
     private Integer offset;
     private Integer recordSize;
     private Integer page;                 // 현재 페이지 번호

@@ -35,19 +35,24 @@ public class BoardService {
 
         UUID uuid = UUID.randomUUID();
 
-        String fileName = uuid + "_" + file.getOriginalFilename();
+        if (file != null) {
+            String fileName = uuid + "_" + file.getOriginalFilename();
 
-        System.out.println("filename : " + file.getOriginalFilename());
+            System.out.println("filename : " + file.getOriginalFilename());
 
-        if (!"".equals(file.getOriginalFilename())) {
-            System.out.println(">>> projectPath : " + projectPath);
+            if (!"".equals(file.getOriginalFilename())) {
+                System.out.println(">>> projectPath : " + projectPath);
 
-            File saveFile = new File(projectPath, fileName);
+                File saveFile = new File(projectPath, fileName);
 
-            file.transferTo(saveFile);
+                file.transferTo(saveFile);
 
-            board.setFilename(fileName);
-            board.setFilepath("/files/" + fileName);
+                board.setFilename(fileName);
+                board.setFilepath("/files/" + fileName);
+            } else {
+                board.setFilename("");
+                board.setFilepath("");
+            }
         } else {
             board.setFilename("");
             board.setFilepath("");

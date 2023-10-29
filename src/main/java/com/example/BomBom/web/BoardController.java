@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,13 +41,14 @@ public class BoardController {
         int limitStart;           // LIMIT 시작 위치
         boolean existPrevPage;    // 이전 페이지 존재 여부
         boolean existNextPage;    // 다음 페이지 존재 여부
-        int currPage;               // 현재 페이지 번호
-        System.out.println(">> currPage : " + request.getParameter("currPage"));
+        int currPage;
+        // 현재 페이지 번호
+        /*System.out.println(">> currPage : " + request.getParameter("currPage"));
         if (request.getParameter("currPage") != null && !"".equals(request.getParameter("currPage"))) {
             currPage = Integer.parseInt(request.getParameter("currPage").toString());
         } else {
             currPage = 1;
-        }
+        }*/
 
         currPage = board.getPage();
         int recordSize = 10;     // 한 화면에 표시할 갯수
@@ -63,7 +66,8 @@ public class BoardController {
 
         // 이전 페이지 존재 여부 확인
         existPrevPage = currPage != 1;
-// 다음 페이지 존재 여부 확인
+
+        // 다음 페이지 존재 여부 확인
         existNextPage = (currPage * recordSize) < totalRecordCount;
 
         board.setLimitStart(limitStart);
@@ -87,119 +91,32 @@ public class BoardController {
         responseMap.put("existPrevPage", existPrevPage);
         responseMap.put("existNextPage", existNextPage);
 
-       return  ResponseEntity.ok(responseMap);
-
-        //return ResponseEntity.ok(boardList);
+        return  ResponseEntity.ok(responseMap);
     }
 
-//
-//    @GetMapping("/list")
-//    public String boardList(@ModelAttribute("Board") Board board, Model model, HttpSession session) {
-//
-//        System.out.println(">> board 1 : " + board.toString());
-//
-//        System.out.println(">> page : " + board.getPage());
-//        System.out.println(">> RecordSize : " + board.getRecordSize());
-//
-//        //board.setOffset(0);
-//        //board.setRecordSize(10);
-//
-//        System.out.println(">> board 2 : " + board.toString());
-//
-//        String sessionuserid = (String) session.getAttribute("email");
-//
-//        System.out.println(">> sessionuserid 2 : " + sessionuserid);
-//
-//        int totalRecordCount;     // 전체 데이터 수
-//        int totalPageCount;       // 전체 페이지 수
-//        int startPage;            // 첫 페이지 번호
-//        int endPage;              // 끝 페이지 번호
-//        int limitStart;           // LIMIT 시작 위치
-//        boolean existPrevPage;    // 이전 페이지 존재 여부
-//        boolean existNextPage;    // 다음 페이지 존재 여부
-//
-//        totalRecordCount = boardService.findAllCount(board);
-//
-//        System.out.println(">> totalRecordCount : " + totalRecordCount);
-//
-//        System.out.println(">> board 3 : " + board.toString());
-//
-//        // 전체 페이지 수 계산
-//        totalPageCount = ((totalRecordCount - 1) / board.getRecordSize()) + 1;
-//
-//        System.out.println(">> totalPageCount : " + totalPageCount);
-//
-//        // 현재 페이지 번호가 전체 페이지 수보다 큰 경우, 현재 페이지 번호에 전체 페이지 수 저장
-//        if (board.getPage() > totalPageCount) {
-//            board.setPage(totalPageCount);
-//        }
-//
-//        // 첫 페이지 번호 계산
-//        startPage = ((board.getPage() - 1) / board.getPageSize()) * board.getPageSize() + 1;
-//
-//        // 끝 페이지 번호 계산
-//        endPage = startPage + board.getPageSize() - 1;
-//
-//        // 끝 페이지가 전체 페이지 수보다 큰 경우, 끝 페이지 전체 페이지 수 저장
-//        if (endPage > totalPageCount) {
-//            endPage = totalPageCount;
-//        }
-//
-//        // LIMIT 시작 위치 계산
-//        limitStart = (board.getPage() - 1) * board.getRecordSize();
-//
-//        // 이전 페이지 존재 여부 확인
-//        existPrevPage = startPage != 1;
-//
-//        // 다음 페이지 존재 여부 확인
-//        existNextPage = (endPage * board.getRecordSize()) < totalRecordCount;
-//
-//        board.setLimitStart(limitStart);
-//        board.setStartPage(startPage);
-//        board.setEndPage(endPage);
-//        board.setTotalPageCount(totalPageCount);
-//        board.setExistPrevPage(existPrevPage);
-//        board.setExistNextPage(existNextPage);
-//
-//        List<Board> boardList = boardService.findItems(board);
-//        board.setLoginId(sessionuserid);
-//
-//        model.addAttribute("boardList", boardList);
-//        model.addAttribute("board", board);
-//        System.out.println(">> boardList : " + boardList.size());
-//        System.out.println(">> boardList : " + boardList.toString());
-//        System.out.println(">> board last : " + board.toString());
-//        return "board/boardList";
-//    }
-
-
-    //    @GetMapping("/list2")
-    //    public String boardList(@ModelAttribute("BoardSearch") BoardSearch boardSearch, Model model) {
-    //
-    //        System.out.println(">> board : " + board.toString());
-    //
-    //        board.setOffset(0);
-    //        board.setRecordSize(10);
-    //        List<Board> boardList = boardService.findItems(board);
-    //
-    //        model.addAttribute("boardList", boardList);
-    //        System.out.println(">> boardList : " + boardList.size());
-    //        System.out.println(">> boardList : " + boardList.toString());
-    //        return "boardList";
-    //    }
-
-    @GetMapping("/write")
+    /*@GetMapping("/write")
     public String addForm() {
         return "board/Form/boardWrite";
-    }
+    }*/
 
     @PostMapping("/write")
-    //public ResponseEntity<Map<String, String>>
-    public ResponseEntity<Map<String, Object>> boardWrite(@ModelAttribute Board board, MultipartFile file, RedirectAttributes redirectAttributes, HttpSession session) {
+    //public ResponseEntity<Map<String, Object>> boardWrite(@RequestBody Board board, MultipartFile file, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> boardWrite(@ModelAttribute Board board, @RequestParam(value = "file", required = false) MultipartFile file, HttpSession session) throws ServletException, IOException {
         Map<String, String> resultMap = new HashMap<>();
         int result = -1;
         try {
-            boardService.write(board, file, session);
+            System.out.println(">> [boardWrite] board : " + board.toString());
+
+            System.out.println("multipartFile = {}" + file);
+
+            if (file != null) {
+                System.out.println("multipartFile = {}" + file);
+                boardService.write(board, file, session);
+            } else {
+                boardService.write(board, null, session); // 파일이 없는 경우 null로 처리
+            }
+
+            //boardService.write(board, file, session);
             result = 1;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -254,7 +171,7 @@ public class BoardController {
 
     //화면 다시띄우려고 만들어둠
     @GetMapping("/detail/{id}")
-    public String boardDetail(@PathVariable int id, Model model, HttpSession session) {
+    public String boardDetail(@RequestBody @PathVariable int id, Model model, HttpSession session) {
         System.out.println(">> boardView  id: " + id);
         String loginId = (String) session.getAttribute("email");
 
@@ -301,6 +218,12 @@ public class BoardController {
         return  ResponseEntity.ok(responseMap);
     }
 
+    /**
+     * 댓글쓰기
+     * @param requestJsonHashMap
+     * @param session
+     * @return
+     */
     @PostMapping("/comment/save")
     public ResponseEntity<Map<String, Object>> commentSave(@RequestBody HashMap<String, Object> requestJsonHashMap, HttpSession session) {
 
@@ -337,33 +260,40 @@ public class BoardController {
         return  ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping("/update/{id}")
-    public ResponseEntity<Map<String, Object>> updateForm(@PathVariable int id, Model model, HttpSession session) {
-
-        System.out.println(">> boardView  id: " + id);
-
-        String loginId = (String) session.getAttribute("email");
-
-        Board board = new Board();
-        board.setId(id);
-        board.setLoginId(loginId);
-        //Board board = boardService.findById(id, loginId);
-        board = boardService.findById(board);
-        System.out.println(">> board 1 : " + board.toString());
-
-        model.addAttribute("board", board);
-
-        Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("board", board);
-
-        return  ResponseEntity.ok(responseMap);
-    }
+//    @GetMapping("/update/{id}")
+//    public ResponseEntity<Map<String, Object>> updateForm(@PathVariable int id, Model model, HttpSession session) {
+//
+//        System.out.println(">> boardView  id: " + id);
+//
+//        String loginId = (String) session.getAttribute("email");
+//
+//        Board board = new Board();
+//        board.setId(id);
+//        board.setLoginId(loginId);
+//        //Board board = boardService.findById(id, loginId);
+//        board = boardService.findById(board);
+//        System.out.println(">> board 1 : " + board.toString());
+//
+//        model.addAttribute("board", board);
+//
+//        Map<String, Object> responseMap = new HashMap<>();
+//        responseMap.put("board", board);
+//
+//        return  ResponseEntity.ok(responseMap);
+//    }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Map<String, Object>> boardUpdate(@PathVariable int id, @ModelAttribute Board board, MultipartFile file, RedirectAttributes redirectAttributes) {
+    public ResponseEntity<Map<String, Object>> boardUpdate(@PathVariable int id, @ModelAttribute Board board, @RequestParam(value = "file", required = false) MultipartFile file, RedirectAttributes redirectAttributes) throws ServletException, IOException {
         System.out.println(" boardUpdate : " + board.toString());
+        int result = -1;
         try {
-            boardService.updateBoard(board, file);
+            if (file != null) {
+                boardService.updateBoard(board, file);
+            } else {
+                boardService.updateBoard(board, null); // 파일이 없는 경우 null로 처리
+            }
+            //boardService.updateBoard(board, file);
+            result = 1;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -371,7 +301,7 @@ public class BoardController {
         //redirectAttributes.addAttribute("status", true);
 
         Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("result", 200);
+        responseMap.put("status", result);
 
         return  ResponseEntity.ok(responseMap);
     }

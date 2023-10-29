@@ -108,11 +108,11 @@
     </delete>
 
     <select id="findComments" resultType="BoardComment">
-        SELECT comment_id, content, upper_comment_id, reg_userid, reg_date, 0 AS depth, LPAD(comment_id,3,'0')  AS disp_id
+        SELECT comment_id, board_id, content, upper_comment_id, reg_userid, reg_date, 0 AS depth, LPAD(comment_id,3,'0')  AS disp_id
         FROM board_comment
         WHERE upper_comment_id = 0 and board_id = #{id}
         UNION all
-        SELECT comment_id, content, upper_comment_id, reg_userid, reg_date, 1 AS depth, CONCAT(LPAD(upper_comment_id,3,'0'), '-', LPAD(comment_id,3,'0')) AS disp_id
+        SELECT comment_id, board_id, content, upper_comment_id, reg_userid, reg_date, 1 AS depth, CONCAT(LPAD(upper_comment_id,3,'0'), '-', LPAD(comment_id,3,'0')) AS disp_id
         FROM board_comment
         WHERE upper_comment_id != 0 and board_id = #{id}
         ORDER BY disp_id

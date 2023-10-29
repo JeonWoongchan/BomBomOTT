@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { setIsLoading } from "../store/store";
 
 export default function SearchContent() {
@@ -9,6 +9,7 @@ export default function SearchContent() {
   const navigate = useNavigate();
   const [loadCount, setLoadCount] = useState(0);
   const [boxOpacity, setBoxOpacity] = useState(true);
+  const { nowProfileCode } = useParams();
 
   useEffect(() => {
     // 이미지 로딩 완료시 보여지도록 설정
@@ -42,12 +43,15 @@ export default function SearchContent() {
                 setLoadCount((prev) => prev + 1);
               }}
               onClick={() => {
-                navigate(`/content/${a.media_type}/${a.genre_ids[0]}/${a.id}`, {
-                  state: {
-                    data: Data,
-                    dataAll: DataAll,
-                  },
-                });
+                navigate(
+                  `/content/${nowProfileCode}/${a.media_type}/${a.genre_ids[0]}/${a.id}`,
+                  {
+                    state: {
+                      data: Data,
+                      dataAll: DataAll,
+                    },
+                  }
+                );
               }}
             />
           ) : null;
