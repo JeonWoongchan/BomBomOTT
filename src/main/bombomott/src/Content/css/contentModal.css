@@ -1,0 +1,23 @@
+.modal-container {
+  width: 560px;
+  height: 480px;
+
+  /* 최상단 위치 */
+  z-index: 999;
+
+  position: relative;
+  top: 20%;
+  left: 50%;
+  transform: translate(-40%, -70%);
+}
+
+.cancelBtn {
+  position: absolute;
+  top: -50px;
+  right: -550px;
+  font-size: xx-large;
+  background-color: transparent;
+  color: gray;
+  border: none;
+  outline: none;
+}

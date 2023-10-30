@@ -1,0 +1,193 @@
+.change-detail{
+    margin: 92px auto;
+    max-width: 374px;
+    min-height: calc(100vh - 460px);
+    position: relative;
+}
+
+.change-detail .change-title h2{
+    color: #ececec;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.change-detail > span{
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #cacaca;
+}
+
+.change-detail .currunt{
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #cacaca;
+    margin: 1.5rem 0;
+}
+
+.change-detail > p > span{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+    color: white;
+}
+
+.change-detail fieldset{
+    border: none;
+    display: inline;
+    margin: 0px 0px 16px;
+    padding: 0px;
+    position: relative;
+    width: 100%;
+}
+
+.change-detail legend{
+    padding: 0px;
+    display: none;
+}
+
+.change-detail fieldset label{
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 1.46;
+    text-transform: none;
+    color: #cacaca
+}
+
+.change-detail fieldset span{
+    position: relative;
+    display: block;
+}
+
+.change-detail fieldset span input{
+    font-size: 15px;
+    line-height: 1.4;
+    backdrop-filter: blur(50px);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    caret-color: rgb(2, 231, 245);
+    height: 55px;
+    margin: 0px;
+    outline: none;
+    padding: 7px 12px;
+    transition: all 0.1s ease 0s;
+    width: 100%;
+    background-color: #40424a;
+    position: relative;
+}
+
+.view-control{
+    position: absolute;
+    top: 12.5px;
+    right: 10px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    opacity: 0.8;
+}
+
+.change-detail fieldset span .input-bottom{
+    font-size: 13px;
+    line-height: 1.46;
+    color: #cacaca;
+    margin: 4px;
+}
+
+.change-detail fieldset span .input-bottom .bar{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 6px 0;
+    min-height: 18px;
+}
+
+.change-detail fieldset span .input-bottom .bar .bar-text{
+    margin-left: 10px;
+}
+
+.change-detail form .check-box{
+    display: block;
+    cursor: pointer;
+    margin: 0px 8px 16px 28px;
+    position: relative;
+    padding: 0px;
+}
+
+.change-detail form .check-box input{
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+.change-detail form .check-box .check-icon{
+    -webkit-box-align: center;
+    align-items: center;
+    border: 2px solid rgb(109, 117, 130);
+    display: flex;
+    height: 20px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    left: -28px;
+    position: absolute;
+    width: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.change-detail form .check-box .check-icon .icon{
+    color: white;
+}
+
+.change-detail form .check-box .check-text{
+    font-size: 15px;
+    line-height: 1.4;
+    color: #cacaca;
+    cursor: pointer;
+}
+
+.change-detail form .check-box .hide-text{
+    font-size: 12px;
+    line-height: 1.46;
+    color: #cacaca;
+    cursor: pointer;
+}
+
+.change-detail form .button-area{
+    display: flex;
+}
+
+.change-detail form .button-area button{
+    font-size: 15px;
+    font-weight: 400;
+    display: inline-block;
+    margin: 0px 8px 0px 0px;
+    width: 6vw;
+    height: 3vw;
+}
+
+.change-detail form .button-area .save{
+    background: #0072d2;
+    color: #f9f9f9;
+    border: 0;
+    border-radius: 0.25rem;
+}
+
+.change-detail form .button-area .cancel{
+    background: #40424a;
+    color: #f9f9f9;
+    border: 0;
+    border-radius: 0.25rem;
+}
+
+.change-detail form .find-password{
+    color: #67bdff;
+    font-size: 15px;
+    line-height: 1.4;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+}

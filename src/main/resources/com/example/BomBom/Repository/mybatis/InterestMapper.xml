@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BomBom.Repository.mybatis.InterestMapper">
+
+    <!-- C -->
+
+    <insert id="addInterest" useGeneratedKeys="true" keyProperty="interestId">
+        insert into interest (contentId, profileId,mediaType)
+        values (#{contentId},#{profileId}, #{mediaType})
+    </insert>
+
+
+
+
+    <select id="SelectInterest" resultType="Interest">
+        select contentId,mediaType from interest where profileId = #{profileId}
+    </select>
+
+
+
+</mapper>

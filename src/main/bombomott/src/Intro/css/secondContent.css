@@ -1,0 +1,43 @@
+div{
+    box-sizing: border-box;
+}
+
+.imageCard-section{
+    position: relative;
+}
+
+.imageCard-section .section-title{
+    position: sticky;
+    top: 110px;
+    left: 0;
+    right: 0;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.imageCard-section .section-title h1{
+    color: white;
+}
+
+.imageCard-section .section-detail p{
+    color: white;
+}
+
+.card-box {
+    position: sticky;
+    top: 240px;
+    transform: all 0.2s ;
+}
+
+.card-box img {
+    display: block;
+    margin: auto;
+    width: 1000px;
+    height: 500px;
+    border-radius: 10px;
+}
+

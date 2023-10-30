@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BomBom.Repository.mybatis.MemberMapper">
+
+    <!-- C -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into member (id,email, password, name)
+        values (#{id},#{email}, #{password}, #{name})
+    </insert>
+
+
+    <!-- R -->
+
+    <!-- 상세정보  -->
+    <select id="SelectPassword" resultType="string">
+        select password from member where email = #{email}
+    </select>
+
+
+    <select id="findById" resultType="Member">
+
+        select id, email,password, name
+
+
+
+        from member
+        where id = #{id}
+    </select>
+
+
+    <select id="findAll" resultType="Member">
+        select *
+        from member
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+
+        </where> </select>
+
+    <!-- U -->
+
+    <update id="update" >
+        update member
+        set
+            email=#{dto.email}
+            password=#{dto.password},
+
+            name=#{dto.name},
+
+        where id = #{id}
+    </update>
+
+    <update id="payment" >
+        update member
+        set
+            payment=#{dto.payment}
+
+        where email = #{email}
+    </update>
+
+<update id="UpdatePassword">
+    update member
+    set
+        password=#{newPassword}
+
+    where email = #{email}
+</update>
+
+    <update id="UpdateEmail">
+        update member
+        set
+            email=#{dto.email}
+
+        where email = #{email}
+    </update>
+
+
+    <!-- D -->
+    <delete id="delete" >
+        delete from member where id = #{id}
+
+
+    </delete>
+
+
+
+
+    <select id="MemberCount" resultType="int">
+        SELECT COUNT(*) FROM member
+    </select>
+
+    <select id="login" resultType="boolean">
+        select *
+        from member
+        where email = #{email} AND password = #{password}
+    </select>
+
+
+
+    <select id="MemberName" resultType="string">
+        select name
+        from member
+        where email = #{email}
+    </select>
+
+
+
+    <select id="Mypage" resultType="Member">
+        select email, password,name
+        from member
+        where userid = #{email}
+    </select>
+
+
+    <select id="DupCheck" resultType="string">
+        select email
+        from member
+        where email = #{email}
+    </select>
+
+
+    <select id="multiCheck" resultType="int">
+      select multidevice
+      from member
+      where email = #{email}
+    </select>
+
+    <select id="FindId" resultType="Long">
+        select id
+        from member
+        where email = #{email}
+    </select>
+
+
+
+
+    <update id="multiAdd">
+        UPDATE member
+        SET multidevice = multidevice + 1
+        WHERE email = #{email}
+    </update>
+
+
+    <update id="multisub">
+        UPDATE member
+        SET multidevice = multidevice - 1
+        WHERE email = #{email}
+    </update>
+
+    <update id="EndUpdatedevice">
+        UPDATE member
+        SET multidevice =
+                CASE
+                    WHEN multidevice > 0 AND multidevice >= 1 THEN 0
+                    ELSE multidevice
+                    END
+        WHERE id > 0;
+    </update>
+
+</mapper>

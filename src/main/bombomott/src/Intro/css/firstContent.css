@@ -1,0 +1,31 @@
+div{
+    box-sizing: border-box;
+}
+
+.hotContent{
+    position: relative;
+    text-align: center;
+    padding: 1px;
+}
+
+.hotContent h1{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: auto;
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.hotContent .img-area{
+    margin-top: 80px;
+}
+
+.hotContent img{
+    width: 400px;
+    margin: 20px;
+    border-radius: 10px;
+    border: solid 0.1px white;
+}

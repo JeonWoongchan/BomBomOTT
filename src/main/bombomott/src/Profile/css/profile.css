@@ -1,0 +1,22 @@
+.profile-background{
+    background-color: rgb(26, 29, 41);
+    position: fixed;
+    height: 100vh;
+    top: 0px;
+    transition: opacity 200ms ease 0s;
+    width: 100%;
+    z-index: -3;
+}
+
+.profile-content{
+    top: 70px; 
+    display: block;
+    min-height: calc(100vh - 250px);
+    overflow-x: hidden;
+    position: relative;
+    padding: 0 calc(3.5vw + 24px);
+}
+
+.profile-content .content-box{
+
+}
