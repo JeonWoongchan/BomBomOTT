@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게시판</h2>
+    </div>
+
+    <form th:object="${Board}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <select class="form-select" id="searchType" name="searchType">
+                    <option value="ALL">제목+내용</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                </select>
+                <input type="text" th:field="*{searchKeyword}" class="form-control" placeholder="검색어"/>
+            </div>
+
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='boardWrite.html'"
+                            th:if="${board.loginId != '' && board.loginId != null}"
+                            th:onclick="|location.href='@{/board/write}'|"
+                            type="button">글쓰기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-6">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일</th>
+                <th>조회</th>
+                <th>좋아요</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="list" th:each="board : ${boardList}">
+                <td th:text="${board.id}"></td>
+                <td><a href="boardView.html" th:href="@{|/board/view/${board.id}|}" th:text="${board.title}">제목</a></td>
+                <td th:text="${board.regUserid}"></td>
+                <td th:text="${board.regDate}"></td>
+                <td th:text="${board.viewCount}"></td>
+                <td th:text="${board.likeCount}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav style="text-align: center;">
+            <ul class="pagination" th:with="start=${board.startPage}, end=(${board.endPage})">
+                <li th:if="${start > 1}">
+                    <!--<a th:href="@{/admin/main(page=1)}" th:text="'<<'"></a>-->
+                    <a th:href="|javascript:movePage('1')|" th:text="'<<'"></a>
+                </li>
+                <li th:if="${start > 1}">
+                    <!--<a th:href="@{/admin/main(page=${start - board.recordSize})}" th:text="'<'"></a>-->
+                    <a th:href="|javascript:movePage('${start - board.recordSize}')|" th:text="'<'"></a>
+                </li>
+
+                <li th:each="page: ${#numbers.sequence(start, end)}">
+                    <!--<a th:text="${page}" th:href=|javascript:movePage('${page})}"></a>-->
+                    <a th:href="|javascript:movePage('${page}')|" th:text="${page}"></a>
+                </li>
+
+                <li th:if="${end <= board.totalPageCount}">
+                    <!--                    <a th:href="@{/admin/main(page=${start + board.recordSize})}" th:text="'>'"></a>-->
+                    <a th:href="|javascript:movePage('${start + board.recordSize}')|" th:text="'>'"></a>
+                </li>
+                <li th:if="${end <= board.totalPageCount}">
+                    <a th:href="|javascript:movePage('${board.totalPageCount}')|" th:text="'>>'"></a>
+                </li>
+            </ul>
+        </nav>
+
+
+
+    </div>
+    <div class="paging">
+        <!--<a href="javascript:void(0);" onclick="movePage(1)" class="page_bt first">첫 페이지</a>
+        <a href="javascript:void(0);" onclick="movePage(1)" class="page_bt prev">이전 페이지</a>
+        <p>
+            <a href="javascript:void(0);" onclick="movePage(1);">1</a>
+            <span class="on">1</span>
+            <a href="javascript:void(0);" onclick="movePage(2);">2</a>
+            <span>2</span>
+        </p>
+        <a href="javascript:void(0);" onclick="movePage(3);" class="page_bt next">다음 페이지</a>
+        <a href="javascript:void(0);" onclick="movePage(5);" class="page_bt last">마지막 페이지</a>-->
+    </div>
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+
+        // 페이지 이동
+        function movePage(page) {
+
+            // 1. drawPage( )의 각 버튼에 선언된 onclick 이벤트를 통해 전달받는 page(페이지 번호)를 기준으로 객체 생성
+            const queryParams = {
+                page: (page) ? page : 1,
+                recordSize: 5,
+                pageSize: 5
+            }
+
+            /*
+             * 2. location.pathname : 리스트 페이지의 URI("/post/list.do")를 의미
+             *    new URLSearchParams(queryParams).toString() : queryParams의 모든 프로퍼티(key-value)를 쿼리 스트링으로 변환
+             *    URI + 쿼리 스트링에 해당하는 주소로 이동
+             *    (해당 함수가 리턴해주는 값을 브라우저 콘솔(console)에 찍어보시면 쉽게 이해하실 수 있습니다.)
+             */
+            location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+        }
+        /*]]>*/
+
+    </script>
+
+</div> <!-- /container -->
+
+
+
+</body>
+</html>

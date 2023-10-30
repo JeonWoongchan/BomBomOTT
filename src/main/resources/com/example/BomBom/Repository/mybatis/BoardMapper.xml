@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BomBom.Repository.mybatis.BoardMapper">
+
+    <!-- C -->
+    <insert id="save">
+        insert into board (title, content, filename, filepath, reg_userid, reg_date)
+        values (#{title}, #{content}, #{filename}, #{filepath}, #{regUserid}, NOW())
+    </insert>
+
+
+    <!-- R -->
+
+    <!-- 상세정보  -->
+    <select id="boardView" resultType="Board">
+        SELECT a.*, IF(b.userid is NULL, 0, 1) AS like_check
+        FROM board a
+                 LEFT OUTER join board_like b
+                                 ON a.id = b.id
+                                     AND b.userid = #{loginId}
+        WHERE a.id = #{id}
+    </select>
+
+    <update id="updateViewCount">
+        update board set view_count = view_count + 1
+        where id = #{id}
+    </update>
+
+    <update id="updateLikeCount" parameterType="map">
+        update board set like_count = like_count + #{likeCount}
+        where id = #{id}
+    </update>
+
+
+    <select id="findAll" resultType="Board">
+        SELECT a.id, a.title, a.like_count, a.view_count, a.reg_userid, DATE_FORMAT(a.reg_date,'%Y-%m-%d') as reg_date
+        , IFNULL(b.comment_count, 0) AS comment_count
+        from board a left outer JOIN (select board_id, COUNT(*) comment_count from board_comment group by board_id) b
+        ON a.id = b.board_id
+        where 1 = 1
+        <if test="searchKeyword != null and searchKeyword != ''">
+            <if test="searchType != null and searchType == 'ALL'">
+                and (a.title like concat('%',#{searchKeyword},'%') or a.content like concat('%',#{searchKeyword},'%'))
+            </if>
+            <if test="searchType != null and searchType == 'title'">
+                and a.title like concat('%',#{searchKeyword},'%')
+            </if>
+            <if test="searchType != null and searchType == 'content'">
+                and a.content like concat('%',#{searchKeyword},'%')
+            </if>
+        </if>
+        <choose>
+            <when test="sortType == null or sortType == '' or sortType == 'new'">
+                ORDER BY a.reg_date desc
+            </when>
+            <otherwise>
+                ORDER BY a.like_count desc, a.reg_date desc
+            </otherwise>
+        </choose>
+        LIMIT #{limitStart}, #{recordSize}
+    </select>
+    <select id="findAllCount" resultType="int">
+        select count(*)
+        from board
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                <if test="searchType != null and searchType == 'ALL'">
+                    and (title like concat('%',#{searchKeyword},'%') or content like concat('%',#{searchKeyword},'%'))
+                </if>
+                <if test="searchType != null and searchType == 'title'">
+                    and title like concat('%',#{searchKeyword},'%')
+                </if>
+                <if test="searchType != null and searchType == 'content'">
+                    and content like concat('%',#{searchKeyword},'%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <!-- U -->
+
+    <update id="update" >
+        update member
+        set userid=#{updateParam.userid},
+            name=#{updateParam.name},
+            email=#{updateParam.email}
+        where id = #{id}
+    </update>
+
+
+    <!-- D -->
+    <delete id="delete" >
+        delete from member where id = #{id}
+
+
+    </delete>
+
+    <insert id="addLike" parameterType="map">
+        insert into board_like (id, userid)
+        values (#{id}, #{loginId})
+    </insert>
+
+    <delete id="deleteLike" parameterType="map">
+        delete from board_like where id = #{id} and userid = #{loginId}
+    </delete>
+
+    <select id="selectLike" parameterType="map" resultType="int">
+        select count(*) from board_like
+         where id = #{id}
+          AND userid = #{loginId}
+    </select>
+
+    <select id="findComments" resultType="BoardComment">
+        SELECT comment_id, board_id, content, upper_comment_id, reg_userid, reg_date, 0 AS depth, LPAD(comment_id,3,'0')  AS disp_id
+        FROM board_comment
+        WHERE upper_comment_id = 0 and board_id = #{id}
+        UNION all
+        SELECT comment_id, board_id, content, upper_comment_id, reg_userid, reg_date, 1 AS depth, CONCAT(LPAD(upper_comment_id,3,'0'), '-', LPAD(comment_id,3,'0')) AS disp_id
+        FROM board_comment
+        WHERE upper_comment_id != 0 and board_id = #{id}
+        ORDER BY disp_id
+    </select>
+
+    <insert id="commentSave">
+        insert into board_comment (board_id, upper_comment_id, content, reg_userid, reg_date)
+        values (#{boardId}, #{upperCommentId}, #{content}, #{regUserid}, NOW())
+    </insert>
+
+    <delete id="deleteComment" >
+        delete from board_comment where comment_id = #{commentId}
+
+    </delete>
+
+    <update id="updateBoard">
+        update board set
+        title = #{title}
+        , content = #{content}
+        <if test="filename != null">
+            , filename = #{filename}
+            , filepath = #{filepath}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBoard" >
+        delete from board_comment where board_id = #{id};
+
+        delete from board_like where id = #{id};
+
+        delete from board where id = #{id};
+
+    </delete>
+
+</mapper>

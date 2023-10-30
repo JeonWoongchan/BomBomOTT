@@ -1,0 +1,23 @@
+{
+    "profile": [
+        {
+            "id": 0,
+            "profileName": "프로필1",
+            "profileCode": "profile1",
+            "profileImg": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 1,
+            "profileName": "프로필2",
+            "profileCode": "profile2",
+            "profileImg": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 2,
+            "profileName": "프로필3",
+            "profileCode": "profile3",
+            "profileImg": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png"
+        }
+        
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "image": [
+        {
+            "id": 0,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/BD2FA0F3965617FC515E3CEBD3AD51C00CCFFBF98F96448EFE46B82867FCE542/scale?width=280&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 1,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/59410138DC977B5A0D1BDE8216C62E61839CCD5F249999DBF48FBFA9CE32EB96/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 2,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4A8EE64C3C59FCA050D334454122C87D60AEDD13586885D5448160F7A03A0E7A/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 3,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/317859BB86DDB612979FF08CAE39011C7BE7A64D7D7ECB952489546AAA239194/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 4,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/60C75A38F859944103AAF1CAB52200EA01266C81D38A3761E118B8BDF5F789AD/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 5,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/AF4D5A22F8B21B7D8F1485855639A11121F0E010A32687D875B79D15458A2B71/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 6,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4BE25EA853A3443E6BDC2CF653E50EE3041EDF12FE30E7D3FC72E59358C03D1D/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 7,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/0B1CBFF3F397FF5A8CA180BE6404FFBBF42C5C8408176330CC8AAF43FAB40A0C/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 8,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/035666D95D62EEAAE70D11B1C5A1B84AAF97297C022F04C7F6399E4A55A2D068/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 9,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4E55CCF235EA8434E6E22B7B576CEA06EEB03BE2321FF9F1AFA0AF12CA6B1DEB/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 10,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/E86A0B41FAD9D1E71117EA587A8A3CCE2F90CAEE497C4D589C8D72D9D9EB440A/scale?width=300&aspectRatio=1.00&format=png"
+        },
+        {
+            "id": 11,
+            "url": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/40536FC9AFF2E88B135C282407C4E5A9F62EE111AC6ACD6B7EA9D85CC501C5F4/scale?width=300&aspectRatio=1.00&format=png"
+        }
+    ]
+}
