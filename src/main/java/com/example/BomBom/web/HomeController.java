@@ -1,6 +1,7 @@
 package com.example.BomBom.web;
 
 import com.example.BomBom.Service.InterestService;
+import com.example.BomBom.Service.MemberService;
 import com.example.BomBom.domain.Interest.Interest;
 import com.example.BomBom.domain.member.Profile;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,20 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class HomeController implements WebMvcConfigurer {
     private final InterestService interestService;
+    private final MemberService memberService;
+
+    @PostMapping("/logout")
+    public  ResponseEntity<Map<String,Object>> logout(HttpSession session) {
+        Map<String, Object> responseMap = new HashMap<>();
+        String email = (String) session.getAttribute("email");
+        if (email== null) {
+            email = (String) session.getAttribute("sqlId");
+        }
+        memberService.multisub(email);
+        session.invalidate();
+        responseMap.put("status", 1);
+        return  ResponseEntity.ok(responseMap);
+    }
 
     @PostMapping("/intro")
     public ResponseEntity<Map<String,Object>> session(HttpSession session){

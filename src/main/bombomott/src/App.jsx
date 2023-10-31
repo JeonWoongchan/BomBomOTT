@@ -10,6 +10,7 @@ import BrandContent from "./BrandContent/BrandContent";
 import Category from "./Category/Category";
 import Interest from "./Interest/Interest";
 import BoardMain from './Board/BoardMain'
+import Logout from "./Logout";
 import useApi from "./useApi";
 
 import { useEffect, useState } from "react";
@@ -54,6 +55,7 @@ function App() {
                 path="/board/:nowProfileCode/write"
                 element={<BoardMain type="write" />}
                 />
+                <Route path="/logout" element={<Logout/>} />
             </Routes>
         </div>
     );

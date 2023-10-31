@@ -49,7 +49,12 @@ export default function AddProfile() {
                                     <p>프로필 이름</p>
                                     <input type="text" placeholder='프로필 이름' value={profileName} onChange={handleInputProfileName} required/>
                                     <div className="line"></div>
-                                    <button type='button' onClick={()=>{createProfile(); navigate('/login/select-profile')}}>저장</button>
+                                    <button type='button' onClick={()=>{
+                                        if(profileName == ''){
+                                            alert('프로필명을 입력하세요')
+                                        }else{
+                                            createProfile(); navigate('/login/select-profile')
+                                        }}}>저장</button>
                                 </div>
                                 <div className="image-section">
                                     <div onClick={()=>{setModal(true)}}>

@@ -12,7 +12,7 @@ export default function ActiveProfile(props) {
     const navigate = useNavigate();
 
     const [profileOn, setProfileOn] = useState(false)
-    const [menuHeight, setMenuHeight] = useState(170)
+    const [menuHeight, setMenuHeight] = useState(200)
     const userId = useSelector((state)=>state.userData)
     const nowProfile = useSelector((state)=>state.nowProfile)
 
@@ -26,7 +26,7 @@ export default function ActiveProfile(props) {
     
     useEffect(()=>{
         if(reciveProfiles){
-            setMenuHeight(200 + reciveProfiles.length * 70)
+            setMenuHeight(230 + reciveProfiles.length * 70)
         }
         console.log(reciveProfiles)
     },[reciveProfiles])
@@ -56,12 +56,7 @@ export default function ActiveProfile(props) {
         localStorage.setItem('profileImg', a.profileImg);
     }
 
-    const removeLocalStorage = ()=>{
-        localStorage.removeItem('profileId');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('profileName');
-        localStorage.removeItem('profileImg');
-    }
+    
 
     return (
         <div className="active-profile" 
@@ -100,7 +95,7 @@ export default function ActiveProfile(props) {
                 <div className='profile-menu' onClick={()=>{ navigate(`/profile/${userId}/${nowProfile}/account`)}}>
                     <span >계정</span>
                 </div>
-                <div className='profile-menu' onClick={()=>{ navigate(`/`); sessionStorage.removeItem('input'); removeLocalStorage()}}>
+                <div className='profile-menu' onClick={()=>{ navigate(`/logout`);}}>
                     <span>로그아웃</span>
                 </div>
             </div>  
