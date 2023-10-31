@@ -23,8 +23,8 @@ export default function ModifyEmailLogic() {
             console.log(res.data.status)
             if(res.data.status == 1){ //비번 있음
                 console.log('성공')
+                navigate('/profile/account')
             }else if(res.data.status == -1){
-                console.log('이미 로그인중')
             }
         })
         .catch((error)=>{

@@ -32,19 +32,14 @@ export default function Account(){
                 <div className="info-title">계정 정보</div>
                 <div className="info-content">
                     <div className="info-inner">
-                        <div className='text'>이메일 정보 표시</div>
+                        <div className='text'>이메일</div>
                         <span className="material-symbols-outlined icon" onClick={()=>{navigate(`/profile/account/change-email`)}}>edit</span>
                     </div>
                 </div>
                 <div className="info-content">
                     <div className="info-inner">
-                        <div className='text'>비밀번호 정보 *로 표시</div>
+                        <div className='text'>비밀번호</div>
                         <span className="material-symbols-outlined icon" onClick={()=>{navigate(`/profile/account/reset-password`)}}>edit</span>
-                    </div>
-                </div>
-                <div className="info-content">
-                    <div className="info-inner">
-                        <button onClick={()=>{navigate(`/profile/account/logout-devices`)}}>모든 기기에서 로그아웃</button>
                     </div>
                 </div>
             </div>

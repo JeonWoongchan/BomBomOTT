@@ -174,7 +174,7 @@ export default function BoardDetailContent() {
         boardwriteId,
         boardTitle,
         boardContent,
-        filename,
+        filepath,
       },
     });
   };

@@ -3,27 +3,52 @@ import Header from "../Header";
 import ToTop from "../ToTop";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import boardwrite from "../BackEndData/BoardWrite.js";
-import boardupdate from "../BackEndData/BoardContentUpdate.js";
+import boardupdate  from "../BackEndData/BoardContentUpdate";
 
 export default function BoardWrite() {
   const location = useLocation();
-  const { boardwriteId, boardTitle, boardContent, filename } =
+  const { boardwriteId, boardTitle, boardContent, filepath } =
     location.state || {};
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [file, setFile] = useState("");
+  const [title, setTitle] = useState(""); // 제목 상태
+  const [content, setContent] = useState(""); // 내용 상태
+  const [file, setFile] = useState(null); // 첨부파일 상태
   const navigate = useNavigate();
 
+  async function fetchFile(filepath) {
+    try {
+      const response = await fetch(`http://localhost:8080/${filepath}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      } 
+      const fileData = await response.blob();
+      return fileData;
+    } catch (error) {
+      throw error;
+    }
+  }
+  // const goBack = () => {
+  //   history.goBack();
+  // };
   useEffect(() => {
     if (boardContent || boardTitle) {
       setTitle(boardTitle);
       setContent(boardContent);
     }
-    if (filename) {
-      const fileName = filename.split("_").slice(1).join("_");
+    if (filepath) {
+      const fileName = filepath.split("_").slice(1).join("_");
       setFile(fileName);
+
+      fetchFile(filepath)
+        .then((fileData) => {
+          const blob = new Blob([fileData]);
+          const file = new File([blob], filepath);
+          setFile(file);
+        })
+        .catch((error) => {
+          console.error("파일 로딩 중 오류 발생:", error);
+        });
     }
-  }, [boardTitle, boardContent, filename]);
+  }, [boardTitle, boardContent, filepath]);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -35,34 +60,44 @@ export default function BoardWrite() {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    console.log(event);
-    console.log(selectedFile);
-    setFile(selectedFile);
+    setFile(selectedFile || null);
   };
 
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    if (file) {
-      formData.append("file", file);
-    }
+    formData.append("file", file || null);
+    console.log(file);
+    console.log(filepath);
 
     if (boardwriteId) {
-      boardupdate(boardwriteId, formData, navigate)
-        .then(() => {
-          console.log("게시물 수정 성공");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      if (file || (file === null && boardContent)) {
+        // 파일이 선택되었거나, 파일이 선택되지 않았지만 이전 파일이 있는 경우 수정 가능
+        boardupdate(boardwriteId, formData, navigate)
+          .then(() => {
+            console.log("게시물 수정 성공");
+            // TODO: 작성 후에 어떤 동작을 수행할지 추가하세요.
+          })
+          .catch((error) => {
+            // 에러 발생 시
+            console.error(error);
+            // TODO: 에러 처리를 추가하세요.
+          });
+      } else {
+        // 파일을 선택하지 않았고 이전 파일도 없는 경우에 대한 처리 추가
+        console.log("파일을 선택하세요 또는 이전 파일을 유지하세요.");
+      }
     } else {
       boardwrite(formData, navigate)
         .then(() => {
           console.log("게시물 작성 성공");
+          // TODO: 작성 후에 어떤 동작을 수행할지 추가하세요.
         })
         .catch((error) => {
+          // 에러 발생 시
           console.error(error);
+          // TODO: 에러 처리를 추가하세요.
         });
     }
   };
@@ -95,7 +130,7 @@ export default function BoardWrite() {
             ></textarea>
           </li>
           <li>
-            <label htmlFor="file">첨부파일</label>
+            <label for="file">첨부파일</label>
             <input
               type="file"
               id="file"
@@ -104,11 +139,10 @@ export default function BoardWrite() {
               onChange={handleFileChange}
             />
           </li>
-          {file && <p>{file}</p>}
         </ul>
         <div className="board-write-button">
           <button onClick={handleSubmit}>저장</button>
-          <button>취소</button>
+          <button onClick={()=>{navigate(-1)}}>취소</button>
         </div>
       </div>
     </div>

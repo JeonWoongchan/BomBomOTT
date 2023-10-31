@@ -7,7 +7,7 @@ export default function ChangeEmail(){
     const [modal, setModal] = useState(false);
     const navigate = useNavigate()
     const currentEmail = 'bombom@younsung.ac.kr';
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
 
     const [checkOn, setCheckOn] = useState(false);
     const [hideText, setHideText] = useState('');
@@ -28,8 +28,7 @@ export default function ChangeEmail(){
             setCheckOn(true)
         }
     }
-
-    useEffect(()=>{
+useEffect(()=>{
         if(checkOn){
             setHideText('이메일을 변경한 후 이 기기에서 로그아웃됩니다. 다른 기기에서 모두 로그아웃되기까지 최대 4시간이 소요될 수 있습니다.')
         }else{

@@ -19,6 +19,10 @@
 
 }
 
+.content-title h1{
+    font-weight: bold;
+}
+
 .content-title .title-img{
     position: absolute;
     max-width: 341px;

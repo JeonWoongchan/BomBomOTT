@@ -97,7 +97,7 @@ export default function ResetPassword(){
                     </span>
                 </fieldset>
                 <div className="button-area">
-                    <button className='save' type="button" style={buttonStyle()} onClick={()=>{alert('개인정보 수집 및 이용에 동의해주세요')}}>저장</button>
+                    <button className='save' type="button" style={buttonStyle()} onClick={()=>{checkPwPattern()}}>저장</button>
                     <button className='cancel' type="button" onClick={()=>{navigate(-1)}}>취소</button>
                 </div>
             </form>

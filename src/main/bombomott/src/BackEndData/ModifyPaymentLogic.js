@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 //개인정보 수정 로직 : userId 받아서 해당 유저의 changeData를 userInput으로 바꿈
 export default function ModifyPaymentLogic() {
+    const navigate = useNavigate()
     const [userInput, setUserInput] = useState('');
     const NewPay = sessionStorage.getItem('input');
 
@@ -22,6 +23,8 @@ export default function ModifyPaymentLogic() {
             console.log(res.data.status)
             if(res.data.status == 1){ //비번 있음
                 console.log('성공')
+                navigate('/profile/account')
+                
             }else if(res.data.status == -1){
                 console.log('이미 로그인중')
             }

@@ -76,10 +76,7 @@ function ContentDetail(props) {
         <div className="content-title">
           {/* {props.receivedData.original_title} */}
           {contentType == "movie" ? (
-            <img
-              className="title-img"
-              src="https://www.themoviedb.org/t/p/original/gC3fmmZbIHaGIsjcjyyuACZSiBZ.png"
-            />
+            <h1>{contentType == 'movie' ? contentDetail.title : contentDetail.name}</h1>
           ) : (
             <img
               className="title-img"
