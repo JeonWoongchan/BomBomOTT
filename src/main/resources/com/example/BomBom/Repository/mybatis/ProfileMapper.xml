@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BomBom.Repository.mybatis.ProfileMapper">
+
+    <!-- C -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="profileId">
+        insert into profile (profileId, id, profileName, profileImg)
+        values (#{profileId}, #{id},#{profileName}, #{profileImg})
+    </insert>
+
+
+    <select id="findProfile" resultType="Profile">
+        select *
+        from profile
+        where id = #{id}
+    </select>
+
+
+
+    <select id="profileCount" resultType="int">
+        select count(*)
+        from profile
+        where id = #{id}
+    </select>
+
+    <update id="updateProfile">
+        update profile
+        set profileName=#{dto.profileName},
+            profileImg=#{dto.profileImg}
+        where profileId = #{profileId}
+    </update>
+
+
+    <delete id="deleteProfile" >
+        delete from profile where profileId = #{profileId}
+    </delete>
+
+
+
+</mapper>

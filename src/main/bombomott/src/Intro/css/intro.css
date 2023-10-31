@@ -1,0 +1,11 @@
+.container{
+    max-width: 100%;
+    padding: 0px;
+}
+
+.content{
+    position: relative;
+    background-color: rgb(4, 7, 20);
+    padding: 90px;
+    height: auto;
+}
