@@ -12,6 +12,7 @@ export default function ActiveProfile(props) {
     const navigate = useNavigate();
 
     const [profileOn, setProfileOn] = useState(false)
+    const [menuHeight, setMenuHeight] = useState(170)
     const userId = useSelector((state)=>state.userData)
     const nowProfile = useSelector((state)=>state.nowProfile)
 
@@ -23,10 +24,17 @@ export default function ActiveProfile(props) {
 
     const ActiveProfileList = Array.isArray(reciveProfiles) ? reciveProfiles.filter((e)=>e.profileId != nowProfileId) : [];
     
+    useEffect(()=>{
+        if(reciveProfiles){
+            setMenuHeight(200 + reciveProfiles.length * 70)
+        }
+        console.log(reciveProfiles)
+    },[reciveProfiles])
+
     const activeProfileStyle = (i) => {
         if(i == 0){
             return{
-                height: profileOn == true ? `${200 + profileData.profile.length * 70}px` : '70px',
+                height: profileOn == true ? `${menuHeight}px` : '70px',
                 backgroundColor: props.contentScroll > 5 ? 'transparent' : null,
                 backgroundColor: profileOn == true ? 'rgb(19, 19, 19)' : null,
                 outline : profileOn == true ? '0.5px solid #acacac' : 'none',

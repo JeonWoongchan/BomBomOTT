@@ -37,6 +37,7 @@ export default function AddProfile() {
                                         <h3>프로필을 삭제하시겠습니까?</h3>
                                     </div>
                                     <button type='button' className='delete' onClick={()=>{deleteProfile(); navigate('/login/select-profile')}}>삭제</button>
+                                    <button type='button' className='cancel' onClick={()=>{navigate(-1)}}>취소</button>
                                 </div>
                             </section>
                         </div>

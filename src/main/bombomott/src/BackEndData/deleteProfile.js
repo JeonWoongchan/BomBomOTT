@@ -22,7 +22,7 @@ export default function DeleteProfile(profileId) {
             
         })
         .catch((error)=>{
-            console.log(error)
+            alert('메인 프로필은 삭제할 수 없습니다')
         });
     };
 

@@ -11,7 +11,7 @@ export default function ScrollLoading(DataList, scroll) {
         //처음부터 data state의 초기값으로 trendMovies를 넣어서 설정하면 처음 랜더링될 때 trendMovies의 데이터 상태를 반영하지 않음
         //순서가 state랜더링, 페이지 랜더링 하고 trendMovies 내용 가져오는듯?
 
-        if (DataList.length > 4) {
+        if (DataList.length > 0) {
             // 데이터를 초기화하고 상태를 업데이트
             setData(DataList.slice(0, 4));  
             setCount(data.length);

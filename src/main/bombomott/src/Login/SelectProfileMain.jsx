@@ -15,7 +15,7 @@ export default function CreateProfile(){
 
     const userData = useSelector((state)=>state.userData)
     const [mouseIndex, setMouseIndex] = useState('');
-    const {reciveProfiles} = ReciveProfileData() //백엔드에서 받아온 프로필 데이터
+    const {reciveProfiles} = ReciveProfileData() //백엔드에서 받아온 프로필 데이터 
     
     const avatarImg = (i)=>{
         return{
