@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function boardwrite(formData, nowProfileCode, navigate) {
+export default function boardwrite(formData, navigate) {
   let axiosConfig = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -13,7 +13,7 @@ export default function boardwrite(formData, nowProfileCode, navigate) {
     .post("http://localhost:8080/board/write", formData, axiosConfig)
     .then((response) => {
       if (response.status === 200) {
-        navigate(`/board/${nowProfileCode}`);
+        navigate(`/board`);
       } else {
         console.log("요청이 실패했습니다.");
         throw new Error("요청이 실패했습니다.");

@@ -792,3 +792,29 @@
 .contentupdate:hover {
   background-color: #393c40;
 }
+
+.deletecommentbtn {
+  text-align: center;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  vertical-align: middle;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: auto;
+  background: none;
+  border: none;
+  padding: 0px;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+  color: #b4433d;
+}
+
+.commentcommentdelete {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+  padding-left: 0;
+}

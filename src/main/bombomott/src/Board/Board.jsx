@@ -12,7 +12,6 @@ import { formatAgo } from "../util/date";
 export default function Board() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const { nowProfileCode } = useParams();
   const [boardListData, setBoardListData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -51,7 +50,7 @@ export default function Board() {
   }, [page, sortword, searchTerm, selectedOption]);
 
   const handleClick = () => {
-    navigate(`/board/${nowProfileCode}/write`);
+    navigate(`/board/write`);
   };
 
   const handleLinkClick = (item) => {
@@ -133,7 +132,7 @@ export default function Board() {
             {boardListData.map((item) => (
               <li key={item.id} className="board-list">
                 <Link
-                  to={`/board/${nowProfileCode}/${item.title}`}
+                  to={`/board/${item.title}`}
                   className="click-wrap"
                   onClick={() => handleLinkClick(item.id)}
                 ></Link>

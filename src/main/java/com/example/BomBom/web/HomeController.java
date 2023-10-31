@@ -54,7 +54,7 @@ public class HomeController implements WebMvcConfigurer {
     }
 
     @GetMapping(value = {"", "/main", "/login/{loginStep}", "/login/{userId}/{loginStep}", "/profile/{userId}/{nowProfileCode}/{profileMenu}", "/profile/{profileMenu}", "/profile/{profileMenu}", "/content/{contentType}/{contentGenre}/{contentId}", "/brand/{brandName}", "/search"
-                , "/category/{mediaType}/{categoryType}", "/interest","/board/{nowProfileCode}","/board/{nowProfileCode}/{content}"})
+                , "/category/{mediaType}/{categoryType}", "/interest","/board","/board/{content}" ,"/board/write"})
     public String forward() {
         return "forward:/index.html";
     }

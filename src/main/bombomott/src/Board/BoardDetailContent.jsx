@@ -8,9 +8,9 @@ import { boardlike } from "../BackEndData/BoardLike";
 import { boardupdate } from "../BackEndData/BoardContentUpdate";
 import { boarddelete } from "../BackEndData/BoardContentDelete";
 import { useNavigate, useParams } from "react-router-dom";
+import boardcommentdelete from "../BackEndData/BoardCommentDelete";
 
 export default function BoardDetailContent() {
-  const { nowProfileCode } = useParams();
   const storedData = localStorage.getItem("filteredBoardList");
   const [boardContent, setBoardContent] = useState();
   const [boardTitle, setBoardTitle] = useState();
@@ -33,7 +33,7 @@ export default function BoardDetailContent() {
   const [loginId, setLoginId] = useState();
   const navigate = useNavigate();
   const [commentId, setCommentId] = useState();
-  const [filename, setFilename] = useState();
+  const [filename, setFilename] = useState("");
 
   useEffect(() => {
     boardcontent(storedData)
@@ -51,7 +51,7 @@ export default function BoardDetailContent() {
         setFilepath(data.board.filepath);
         setLoginId(data.board.loginId);
         setCommentId(data.boardComment.regUserid);
-        setFilename(filename);
+        setFilename(data.board.filename);
 
         const initialAnswerStates = {};
         const initialReplyStates = {};
@@ -153,26 +153,60 @@ export default function BoardDetailContent() {
   };
 
   const handleDeleteContent = () => {
-    boarddelete(boardwriteId)
-      .then(() => {
-        // 성공적으로 업데이트
-        console.log("삭제 완료");
-        navigate(`/board/${nowProfileCode}`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // eslint-disable-next-line no-restricted-globals
+    const confirmation = confirm("정말로 삭제하시겠습니까?");
+    if (confirmation) {
+      boarddelete(boardwriteId)
+        .then(() => {
+          // 성공적으로 업데이트
+          console.log("삭제 완료");
+          navigate(`/board`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const handleUpdateContent = () => {
-    navigate(`/board/${nowProfileCode}/write`, {
+    navigate(`/board/write`, {
       state: {
         boardwriteId,
         boardTitle,
         boardContent,
-        filepath,
+        filename,
       },
     });
+  };
+
+  // const handlecommentdelete = (commentreguserid) => {
+  //   confirm("정말로 삭제하시겠습니까?");
+
+  //   boardcommentdelete(boardwriteId, commentreguserid)
+  //     .then(() => {
+  //       console.log("삭제 완료");
+  //       navigate(`/board/boardTitle`);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
+  const handlecommentdelete = (commentreguserid) => {
+    // 알림창을 띄웁니다.
+    // eslint-disable-next-line no-restricted-globals
+    const confirmation = confirm("정말로 삭제하시겠습니까?");
+
+    // 확인을 눌렀을 때 true를 반환하면 삭제 작업을 수행합니다.
+    if (confirmation) {
+      boardcommentdelete(boardwriteId, commentreguserid)
+        .then(() => {
+          console.log("삭제 완료");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -283,6 +317,18 @@ export default function BoardDetailContent() {
                           </div>
                         </div>
                         <ul>
+                          {loginId === item.regUserid && (
+                            <li>
+                              <button
+                                className="deletecommentbtn"
+                                onClick={() =>
+                                  handlecommentdelete(item.commentId)
+                                }
+                              >
+                                <span>삭제</span>
+                              </button>
+                            </li>
+                          )}
                           <li>
                             <button
                               className="comment-btn"
@@ -353,7 +399,19 @@ export default function BoardDetailContent() {
                                     <p>{comment.content}</p>
                                   </div>
                                 </div>
-                                <ul>
+                                <ul className="commentcommentdelete">
+                                  {loginId === comment.regUserid && (
+                                    <li>
+                                      <button
+                                        className="deletecommentbtn"
+                                        onClick={() =>
+                                          handlecommentdelete(comment.commentId)
+                                        }
+                                      >
+                                        <span>삭제</span>
+                                      </button>
+                                    </li>
+                                  )}
                                   <li>
                                     <button
                                       className="comment-btn"

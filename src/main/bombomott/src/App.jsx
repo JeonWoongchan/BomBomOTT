@@ -46,15 +46,9 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path='/category/:mediaType/:categoryType' element={<Category/>}/>
                 <Route path='/interest' element={<Interest/>}/>
-                <Route path="/board/:nowProfileCode" element={<BoardMain />} />
-                <Route
-                path="/board/:nowProfileCode/:content"
-                element={<BoardMain type="content" />}
-                />
-                <Route
-                path="/board/:nowProfileCode/write"
-                element={<BoardMain type="write" />}
-                />
+                <Route path="/board" element={<BoardMain />} />
+                <Route path="/board/:content" element={<BoardMain type="content" />} />
+                <Route path="/board/write" element={<BoardMain type="write" />} />
                 <Route path="/logout" element={<Logout/>} />
             </Routes>
         </div>
