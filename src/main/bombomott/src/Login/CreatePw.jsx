@@ -16,6 +16,7 @@ export default function CreatePw(props) {
     const location = useLocation();
     const nextButtonRef = useRef(null);
     const email = location.state.email;
+    const loginEmail = localStorage.getItem('loginEmail')
 
     const [inputValue, setInputValue] = useState(''); //input창 텍스트
     const [inputView, setInputView] = useState(false); // 패스워드 view on/off
@@ -81,7 +82,7 @@ export default function CreatePw(props) {
                     <p>2단계</p>
                     <h2>계정을 생성하세요</h2>
                 </div>
-                <span><p>비밀번호를 입력해 계정을 생성하세요. 사용할 이메일 주소는 다음과 같습니다: bombom@naver.com</p></span>
+                <span><p>비밀번호를 입력해 계정을 생성하세요. 사용할 이메일 주소는 다음과 같습니다: {loginEmail}</p></span>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
                     <span>

@@ -15,6 +15,7 @@ export default function EnterPw() {
     const location = useLocation();
     const nextButtonRef = useRef(null);
     const email = location.state.email;
+    const loginEmail = localStorage.getItem('loginEmail')
     
     const [inputView, setInputView] = useState(false); // 패스워드 view on/off
     const { inputIcon, inputType } = PasswordView(inputView);
@@ -22,7 +23,7 @@ export default function EnterPw() {
     
     const handleSubmit = (event)=>{
         event.preventDefault(); // 기본 폼 제출 동작을 막음
-        CheckPw(); // CheckEmail 함수 실행
+        CheckPw(); // CheckPw 함수 실행
     }
 
     const toggleinputView = () => {
@@ -43,7 +44,7 @@ export default function EnterPw() {
                     <p>2단계</p>
                     <h2>비밀번호를 입력하세요</h2>
                 </div>
-                <span><p>계정에 로그인하세요. 로그인에 사용할 이메일 주소는 다음과 같습니다: bombom@naver.com </p></span>
+                <span><p>계정에 로그인하세요. 로그인에 사용할 이메일 주소는 다음과 같습니다: {loginEmail} </p></span>
                 <form onSubmit={handleSubmit}>
                     <fieldset>
                         <span>

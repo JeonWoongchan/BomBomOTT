@@ -34,8 +34,10 @@ export default function CheckEmailLogic() {
                     console.log(res.data)
                     if(res.data.status == 1 ){ //이메일 있음
                         navigate('/login/enter-password', {state:{ email: userEmail} })
+                        localStorage.setItem('loginEmail', userEmail)
                     }else if(res.data.status == 0){ //이메일 없음
                         navigate('/login/create-password', {state:{ email: userEmail} }) //회원 가입 단계로
+                        localStorage.setItem('loginEmail', userEmail)
                     }else if(res.data.status == -10){
                         console.log('이미 로그인중') //다중 로그인 차단
                     }

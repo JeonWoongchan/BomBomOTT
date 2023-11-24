@@ -10,14 +10,18 @@ import { useSelector } from "react-redux";
 export default function Header(props) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { nowProfileCode } = useParams();
+  const { pathname } = useLocation();
 
   const NavBarStyle = () => {
     // props를 매개변수로 추가
     return {
-      backgroundColor: props.contentScroll > 5 ? null : "transparent",
+      backgroundColor: pathname.startsWith('/board') ? null : props.contentScroll > 10 ? null : "transparent",
     };
   };
+
+  useEffect(()=>{
+    console.log(props.contentScroll)
+  },[props.contentScroll])
 
   return (
     <div className="main-header">

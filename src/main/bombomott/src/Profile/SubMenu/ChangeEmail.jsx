@@ -53,7 +53,7 @@ useEffect(()=>{
                 <h2>이메일을 변경하세요</h2>
             </div>
             <span><p>봄봄+ 계정 로그인에 사용하는 이메일이 아래 입력한 이메일로 변경됩니다.</p></span>
-            <p className='currunt'>현재 이메일: <span>{currentEmail}</span></p>
+            {/* <p className='currunt'>현재 이메일: <span>{currentEmail}</span></p> */}
             <form action="">
                 <fieldset>
                     <legend>currentEmail</legend>

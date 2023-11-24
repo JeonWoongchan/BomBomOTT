@@ -70,11 +70,7 @@ public class MemberLoginController {
         }
     }
     @PostMapping("/enter-password")
-    public ResponseEntity<Map<String,Object>> PasswordCheck(@RequestBody MemberLoginDto dto,
-                                                            @ModelAttribute Member member,
-                                                            HttpSession session
-                                                           ) {
-
+    public ResponseEntity<Map<String,Object>> PasswordCheck(@RequestBody MemberLoginDto dto, @ModelAttribute Member member, HttpSession session) {
         Map<String, Object> responseMap = new HashMap<>();
         String sql = (String) session.getAttribute("sqlId");
         if (sql == null) {
@@ -97,16 +93,12 @@ public class MemberLoginController {
                     }, 599999); // 9분 59초 후에 실행
 
                     session.setMaxInactiveInterval(10 * 60);
-
                     String email = (String) session.getAttribute("email");
-
-
 
                     memberService.multiAdd(email);
                     Long id = memberService.FindId(email);
 
                     session.setAttribute("id",id);
-
 
                     responseMap.put("status", 1); // 아이디 비밀번호 맞음
                     responseMap.put("id", id);
@@ -116,19 +108,11 @@ public class MemberLoginController {
                     responseMap.put("status", -1);
                     return ResponseEntity.ok(responseMap);  // 다중 접속 실패
                 }
-
             } else {
                 responseMap.put("status", 0); // 아이디 비밀번호 틀림
-
                 return ResponseEntity.ok(responseMap);
-
-
             }
-
-
         }
-
-        // 중복 공백 제거 로직은 생략
     }
 
     @PostMapping("/create-password")

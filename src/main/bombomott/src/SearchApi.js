@@ -9,8 +9,7 @@ function SearchMulti(text, page, dispatch) {
     url: `https://api.themoviedb.org/3/search/multi?query=${text}&include_adult=false&language=ko-KR&page=${page}`,
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZmYyYWIxMjJjNDc2YzFkZmRjZjk3NjIyYjgzNjBiYiIsInN1YiI6IjY0MTdlODQ4OWVlMGVmMDA3ZmM1MmFkOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VvnmWobsJc2hJpMjf0-VHRO1V39tMEJY3vWzCOws8RQ",
+      Authorization: process.env.REACT_APP_TMDB_API_KEY,
     },
   };
   const getRequest = (a, b) => {
