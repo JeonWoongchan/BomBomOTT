@@ -1,0 +1,27 @@
+{
+    "images": [
+        {
+            "id": 0,
+            "title": "Elemental",
+            "url": "https://www.themoviedb.org/t/p/original/8HZT9JXCprrXjf77Yjh6VTIiEor.jpg"
+        },
+        {
+            
+            "id": 1,
+            "title": "EndGame",
+            "url": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbObE47%2FbtquSzNfksQ%2FIE4pysETTKnA3OkTYhrHzK%2Fimg.jpg"
+        },
+        {
+            
+            "id": 2,
+            "title": "Loki",
+            "url": "https://www.themoviedb.org/t/p/original/rSumVltOLWsmsK5wqWIDZEFGL2H.jpg"
+        },
+        {
+            
+            "id": 3,
+            "title": "Starwars",
+            "url": "https://www.themoviedb.org/t/p/original/2ORO88cnhMCrgeC4VJrIf8Qdm9Y.jpg"
+        }
+    ]
+}

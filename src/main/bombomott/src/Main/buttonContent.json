@@ -1,0 +1,58 @@
+{
+    "data": [
+        {
+            "id": 0,
+            "brand": "disney",
+            "img1": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/FFA0BEBAC1406D88929497501C84019EBBA1B018D3F7C4C3C829F1810A24AD6E/scale?width=400&aspectRatio=1.78&format=png",
+            "img2": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/61C377B14F25252D8A112D23A89A78516435DCF60F1C151854DE3D91C755A11A/scale?width=1440&aspectRatio=1.78&format=jpeg",
+            "img3": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2939F39F251515613B87DB083CC248B93D3FA40EA13B8399FC1F6F9B0A07CA31/scale?width=600&aspectRatio=2.00&format=png",
+            "video1": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564674844-disney.mp4",
+            "video2": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2021/11/04/1636056497-disney.mp4"
+        },
+        {
+            "id": 1,
+            "brand": "pixar",
+            "img1": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/7F4E1A299763030A0A8527227AD2812C049CE3E02822F7EDEFCFA1CFB703DDA5/scale?width=400&aspectRatio=1.78&format=png",
+            "img2": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/0CF86F6F281176EFE2F22314CB713B3AFE515C4291EA9AFC6546F1FE42EFB756/scale?width=1440&aspectRatio=1.78&format=jpeg",
+            "img3": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2939F39F251515613B87DB083CC248B93D3FA40EA13B8399FC1F6F9B0A07CA31/scale?width=600&aspectRatio=2.00&format=png",
+            "video1": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564676714-pixar.mp4",
+            "video2": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2021/11/04/1636056639-pixar.mp4"
+        },
+        {
+            "id": 2,
+            "brand": "marvel",
+            "img1": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C90088DCAB7EA558159C0A79E4839D46B5302B5521BAB1F76D2E807D9E2C6D9A/scale?width=400&aspectRatio=1.78&format=png",
+            "img2": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/62D6598A98D947B4418FA801AB7C7BC7789E7DD15D5F1378787D52A85B17D841/scale?width=1440&aspectRatio=1.78&format=jpeg",
+            "img3": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2939F39F251515613B87DB083CC248B93D3FA40EA13B8399FC1F6F9B0A07CA31/scale?width=600&aspectRatio=2.00&format=png",
+            "video1": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564676115-marvel.mp4",
+            "video2": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2023/06/13/1686685609-marvel.mp4"
+        },
+        {
+            "id": 3,
+            "brand": "starwars",
+            "img1": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/5A9416D67DC9595496B2666087596EE64DE379272051BB854157C0D938BE2C26/scale?width=400&aspectRatio=1.78&format=png",
+            "img2": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/5A92131654C1E0B1A4C072A327E49FB30CA8BDED279852FB32CAD9B33B4AAAB1/scale?width=1440&aspectRatio=1.78&format=jpeg",
+            "img3": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2939F39F251515613B87DB083CC248B93D3FA40EA13B8399FC1F6F9B0A07CA31/scale?width=600&aspectRatio=2.00&format=png",
+            "video1": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2020/12/17/1608229455-star-wars.mp4",
+            "video2": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2021/11/04/1636056809-star-wars.mp4"
+        },
+        {
+            "id": 4,
+            "brand": "national-geographic",
+            "img1": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2EF24AA0A1E648E6D1A3B26491F516632137ED87AB22969D153316F8BD670FB5/scale?width=400&aspectRatio=1.78&format=png",
+            "img2": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/368CF25E5033AC11C828B2AA2B113942743175E35C5AA7A4F6F6F39E70E5B204/scale?width=1440&aspectRatio=1.78&format=jpeg",
+            "img3": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2939F39F251515613B87DB083CC248B93D3FA40EA13B8399FC1F6F9B0A07CA31/scale?width=600&aspectRatio=2.00&format=png",
+            "video1": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2019/08/01/1564676296-national-geographic.mp4",
+            "video2": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2021/11/04/1636056567-national-geographic.mp4"
+        },
+        {
+            "id": 5,
+            "brand": "star",
+            "img1": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/AE893BCDD6264C4A876C03A0DE5004D9F394BE1E8388F085431318CDCEC9A598/scale?width=400&aspectRatio=1.78&format=png",
+            "img2": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/463D0FF785C5A1E1D9EF486C0812863F381608E9D2AD66DE5BF8648BD9998B97/scale?width=1440&aspectRatio=1.78&format=jpeg",
+            "img3": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2939F39F251515613B87DB083CC248B93D3FA40EA13B8399FC1F6F9B0A07CA31/scale?width=600&aspectRatio=2.00&format=png",
+            "video1": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2020/12/17/1608169994-brand-star.mp4",
+            "video2": "https://vod-bgc-oc-east-1.media.dssott.com/bgui/ps01/disney/bgui/2020/12/16/1608080788-brand-star.mp4"
+        }
+    ]
+}
