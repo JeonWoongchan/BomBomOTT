@@ -91,7 +91,7 @@ export default function Header(props) {
                                     isSesstion ? <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/select-profile')}}>메인으로</button> 
                                     :
                                     <>
-                                        <button className="header-signup-btn" type='button' onClick={()=>{navigate('/login/enter-email')}}>지금 가입</button> 
+                                        <button className="header-signup-btn" type='button' onClick={()=>{navigate('/main')}}>메인페이지</button> 
                                         <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/enter-email')}}>로그인</button> 
                                     </>
                                 }
