@@ -48,7 +48,7 @@ export default function Header(props) {
         };
     })
 
-    const [isSesstion, setIsSesstion] = useState(false)
+    const [isSession, setIsSession] = useState(false)
     useEffect(()=>{
         localStorage.clear()
         axios
@@ -58,9 +58,9 @@ export default function Header(props) {
             .then((res) => {
                 console.log(res.data)
                 if(res.data.status == 1 ){ 
-                    setIsSesstion(true)
+                    setIsSession(true)
                 }else if(res.data.status == 0){ 
-                    setIsSesstion(false)
+                    setIsSession(false)
                 }
         })
         .catch((error)=>{
@@ -72,9 +72,10 @@ export default function Header(props) {
         <div className='header'>
             {/* 상단바 */}
             {
-                isSesstion ? <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/select-profile')}}>메인으로</button> 
+                isSession ? <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/select-profile')}}>메인으로</button> 
                 : <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/enter-email')}}>로그인</button> 
             }
+            <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/select-profile')}}>메인으로</button> 
             <Navbar className={`intro-Navbar ${props.scroll>450 ? 'show-Navbar' : ''}`} style={{top: '0'}}>
                 <Container>
                     <Navbar.Brand href="" className='header-logo'>
@@ -88,10 +89,10 @@ export default function Header(props) {
                             <>
                                 
                                 {
-                                    isSesstion ? <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/select-profile')}}>메인으로</button> 
+                                    isSession ? <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/select-profile')}}>메인으로</button> 
                                     :
                                     <>
-                                        <button className="header-signup-btn" type='button' onClick={()=>{navigate('/main')}}>메인페이지</button> 
+                                        <button className="header-signup-btn" type='button' onClick={()=>{navigate('/main')}}>메인으로</button> 
                                         <button className="header-login-btn" type='button' onClick={()=>{navigate('/login/enter-email')}}>로그인</button> 
                                     </>
                                 }
