@@ -21,7 +21,7 @@
     - 나현운
     - 이동규
 
-⛏ Tools
+⛏ 기술 스택
   - React
   - Spring
   - MySQL
